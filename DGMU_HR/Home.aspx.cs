@@ -17,12 +17,12 @@ namespace DGMU_HR
         {
             if (!Page.IsPostBack)
             {
-
+                
                 DisplayEmployeeEmploymentStat();
 
                 DisplayPayrollPeriodToday();
 
-                lblDefaultYear.Text = " Year: <b>" + oSystem.GET_DEFAULT_FISCAL_YEAR().ToString() + "</b>";
+                lblDefaultYear.Text = " Year: <b>" + oSystem.GET_DEFAULT_FISCAL_YEAR().ToString() + DateTime.Now.ToShortDateString() +"</b>";
 
                 //lblCountActiveEmployee.Text = "Active Employee's : <b>" + oPayroll.GET_COUNT_EMPLOYEE_ACTIVE() + "</b>";
               //  lnkActiveEmployees.Text = oPayroll.GET_COUNT_EMPLOYEE_ACTIVE().ToString();

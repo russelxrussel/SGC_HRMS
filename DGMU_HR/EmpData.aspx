@@ -20,7 +20,7 @@
                 $(function () {
                     $('.calendarInput').datetimepicker(
                         {
-                            format: 'S'
+                            format: 'L'
                         });
                 });
 
@@ -371,11 +371,10 @@
                                                         <div class="panel panel-warning">
                                                             <div class="panel-heading">Application Details</div>
                                                             <ul class="list-group">
-                                                                <li class="list-group-item"></li>
+                                                           
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Application Date</small>
-                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="calendarInput form-control" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date"></asp:TextBox></li>
-                                                               
+                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date" TextMode="DateTime"></asp:TextBox></li>
                                                                  <li class="list-group-item">
                                                                     <small class="form-text text-muted">Job Posting</small>
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddJobPosting" data-toggle="tooltip" data-placement="top" title="How does applicant know the job posting?"></asp:DropDownList></li>
@@ -397,7 +396,7 @@
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddCompany" data-toggle="tooltip" data-placement="top" title="Company"></asp:DropDownList></li>
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Date Hired</small>
-                                                                    <asp:TextBox runat="server" ID="txtDateHired" CssClass="calendarInput form-control" data-toggle="tooltip" data-placement="top" title="Date Hired" placeholder="Date Hired *"></asp:TextBox></li>
+                                                                    <asp:TextBox runat="server" ID="txtDateHired" CssClass="form-control calendarInput " data-toggle="tooltip" data-placement="top" title="Date Hired" placeholder="Date Hired *"></asp:TextBox></li>
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Employment Status</small>
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddEmploymentStatus" data-toggle="tooltip" data-placement="top" title="Status"></asp:DropDownList></li>

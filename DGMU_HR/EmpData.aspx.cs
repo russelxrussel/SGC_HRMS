@@ -41,6 +41,8 @@ namespace DGMU_HR
                 gvEmployeeList.DataBind();
 
                 imgEmployeePicture.ImageUrl = "/Emp_Pictures/default-avatar.png";
+
+               
             }
            
         }
@@ -286,8 +288,17 @@ namespace DGMU_HR
                 txtPagibigNumber.Text = dvr.Row["HDMF"].ToString();
                 txtPhilHealthNumber.Text = dvr.Row["PhilHealth"].ToString();
 
-                
+
+                //DateTime dtHired = DateTime.Parse(dvr.Row["Date_Hired"].ToString(), new System.Globalization.CultureInfo("en-US"));
+                //txtDateHired.Text = dtHired.ToShortDateString();
+                //DateTime dtApplied = DateTime.Parse(dvr.Row["Date_Applied"].ToString(), new System.Globalization.CultureInfo("en-US"));
+                //txtApplicationDate.Text = dtApplied.ToShortDateString();
+
                 txtDateHired.Text = Convert.ToDateTime(dvr.Row["Date_Hired"]).ToShortDateString();
+                txtApplicationDate.Text = Convert.ToDateTime(dvr.Row["Date_Applied"]).ToShortDateString();
+                //
+
+
 
                 txtContactPerson.Text = dvr.Row["ContactPerson"].ToString();
                 txtContactRelationship.Text = dvr.Row["ContactRelationship"].ToString();
@@ -323,7 +334,7 @@ namespace DGMU_HR
                     ddJobPosting.SelectedValue = dvr.Row["JPCode"].ToString();
                 }
 
-                txtApplicationDate.Text = dvr.Row["Date_Applied"].ToString();
+               
                 txtApplicantEvaluation.Text = dvr.Row["Applicant_Evaluation"].ToString();
                 
 
