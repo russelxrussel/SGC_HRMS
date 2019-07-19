@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HRMS.master.cs" Inherits="DGMU_HR.HRMS" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>DGMU - Human Resource Management System</title>
+
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="Content/bootstrap-toggle.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/moment.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="Scripts/bootstrap-toggle.min.js"></script>
+
+    <style type="text/css">
+
+   
+
+        
+        html {
+        height: 100%;
+        }
+        body {
+            height: 100%;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            /*background-image: linear-gradient(to bottom right, skyblue,yellow );  Standard syntax (must be last) */
+             background-image: linear-gradient(to bottom right, skyblue , green);
+        }
+
+        .bg_form {
+            opacity: .9;
+        }
+
+       .bg_form:hover {
+            opacity: 1;
+       }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>   
+        <asp:ScriptManager runat="server" ID="ScriptManager1">
+        </asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="ContentArea" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+          <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+           
+         
+     <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="">
+     <span class="sr-only">Toggle Nav</span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     </button>
+     <div><a class="navbar-brand" href="home.aspx"><span class="glyphicon glyphicon-home"></span></a></div>
+     </div>
+
+
+     <div class="collapse navbar-collapse">
+     
+          <div id="myDiv" runat="server">
+          <!-- Location of dynamic menu located here -->
+       
+
+          </div>
+
+         <ul class="nav navbar-nav navbar-right">
+             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                 aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><asp:Label runat="server" ID="lblUser"></asp:Label> <span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                  <%--   <li><a href="login.aspx"><span class="glyphicon glyphicon-off">
+                 </span> Log-out </a></li>--%>
+                  <li><asp:LinkButton runat="server" ID="lnkLogOut" OnClick="lnkLogOut_Click">Logout</asp:LinkButton></li>
+                 </ul>
+             </li>
+         </ul>
+     </div>
+
+<%--</div> <!--End of Container-->--%>
+
+          
+ </div>
+    </div>
+    </form>
+</body>
+</html>

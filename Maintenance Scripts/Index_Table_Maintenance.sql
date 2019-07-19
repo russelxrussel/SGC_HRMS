@@ -1,0 +1,9 @@
+--THIS WILL RE INDEX ALL TABLE INDEX
+--TABLE INDEX MAINTENANCE 01.17.2019
+
+USE 'YOUR DATABASE HERE'
+GO
+EXEC sp_MSforeachtable @command1="print '?' DBCC DBREINDEX ('?', ' ', 80)"
+GO
+EXEC sp_updatestats
+GO
