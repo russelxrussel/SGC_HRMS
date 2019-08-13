@@ -129,7 +129,7 @@
                             <hr />
 
                             <asp:Panel runat="server" ID="panelListEmployee" Height="800px" ScrollBars="Vertical">
-                                <asp:GridView runat="server" ID="gvEmployeeList" GridLines="None" OnRowCommand="gvEmployeeList_RowCommand" AutoGenerateColumns="false" CssClass="table table-hover table-condensed table-responsive small" OnRowDataBound="gvEmployeeList_RowDataBound" ShowHeader="false">
+                                <asp:GridView runat="server" ID="gvEmployeeList" GridLines="None" OnRowCommand="gvEmployeeList_RowCommand" AutoGenerateColumns="false" CssClass="table table-hover table-condensed table-responsive small" ShowHeader="false">
                                     <Columns>
                                          <%--<asp:TemplateField ItemStyle-Width="60px" ControlStyle-Width="60px">
                                                 <ItemTemplate>
@@ -140,7 +140,7 @@
                                         <asp:BoundField DataField="EmployeeName" />
                                         <asp:BoundField DataField="GenderDescription" />
                                         <asp:BoundField DataField="MaritalStatus" />
-                                       <%-- <asp:BoundField DataField="Date_Of_Birth" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />--%>
+                                        <asp:BoundField DataField="Date_Of_Birth" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />
                                          <asp:BoundField DataField="CompanyName" />
                                         <asp:BoundField DataField="Date_Hired" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />
                                         <asp:BoundField DataField="Position" />
@@ -374,7 +374,7 @@
                                                            
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Application Date</small>
-                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date" TextMode="DateTime"></asp:TextBox></li>
+                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="form-control calendarInput" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date" TextMode="DateTime"></asp:TextBox></li>
                                                                  <li class="list-group-item">
                                                                     <small class="form-text text-muted">Job Posting</small>
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddJobPosting" data-toggle="tooltip" data-placement="top" title="How does applicant know the job posting?"></asp:DropDownList></li>

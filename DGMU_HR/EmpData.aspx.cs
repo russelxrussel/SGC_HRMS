@@ -231,12 +231,7 @@ namespace DGMU_HR
            
         }
 
-        protected void gvEmployeeList_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            
-           
-
-        }
+       
 
     
 
@@ -246,6 +241,8 @@ namespace DGMU_HR
 
             DataView dv = dt.DefaultView;
             dv.RowFilter = "EmployeeID ='" + _employeeID + "'";
+
+            
 
             if (dv.Count > 0)
             {
@@ -382,6 +379,7 @@ namespace DGMU_HR
                 }
 
 
+                //DISPLAY List of Skills and Training of Employee
                 DISPLAY_SKILLS_TRAINING(_employeeID);
 
             }
@@ -392,6 +390,7 @@ namespace DGMU_HR
         {
             //Display Employee Skills and Training
             DataTable dtSkillsTraining = oEmployeeData.GET_EMPLOYEE_SKILLS_TRAINING(_employeeID);
+
             if (dtSkillsTraining.Rows.Count > 0)
             {
                 gvSkillsTraining.DataSource = dtSkillsTraining;

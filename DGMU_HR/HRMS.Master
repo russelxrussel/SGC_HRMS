@@ -17,7 +17,7 @@
     <script src="Scripts/bootstrap-datetimepicker.js"></script>
     <script src="Scripts/bootstrap-toggle.min.js"></script>
 
-    <style type="text/css">
+  <%--  <style type="text/css">
 
    
 
@@ -40,7 +40,7 @@
        .bg_form:hover {
             opacity: 1;
        }
-    </style>
+    </style>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

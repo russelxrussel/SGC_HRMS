@@ -15,7 +15,7 @@
     <RootNamespace>DGMU_HR</RootNamespace>
     <AssemblyName>DGMU_HR</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -858,7 +858,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3819</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/DGMU_HR</IISUrl>
+          <IISUrl>http://localhost:3819/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
