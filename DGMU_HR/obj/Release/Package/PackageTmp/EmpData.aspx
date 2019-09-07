@@ -3,7 +3,42 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentArea" runat="server">
- 
+<style type="text/css">
+ #overlay{
+ position: fixed;
+ z-index: 99;
+ top: 0px;
+ left: 0px;
+ background-color: black;
+ width: 100%;
+ height: 100%;
+ filter: Alpha(Opacity=80);
+ opacity: 0.80;
+-moz-opacity: 0.80;
+}
+
+#theProgress{
+ width: 110px;
+ height: 24px;
+ text-align: center;
+ filter: Alpha(Opacity=100);
+ opacity: 1;
+ -moz-opacity: 1;
+}
+
+#modalProgress{
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ margin: -11px 0 0 -55px;
+ color: black;
+}
+
+body>modalProgress {
+position: fixed;
+}
+</style>
+
 
 <br /><br /><br />
 <%--<div class="container container_content">--%>
@@ -129,7 +164,7 @@
                             <hr />
 
                             <asp:Panel runat="server" ID="panelListEmployee" Height="800px" ScrollBars="Vertical">
-                                <asp:GridView runat="server" ID="gvEmployeeList" GridLines="None" OnRowCommand="gvEmployeeList_RowCommand" AutoGenerateColumns="false" CssClass="table table-hover table-condensed table-responsive small" OnRowDataBound="gvEmployeeList_RowDataBound" ShowHeader="false">
+                                <asp:GridView runat="server" ID="gvEmployeeList" GridLines="None" OnRowCommand="gvEmployeeList_RowCommand" AutoGenerateColumns="false" CssClass="table table-hover table-condensed table-responsive small" ShowHeader="false">
                                     <Columns>
                                          <%--<asp:TemplateField ItemStyle-Width="60px" ControlStyle-Width="60px">
                                                 <ItemTemplate>
@@ -140,7 +175,7 @@
                                         <asp:BoundField DataField="EmployeeName" />
                                         <asp:BoundField DataField="GenderDescription" />
                                         <asp:BoundField DataField="MaritalStatus" />
-                                       <%-- <asp:BoundField DataField="Date_Of_Birth" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />--%>
+                                        <asp:BoundField DataField="Date_Of_Birth" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />
                                          <asp:BoundField DataField="CompanyName" />
                                         <asp:BoundField DataField="Date_Hired" DataFormatString="{0:MM/d/yyyy}" HtmlEncode="false" />
                                         <asp:BoundField DataField="Position" />
@@ -188,15 +223,13 @@
                         <div class="panel-body">
 
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#Basic" aria-controls="Basic" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user text-success"></span>Basic</a> </li>
-                                <li role="presentation"><a href="#Family" aria-controls="Family" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>Family</a></li>
-                                <li role="presentation"><a href="#Education" aria-controls="Education" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book"></span>Education</a></li>
-                                <li role="presentation"><a href="#SkillTraining" aria-controls="SkillTraining" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span>Skills and Training</a></li>
-                                <li role="presentation"><a href="#HealthMonitoring" aria-controls="HealthMonitoring" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-heart text-danger"></span>Health Monitoring</a></li>
-                                <li role="presentation"><a href="#IssuedItems" aria-controls="IssuedItems" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-credit-card"></span>Issued Items / Assets</a></li>
-                                <li role="presentation"><a href="#Attachments" aria-controls="Attachments" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-file"></span>Attachment(s)</li>
-
-
+                                <li role="presentation" class="active"><a href="#Basic" aria-controls="Basic" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user text-success"></span> Basic</a> </li>
+                                <li role="presentation"><a href="#Family" aria-controls="Family" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span> Family</a></li>
+                                <li role="presentation"><a href="#Education" aria-controls="Education" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> Education</a></li>
+                                <li role="presentation"><a href="#SkillTraining" aria-controls="SkillTraining" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> Skills and Training</a></li>
+                                <li role="presentation"><a href="#Evaluation" aria-controls="Evaluation" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-briefcase text-success"></span> Work Evaluation</a></li>
+                                <li role="presentation"><a href="#Offenses" aria-controls="Offenses" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-comment text-danger"></span> Offenses Record</a></li>
+                           
                             </ul>
 
                             <!-- Tab panes -->
@@ -373,11 +406,11 @@
                                                         <div class="panel panel-warning">
                                                             <div class="panel-heading">Application Details</div>
                                                             <ul class="list-group">
-                                                                <li class="list-group-item"></li>
+                                                           
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Application Date</small>
-                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="calendarInput form-control" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date"></asp:TextBox></li>
-                                                                <li class="list-group-item">
+                                                                    <asp:TextBox runat="server" ID="txtApplicationDate" CssClass="form-control calendarInput" data-toggle="tooltip" data-placement="top" title="Date Applied" placeholder="Application Date" TextMode="DateTime"></asp:TextBox></li>
+                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Job Posting</small>
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddJobPosting" data-toggle="tooltip" data-placement="top" title="How does applicant know the job posting?"></asp:DropDownList></li>
                                                                 <li class="list-group-item">
@@ -398,7 +431,7 @@
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddCompany" data-toggle="tooltip" data-placement="top" title="Company"></asp:DropDownList></li>
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Date Hired</small>
-                                                                    <asp:TextBox runat="server" ID="txtDateHired" CssClass="calendarInput form-control" data-toggle="tooltip" data-placement="top" title="Date Hired" placeholder="Date Hired *"></asp:TextBox></li>
+                                                                    <asp:TextBox runat="server" ID="txtDateHired" CssClass="form-control calendarInput " data-toggle="tooltip" data-placement="top" title="Date Hired" placeholder="Date Hired *"></asp:TextBox></li>
                                                                 <li class="list-group-item">
                                                                     <small class="form-text text-muted">Employment Status</small>
                                                                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddEmploymentStatus" data-toggle="tooltip" data-placement="top" title="Status"></asp:DropDownList></li>
@@ -648,35 +681,145 @@
                                 </div>
                                 <%--End of Skills and Training--%>
 
-                                <div role="tabpanel" class="tab-pane fade" id="MedicalHistory">
+                                <div role="tabpanel" class="tab-pane fade" id="Evaluation">
                                     <br />
+                                     <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
+                                    <ContentTemplate>
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
-                                            Medical History
+                                            <div class="row">
+                                                 <div class="col-md-6 col-sm-6">
+                                                     Work Evaluation / Performance
+                                                     </div>
+                                                <div class="col-md-6 col-sm-6 text-right">
+                                                 <asp:LinkButton runat="server" ID="lnkUpdateWorkEvaluation" CssClass="btn btn-success btn-sm" OnClick="lnkUpdateWorkEvaluation_Click">Update</asp:LinkButton>
+                                            </div>
+                                            </div>
+                                            
+                                            
+
                                         </div>
                                         <div class="panel-body">
-                                          
+                                          <div class="row small small">
+                                                      <div class="col-md-9">
+                                                             
+                                                           <asp:GridView runat="server" ID="gvWorkEvaluationCriteria" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true" OnRowDataBound="gvWorkEvaluationCriteria_RowDataBound">
+                                                     <Columns>
+                                                         <asp:BoundField DataField="WEC_CODE" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
+                                                         <asp:BoundField DataField="WEC_Title" HeaderText="Title" ItemStyle-Font-Bold="true" />
+                                                         <asp:BoundField DataField="WEC_Details" HeaderText="Details" />
+                                                         <asp:TemplateField>
+                                                             <HeaderTemplate>
+                                                                 Ratings
+                                                             </HeaderTemplate>
+                                                             <ItemTemplate>
+                                                                 <asp:DropDownList runat="server" ID="ddRatings" CssClass="form-control">
+
+                                                                 </asp:DropDownList>
+                                                             </ItemTemplate>
+                                                         </asp:TemplateField>
+                                                     </Columns>
+                                                  </asp:GridView>
+                                                          
+                                                      </div>
+                                                      <div class="col-md-3">
+                                                            General Remarks:
+                                                              <asp:TextBox runat="server" ID="txtEvaluationRemarks" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="General Remarks">
+                                                              </asp:TextBox>
+                                                        <br />
+                                                          Ratings Legend:
+                                                   <asp:GridView runat="server" ID="gvRatingsLegend" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true">
+                                                       <Columns>
+                                                           <asp:BoundField DataField="WER_Title" HeaderText="Title" ItemStyle-Font-Bold="true" />
+                                                           <asp:BoundField DataField="Value_Min" HeaderText="Ratings" />
+                                                       </Columns>
+                                                   </asp:GridView>
+                                                  
+                                              </div>
+                                             
+                                          </div>
                                         </div>
                                     </div>
-
+                                   </ContentTemplate>
+                                   </asp:UpdatePanel>
                                 </div>
-                                <%--End of Health Monitoring--%>
+                                <%--End of Work Evaluation--%>
 
-                                <div role="tabpanel" class="tab-pane fade" id="IssuedItems">
+                               
+                               <div role="tabpanel" class="tab-pane fade" id="Offenses">
                                     <br />
-                                    <div class="panel panel-primary">
+                                 
+                                     <asp:UpdatePanel runat="server" ID="UpdatePanel3" UpdateMode="Conditional">
+                                    <ContentTemplate>
+
+                                    <div class="panel panel-danger">
                                         <div class="panel-heading">
-                                            Issued Items
+                                            <div class="row">
+
+
+                                                <div class="col-md-3">
+                                                    Offenses Record
+                                                </div>
+
+                                                <div class="col-md-9 text-right">
+                                                    <asp:LinkButton runat="server" ID="lnkOffenses" CssClass="btn btn-success btn-sm" OnClick="lnkOffenses_Click">Update</asp:LinkButton>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="panel-body">
-                                            <asp:Image runat="server" ID="image5" CssClass="img-responsive" ImageUrl="~/Pictures/add-inventory.png" />
+                                            <div class="row">
+                                                <!--Input Entry of Skills -->
+                                                <div class="col-md-4">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                            <small class="form-text text-muted">Offense Title:</small>
+                                                            <asp:TextBox runat="server" ID="txtOffenseTitle" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Offense Title"></asp:TextBox>
+
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <small class="form-text text-muted">Details/Particular:</small>
+                                                            <asp:TextBox runat="server" ID="txtOffenseDetails" TextMode="MultiLine" Rows="3" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Details"></asp:TextBox></li>
+                                                        </li>
+                                                            <li class="list-group-item">
+                                                                <small class="form-text text-muted">Recommendation:</small>
+                                                                <asp:TextBox runat="server" ID="txtOffenseRecommendation" CssClass="form-control" TextMode="MultiLine" Rows="2" data-toggle="tooltip" data-placement="top" title="Recommendation"></asp:TextBox></li>
+                                                        </li>
+                                                            
+                                                    </ul>
+                                                </div>
+                                                <!-- List of Skills and Training -->
+                                                <div class="col-md-8">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading">Offenses Committed</div>
+                                                        <asp:GridView runat="server" ID="gvEmployeeOffense" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true">
+                                                            <Columns>
+                                                                 <asp:BoundField DataField="OffenseID" />
+                                                                <asp:BoundField DataField="OffenseTitle" HeaderText="Title" />
+                                                                <asp:BoundField DataField="OffenseDetails" HeaderText="Details" />
+                                                                <asp:BoundField DataField="OffenseRecommendation" HeaderText="Recommendation" />
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton runat="server" ID="lnkRemoveOffense" CssClass="btn btn-danger btn-sm" OnClick="lnkRemoveOffense_Click">X</asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            </Columns>
+
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                        
+                                           </ContentTemplate>
+                                </asp:UpdatePanel>
 
+
+                                   
 
                                 </div>
                              
-                                   <%-- End of Issued Items and Asset--%>
+                                 
                             </div>
                             <!-- End of Tab Content-->
 
@@ -741,5 +884,18 @@
         
         </ContentTemplate>
     </asp:UpdatePanel>
+
+         <asp:UpdateProgress id="upgLoading" runat="server" AssociatedUpdatePanelID="uplMain">
+                    <ProgressTemplate>
+                        <div id="overlay">
+                            <div id="modalProgress">
+                                <div id="theProgress">
+                                    <img src="images/loading2.gif" alt="Loading..." />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
 <%--</div>--%>
   </asp:Content>

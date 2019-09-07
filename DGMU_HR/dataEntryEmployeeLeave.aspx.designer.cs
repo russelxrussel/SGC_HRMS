@@ -85,15 +85,6 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.Image imgEmployee;
         
         /// <summary>
-        /// lnkLeaveHistory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLeaveHistory;
-        
-        /// <summary>
         /// txtDateApplied control.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.LinkButton lnkProcess;
         
         /// <summary>
+        /// lnkLeaveHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLeaveHistory;
+        
+        /// <summary>
         /// gvEmployeeLeaveAvailability control.
         /// </summary>
         /// <remarks>
@@ -200,5 +200,23 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorMessage;
+        
+        /// <summary>
+        /// lnkOK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkOK;
+        
+        /// <summary>
+        /// lnkClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkClose;
     }
 }

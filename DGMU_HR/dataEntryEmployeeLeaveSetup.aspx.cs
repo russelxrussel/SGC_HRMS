@@ -106,11 +106,7 @@ namespace DGMU_HR
                         oPayroll.INSERT_UPDATE_EMPLOYEE_LEAVES_SETUP(empCode,oSystem.GET_DEFAULT_FISCAL_YEAR(), creditLeave);
                     }
 
-                    //lnkViewStock_Click(sender, e);
-
-                    //lblMessageSuccess.Text = "Branches beginning successfully updated.";
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
-
+                  
                 }
             }
         }

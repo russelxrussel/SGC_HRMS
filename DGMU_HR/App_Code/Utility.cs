@@ -95,6 +95,24 @@ namespace DGMU_HR
         }
 
 
+        /*
+        WORK EVALUATION CRITERIA AND RATINGS
+        08/14/2019
+        */
+        public DataTable GET_WORK_EVALUATION_CRITERIA_LIST()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[HR].[spGET_WORK_EVALUATION_CRITERIA_LIST]");
+            return dt;
+        }
+
+        public DataTable GET_WORK_EVALUATION_RATINGS_LIST()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[HR].[spGET_WORK_EVALUATION_RATINGS_LIST]");
+            return dt;
+        }
+
 
 
 

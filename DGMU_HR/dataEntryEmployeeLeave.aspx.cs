@@ -112,6 +112,16 @@ namespace DGMU_HR
         }
      
 
+        private void clearInputs()
+        {
+            //CLEAR FIELD
+            txtDateApplied.Text = "";
+            txtDays.Text = "";
+            txtDateFrom.Text = "";
+            txtDateTo.Text = "";
+            txtRemarks.Text = "";
+
+        }
         
 
 
@@ -126,21 +136,19 @@ namespace DGMU_HR
 
         protected void lnkProcess_Click(object sender, EventArgs e)
         {
-            
 
+            double dAvailableBalance = GET_LEAVE_BALANCE(ViewState["EMPCODE"].ToString(), oSystem.GET_DEFAULT_FISCAL_YEAR());
+
+    
 
             if (oSystem.CHECK_VALID_DATE(txtDateApplied.Text) && oSystem.CHECK_VALID_DATE(txtDateFrom.Text) && oSystem.CHECK_VALID_DATE(txtDateTo.Text))
             {
-                if (ddLeavesList.SelectedIndex == 0 && GET_LEAVE_BALANCE(ViewState["EMPCODE"].ToString(), oSystem.GET_DEFAULT_FISCAL_YEAR()) > 0)
+                if (ddLeavesList.SelectedIndex == 0 && dAvailableBalance > 0)
                 {
                     oPayroll.INSERT_UPDATE_EMPLOYEE_LEAVES(ViewState["EMPCODE"].ToString(), ddLeavesList.SelectedValue, Convert.ToDateTime(txtDateApplied.Text), Convert.ToDateTime(txtDateFrom.Text), Convert.ToDateTime(txtDateTo.Text), Convert.ToDouble(txtDays.Text), txtRemarks.Text, oSystem.GET_DEFAULT_FISCAL_YEAR());
 
                     //CLEAR FIELD
-                    txtDateApplied.Text = "";
-                    txtDays.Text = "";
-                    txtDateFrom.Text = "";
-                    txtDateTo.Text = "";
-                    txtRemarks.Text = "";
+                    clearInputs();
 
                     //Refresh
                     DataView dv = oPayroll.GET_EMPLOYEE_LEAVES_AVAILABLE().DefaultView;
@@ -154,27 +162,28 @@ namespace DGMU_HR
 
 
                 }
-                else if (ddLeavesList.SelectedIndex > 0)
-                {
-                    oPayroll.INSERT_UPDATE_EMPLOYEE_LEAVES(ViewState["EMPCODE"].ToString(), ddLeavesList.SelectedValue, Convert.ToDateTime(txtDateApplied.Text), Convert.ToDateTime(txtDateFrom.Text), Convert.ToDateTime(txtDateTo.Text), Convert.ToDouble(txtDays.Text), txtRemarks.Text, oSystem.GET_DEFAULT_FISCAL_YEAR());
+                //else if (ddLeavesList.SelectedIndex > 0)
+                //{
+                //    oPayroll.INSERT_UPDATE_EMPLOYEE_LEAVES(ViewState["EMPCODE"].ToString(), ddLeavesList.SelectedValue, Convert.ToDateTime(txtDateApplied.Text), Convert.ToDateTime(txtDateFrom.Text), Convert.ToDateTime(txtDateTo.Text), Convert.ToDouble(txtDays.Text), txtRemarks.Text, oSystem.GET_DEFAULT_FISCAL_YEAR());
 
-                    //CLEAR FIELD
-                    txtDateApplied.Text = "";
-                    txtDays.Text = "";
-                    txtDateFrom.Text = "";
-                    txtDateTo.Text = "";
-                    txtRemarks.Text = "";
-
-
-                    lblSuccessMessage.Text = "Employee Leave successfully process.";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+                //    //CLEAR FIELD
+                //    txtDateApplied.Text = "";
+                //    txtDays.Text = "";
+                //    txtDateFrom.Text = "";
+                //    txtDateTo.Text = "";
+                //    txtRemarks.Text = "";
 
 
-                }
+                //    lblSuccessMessage.Text = "Employee Leave successfully process.";
+                //    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+
+                //}
                 else
+                //Prompt a message that Employee don't have balance for leave. But optionally allowed if the user select Yes.
                 {
-                    lblErrorMessage.Text = "Incentive Leave Balance is zero.";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+                    //lblErrorMessage.Text = "Incentive Leave Balance is zero.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#promptMessage').modal('show');</script>", false);
                 }
 
       
@@ -205,6 +214,28 @@ namespace DGMU_HR
 
             }
 
+        }
+
+        protected void lnkOK_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "#promptMessage", "$('body').removeClass('modal-open');$('.modal-backdrop').remove();$('#promptMessage').hide();", true);
+
+            oPayroll.INSERT_UPDATE_EMPLOYEE_LEAVES(ViewState["EMPCODE"].ToString(), ddLeavesList.SelectedValue, Convert.ToDateTime(txtDateApplied.Text), Convert.ToDateTime(txtDateFrom.Text), Convert.ToDateTime(txtDateTo.Text), Convert.ToDouble(txtDays.Text), txtRemarks.Text, oSystem.GET_DEFAULT_FISCAL_YEAR());
+
+            //CLEAR FIELD
+            clearInputs();
+
+            //Refresh
+            DataView dv = oPayroll.GET_EMPLOYEE_LEAVES_AVAILABLE().DefaultView;
+            dv.RowFilter = "EmpCode ='" + ViewState["EMPCODE"].ToString() + "'";
+            gvEmployeeLeaveAvailability.DataSource = dv;
+            gvEmployeeLeaveAvailability.DataBind();
+
+         
+            lblSuccessMessage.Text = "Employee Leave successfully process.";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+          
         }
     }
 }

@@ -6,7 +6,7 @@
 
 <br /><br /><hr />  
 <%--<div class="container container_content">--%>
-    <div>
+    <div class="small">
    
 <asp:UpdatePanel runat="server" ID="uplMain">
     <ContentTemplate>

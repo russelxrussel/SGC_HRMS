@@ -1,0 +1,49 @@
+USE [DGMU]
+GO
+
+/****** Object:  StoredProcedure [HR].[spINSERTUPDATE_EMPLOYEE_OFFENSES]    Script Date: 8/16/2019 12:09:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+/* INSERT/ UPDATE Employee Offenses
+08.15.2019
+Russel Vasquez
+*/
+
+CREATE PROC [HR].[spINSERTUPDATE_EMPLOYEE_OFFENSES]
+@EMPLOYEEID nvarchar(10),
+@OFFENSE_TITLE nvarchar(100),
+@OFFENSE_DETAILS nvarchar(250),
+@OFFENSE_RECOMMENDATION nvarchar(250)
+
+AS
+BEGIN
+
+BEGIN TRY
+	BEGIN TRANSACTION
+	
+		INSERT INTO [HR].[Employee_Offenses_MD]
+		(EmployeeID,OffenseTitle,OffenseDetails,OffenseRecommendation)
+		VALUES
+		(@EMPLOYEEID,@OFFENSE_TITLE,@OFFENSE_DETAILS,@OFFENSE_RECOMMENDATION)
+
+	COMMIT TRANSACTION
+END TRY
+
+BEGIN CATCH
+
+	ROLLBACK TRANSACTION -- Will not commit changes on all tables
+
+END CATCH
+
+END
+
+
+GO
+
+

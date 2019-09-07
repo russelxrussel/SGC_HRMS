@@ -6,7 +6,7 @@
 
 <br /><br /><hr />  
 <%--<div class="container container_content">--%>
-    <div>
+    <div class="small">
    
 <asp:UpdatePanel runat="server" ID="uplMain">
     <ContentTemplate>
@@ -120,19 +120,19 @@
                 <div class="panel-body">
                         <div class="row">
                      
-                      <div class="col-md-2">
+                      <div class="col-md-2 hidden">
                              
                                  <div class="text-center">
                                      <asp:Image runat="server" ID="imgEmployee" CssClass="img-circle img-responsive" Width="200px" Height="200px" />
                                      <hr />
                                     
                                  </div>
-                           <asp:LinkButton runat="server" ID="lnkLeaveHistory" CssClass="btn btn-warning" OnClick="lnkLeaveHistory_Click"><span class="glyphicon glyphicon-folder-open"></span> Leave History</asp:LinkButton>
+                          
                           </div>
 
                             
                                 
-                            <div class="col-md-5"> 
+                            <div class="col-md-7"> 
                                 <div class="panel panel-default">
                 <div class="panel-heading"><span class="glyphicon glyphicon-tag"></span> Leave Application Entry</div>
                 <div class="panel-body">
@@ -149,7 +149,9 @@
                     <div class="input-group">
                          
                         <span class="input-group-addon alert-warning">Leave Type:</span>
-                        <asp:DropDownList runat="server" ID="ddLeavesList" CssClass="form-control">
+                        <!--Make the ddLeaveList disable to prevent selection 
+                            because leave available only is Service Incentive  09022019-->
+                        <asp:DropDownList runat="server" ID="ddLeavesList" CssClass="form-control" Enabled="false">
                         </asp:DropDownList>
 
                          <span class="input-group-addon alert-warning">Days</span>
@@ -171,7 +173,7 @@
                             </li>
 
                         <li class="list-group-item text-right">
-                            <asp:LinkButton runat="server" ID="lnkProcess" CssClass="btn btn-primary" OnClick="lnkProcess_Click"><span class="glyphicon glyphicon-floppy-saved"></span> Process</asp:LinkButton>
+                            <asp:LinkButton runat="server" ID="lnkProcess" CssClass="btn btn-primary btn-sm" OnClick="lnkProcess_Click"><span class="glyphicon glyphicon-floppy-saved"></span> Process</asp:LinkButton>
                         </li>
                         </ul>
                 </div>
@@ -180,10 +182,12 @@
 
                               <div class="col-md-5">
                 <div class="panel panel-info">
-                <div class="panel-heading"> <span class="glyphicon glyphicon-briefcase"></span> Leaves Credit and Balances Summary</div>
+                <div class="panel-heading"> 
+                    <span class="glyphicon glyphicon-briefcase"></span> Leaves Credit and Balances Summary</div>
                 <div class="panel-body">
-                    
-                    <asp:GridView runat="server" ID="gvEmployeeLeaveAvailability" CssClass="table table-responsive" AutoGenerateColumns="false">
+                     <asp:LinkButton runat="server" ID="lnkLeaveHistory" CssClass="btn btn-info btn-sm" OnClick="lnkLeaveHistory_Click"><span class="glyphicon glyphicon-folder-open"></span> Leave History</asp:LinkButton>
+                  <hr />
+                     <asp:GridView runat="server" ID="gvEmployeeLeaveAvailability" CssClass="table table-responsive" AutoGenerateColumns="false">
                         <Columns>
                             <asp:BoundField DataField="LeaveDescription" HeaderText="Description" />
                             <asp:BoundField DataField="Credit" HeaderText="Available" />
@@ -290,6 +294,38 @@
                                       </div>
                                   </div>
                
+        <!--PROMPT USER SELECTION -->
+        <div class="modal fade" id="promptMessage" data-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header alert-warning">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">HR Management System</h4>
+                </div>
+                 
+                      <div class="modal-body">
+                      <h3><span class="glyphicon glyphicon-question-sign alert-info"></span> Employee exceed leave balance.</h3>
+                     
+                      <p>Are you sure you want to continue leave entry?</p>
+
+                      </div>
+                
+
+                  <div class="modal-footer">
+                    
+                <asp:LinkButton runat="server" ID="lnkOK" CssClass="btn btn-primary btn-sm" OnClick="lnkOK_Click">Yes</asp:LinkButton>
+
+                <asp:LinkButton runat="server" ID="lnkClose" CssClass="btn btn-danger btn-sm" data-dismiss="modal">No</asp:LinkButton>
+
+                </div>
+
+
+                 
+            </div>
+            </div>
+
+          
+       </div>
 
     </ContentTemplate>
 </asp:UpdatePanel>

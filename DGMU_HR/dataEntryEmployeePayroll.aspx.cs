@@ -850,29 +850,29 @@ namespace DGMU_HR
         {
             //COMMENTED TO ENHANCE PERFORMANCE in loading of LIST. 09272018
 
-        //    foreach (GridViewRow r in gvEmployeeList.Rows)
-        //    {
-        //        try
-        //        {
-        //            string sEmpCode = r.Cells[0].Text;
-        //            LinkButton lnkEditSalary = r.FindControl("lnkEmployeeAssign") as LinkButton;
+            //foreach (GridViewRow r in gvEmployeeList.Rows)
+            //{
+            //    try
+            //    {
+            //        string sEmpCode = r.Cells[0].Text;
+            //        LinkButton lnkEditSalary = r.FindControl("lnkEmployeeAssign") as LinkButton;
 
-        //            if (oPayroll.CHECK_EMPLOYEE_PAYROLL_EXIST(sEmpCode, Convert.ToInt16(ViewState["PPID"])))
-        //            {
-        //                //lnkEditSalary.Text = "Edit";
-        //                //lnkEditSalary.CssClass = "btn btn-success btn-sm";
-        //                r.ControlStyle.BackColor = System.Drawing.Color.Green;
-        //            }
+            //        if (oPayroll.CHECK_EMPLOYEE_PAYROLL_EXIST(sEmpCode, Convert.ToInt16(ViewState["PPID"])))
+            //        {
+            //           // lnkEditSalary.Text = "Edit";
+            //            //lnkEditSalary.CssClass = "btn btn-success btn-sm";
+            //            // r.ControlStyle.BackColor = System.Drawing.Color.Green;
+            //        }
 
-        //            //        //else
-        //            //        //{
-        //            //        //    imgEmployee.ImageUrl = "../Emp_Pictures/default-avatar.png";
-        //            //        //}
+            //        //        //else
+            //        //        //{
+            //        //        //    imgEmployee.ImageUrl = "../Emp_Pictures/default-avatar.png";
+            //        //        //}
 
 
-        //        }
-        //        catch { }
-        //}
-    }
+            //    }
+            //    catch { }
+            //}
+        }
     }
 }

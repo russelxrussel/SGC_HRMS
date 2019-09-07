@@ -7,6 +7,11 @@
 
         .bg_transparent:hover {
             opacity: 1;
+
+        }
+
+        .tr_size {
+            font-size: 10px;
         }
     </style>
 </asp:Content>
@@ -108,11 +113,11 @@
                        </script>    
 
 
-           <div class="row">
-        <div class="col-md-3">
+           <div class="row small">
+        <div class="hidden">
               
                <div class="panel panel-primary">
-                <div class="panel-heading">
+                <div class  ="panel-heading">
                    DGMU - Human Resources Management System
                 </div>
 
@@ -147,17 +152,17 @@
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-lg-9 col-md-9 col-sm-3">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="panel panel-success">
 
                         <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> Manage Employee <asp:Label runat="server" ID="lblDefaultYear"></asp:Label></div>
                         <div class="panel-body bg-info">
 
                             <asp:HyperLink runat="server" ID="hlnkPeople" CssClass="text-muted" NavigateUrl="~/EmpData.aspx">
-                                <h2>
-                                    <asp:Image runat="server" ID="image1" src="images/dbh_employment.png" Width="64px" height="64px"/> Employment</h2>
+                                <h3>
+                                    <asp:Image runat="server" ID="image1" src="images/dbh_employment.png" Width="64px" height="64px"/> Employee</h3>
                             </asp:HyperLink>
 
                         </div>
@@ -180,55 +185,18 @@
                         </div>
                     </div>
                 </div>
-                 <div class="col-md-4">
-                      <div class="panel panel-success">
-                        <div class="panel-heading"><span class="glyphicon glyphicon-plane"></span> Upcoming Employee Leaves: <b><asp:Label runat="server" ID="lblUpcomingLeaveCount"></asp:Label></b></div>
-                        <div class="panel-body bg-info">
+               
 
-                            <asp:HyperLink runat="server" ID="hlLeaves" CssClass="text-muted" NavigateUrl="~/dataEntryEmployeeLeave.aspx">
-                                <h2>
-                                    <asp:Image runat="server" ID="image4" src="images/dbh_leaves.png" /> Leaves</h2>
-                            </asp:HyperLink>
-
-                        </div>
-                        <div class="panel-footer">
-                             <%--<div class="text-center text-muted"><i>Upcoming Leaves</i>
-                                 <br />
-
-                             </div>--%>
-                            <asp:Panel runat="server" ID="panelUpcomingLeaves" Height="250px" ScrollBars="Vertical">
-                            <asp:GridView runat="server" ID="gvUpcomingLeaves" CssClass="table table-responsive table-condensed small" GridLines="None" AutoGenerateColumns="false" ShowHeader="true">
-                                <Columns>
-                                    <asp:BoundField DataField="EmployeeName" /> 
-                                    <asp:BoundField DataField="LeaveTypeCode" HeaderText="Leave" />
-                                    <asp:BoundField DataField="DateFrom" DataFormatString="{0:d}" HeaderText="Date Start" />
-                                    <asp:BoundField DataField="DaysCount" HeaderText="Days" />
-                                </Columns>
-                            </asp:GridView>
-                            </asp:Panel>
-
-                           
-                        </div>
-                    </div>
-                   
-                
-                        </div>
-
-                 <div class="col-md-4">
+                 <div class="col-md-3">
                       <div class="panel panel-success">
                         <div class="panel-heading"><span class="glyphicon glyphicon-star"></span> <asp:Label runat="server" ID="lblPayrollPeriodText"></asp:Label></div>
                         <div class="panel-body bg-info">
 
                             <asp:HyperLink runat="server" ID="hlPayroll" CssClass="text-muted" NavigateUrl="~/dataEntryEmployeePayroll.aspx">
-                                <h2>
-                                    <asp:Image runat="server" ID="image2" src="images/dbh_payroll.png" /> Payroll</h2>
+                                <h3>
+                                    <asp:Image runat="server" ID="image2" src="images/dbh_payroll.png" /> Payroll</h3>
                             </asp:HyperLink>
-                         <%--  <ul class="list-group">
-                               <li class="list-group-item">
-                                 
-                               </li>
-                           </ul>
-                           --%>
+                        
 
                           
 
@@ -237,7 +205,7 @@
                         <div class="panel-footer">
                             <ul class="list-group small">
                                 <li class="list-group-item">
-                                    <div class="text-muted"><i><span class="glyphicon glyphicon-saved"></span> Employee Payroll processed: </i> <asp:LinkButton runat="server" ID="lnkProcessPayrollStat" CssClass="badge bg-danger" OnClick="lnkProcessPayrollStat_Click1"></asp:LinkButton></div>
+                                    <i> # of payroll processed: </i> <asp:LinkButton runat="server" ID="lnkProcessPayrollStat" CssClass="badge bg-danger" OnClick="lnkProcessPayrollStat_Click1"></asp:LinkButton>
                                 </li>
                             </ul>
                              
@@ -246,13 +214,19 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-success">
+                   
+
+                    
+                </div>
+
+                  <div class="col-md-3">
+                       <div class="panel panel-success">
                         <div class="panel-heading"><span class="glyphicon glyphicon-fire"></span> <asp:Label runat="server" ID="lblActiveLoansCount"></asp:Label></div>
                         <div class="panel-body bg-info">
 
                             <asp:HyperLink runat="server" ID="hlLoans" CssClass="text-muted" NavigateUrl="~/dataEntryEmployeeLoan.aspx">
-                                <h2>
-                                    <asp:Image runat="server" ID="image3" src="images/dbh_loan.png" />Loans</h2>
+                                <h3>
+                                    <asp:Image runat="server" ID="image3" src="images/dbh_loan.png" />Loans</h3>
                             </asp:HyperLink>
 
                         </div>
@@ -272,13 +246,46 @@
 
                         </div>
                     </div>
+                  </div>
 
-                    
-                </div>
+                  <div class="col-md-3">
+                      <div class="panel panel-success">
+                        <div class="panel-heading"><span class="glyphicon glyphicon-plane"></span> Upcoming Employee Leaves: <b><asp:Label runat="server" ID="lblUpcomingLeaveCount"></asp:Label></b></div>
+                        <div class="panel-body bg-info">
+
+                            <asp:HyperLink runat="server" ID="hlLeaves" CssClass="text-muted" NavigateUrl="~/dataEntryEmployeeLeave.aspx">
+                                <h3>
+                                    <asp:Image runat="server" ID="image4" src="images/dbh_leaves.png" /> Leaves</h3>
+                            </asp:HyperLink>
+
+                        </div>
+                        <div class="panel-footer">
+                             <%--<div class="text-center text-muted"><i>Upcoming Leaves</i>
+                                 <br />
+
+                             </div>--%>
+                            <asp:Panel runat="server" ID="panelUpcomingLeaves" Height="200px" ScrollBars="Vertical">
+                            <asp:GridView runat="server" ID="gvUpcomingLeaves" CssClass="table table-responsive table-condensed small" GridLines="None" AutoGenerateColumns="false" ShowHeader="true">
+                                <Columns>
+                                    <asp:BoundField DataField="DateFrom" DataFormatString="{0:d}" HeaderText="From" />
+                                    <asp:BoundField DataField="EmployeeName" HeaderText="Employee" /> 
+                                    <%--<asp:BoundField DataField="LeaveTypeCode" HeaderText="Leave" />--%>
+                                    
+                                    <asp:BoundField DataField="DaysCount" HeaderText="Days" />
+                                </Columns>
+                            </asp:GridView>
+                            </asp:Panel>
+
+                           
+                        </div>
+                    </div>
+                   
+                
+                        </div>
             </div>
         </div>
 
-          <div class="col-md-3">
+          <div class="col-lg-3 col-md-3 col-sm-3">
           <asp:Panel runat="server" ID="panelBdayCorner" Height="768px" ScrollBars="Vertical">
 
           <div class="panel panel-primary">
@@ -288,9 +295,9 @@
                 <div class="panel-body">
                    <asp:GridView ID="gvBirthdayList" runat="server" CssClass="table table-responsive table-condensed table-hover" AutoGenerateColumns="false">
                        <Columns>
-                           <asp:BoundField DataField="Date_of_Birth" HeaderText="Date" DataFormatString="{0:d}" ItemStyle-Font-Size= "12px" />
-                           <asp:BoundField DataField="EmployeeName" HeaderText="Employee" ItemStyle-Font-Size= "12px" />
-                           <asp:BoundField DataField="Position" HeaderText="Position" ItemStyle-Font-Size= "12px" />
+                           <asp:BoundField DataField="Date_of_Birth" HeaderText="Date" DataFormatString="{0:d}" ItemStyle-Font-Size= "10px" />
+                           <asp:BoundField DataField="EmployeeName" HeaderText="Employee" ItemStyle-Font-Size= "10px" />
+                           <asp:BoundField DataField="Position" HeaderText="Position" ItemStyle-Font-Size= "10px" />
                        </Columns>
                    </asp:GridView>
                 </div>

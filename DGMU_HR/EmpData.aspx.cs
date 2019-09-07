@@ -34,7 +34,7 @@ namespace DGMU_HR
                 DISPLAY_COMPANY_LIST();
                 DISPLAY_EMPLOYMENT_STATUS_LIST();
 
-
+              
 
 
                 gvEmployeeList.DataSource = oEmployeeData.GET_EMPLOYEE_LIST_LW();
@@ -286,11 +286,7 @@ namespace DGMU_HR
                 txtPhilHealthNumber.Text = dvr.Row["PhilHealth"].ToString();
 
 
-                //DateTime dtHired = DateTime.Parse(dvr.Row["Date_Hired"].ToString(), new System.Globalization.CultureInfo("en-US"));
-                //txtDateHired.Text = dtHired.ToShortDateString();
-                //DateTime dtApplied = DateTime.Parse(dvr.Row["Date_Applied"].ToString(), new System.Globalization.CultureInfo("en-US"));
-                //txtApplicationDate.Text = dtApplied.ToShortDateString();
-
+           
                 txtDateHired.Text = Convert.ToDateTime(dvr.Row["Date_Hired"]).ToShortDateString();
                 txtApplicationDate.Text = Convert.ToDateTime(dvr.Row["Date_Applied"]).ToShortDateString();
                 //
@@ -382,6 +378,14 @@ namespace DGMU_HR
                 //DISPLAY List of Skills and Training of Employee
                 DISPLAY_SKILLS_TRAINING(_employeeID);
 
+                //WORK EVALUATION
+                DISPLAY_EVALUATION_CRITERIA_LIST();
+                DISPLAY_EVALUATION_RATINGS_LIST();
+                txtEvaluationRemarks.Text = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_REMARKS(_employeeID);
+
+                //EMPLOYEE OFFENSES
+
+                DISPLAY_EMPLOYEE_OFFENSE(_employeeID);
             }
         }
 
@@ -496,7 +500,13 @@ namespace DGMU_HR
             txtContactPerson.Text = "";
             txtContactNumber.Text = "";
             txtContactRelationship.Text = "";
-            
+
+
+
+            //WORK EVALUATION / PERFORMANCE
+            gvWorkEvaluationCriteria.DataSource = null;
+            gvWorkEvaluationCriteria.DataBind();
+            txtEvaluationRemarks.Text = "";
 
         }
 
@@ -505,6 +515,13 @@ namespace DGMU_HR
             txtSkillsTraining.Text = "";
             txtTrainingCenterName.Text = "";
             txtEndDateTraining.Text = "";
+        }
+
+        private void Clear_EmployeeOffenses()
+        {
+            txtOffenseTitle.Text = "";
+            txtOffenseDetails.Text = "";
+            txtOffenseRecommendation.Text = "";
         }
         protected void lnkReturn_Click(object sender, EventArgs e)
         {
@@ -515,29 +532,45 @@ namespace DGMU_HR
 
         protected void lnkUpdateFamily_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSiblingsCount.Text))
+            if (!string.IsNullOrEmpty(lblEmployeeID.Text))
             {
-                txtSiblingsCount.Text = "0";
+                if (string.IsNullOrEmpty(txtSiblingsCount.Text))
+                {
+                    txtSiblingsCount.Text = "0";
+                }
+
+                oEmployeeData.INSERT_EMPLOYEE_FAMILY(lblEmployeeID.Text, txtFatherName.Text, txtFatherContactNumber.Text, txtMotherName.Text,
+                                                     txtMotherContactNumber.Text, Convert.ToInt32(txtSiblingsCount.Text), txtSpouseLastName.Text,
+                                                     txtSpouseFirstName.Text, txtSpouseMiddleName.Text, txtSpouseContactNumber.Text);
+
+
+
+                lblSuccessMessage.Text = "Family background successfully updated.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+            }else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
             }
-
-            oEmployeeData.INSERT_EMPLOYEE_FAMILY(lblEmployeeID.Text, txtFatherName.Text, txtFatherContactNumber.Text, txtMotherName.Text,
-                                                 txtMotherContactNumber.Text, Convert.ToInt32(txtSiblingsCount.Text), txtSpouseLastName.Text,
-                                                 txtSpouseFirstName.Text, txtSpouseMiddleName.Text, txtSpouseContactNumber.Text);
-
-            //lnkReturn_Click(sender, e);
-
-            lblSuccessMessage.Text =  "Family background successfully updated.";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
         }
 
         protected void lnkUpdateEducation_Click(object sender, EventArgs e)
         {
-            oEmployeeData.INSERT_UPDATE_EMPLOYEE_EDUCATION(lblEmployeeID.Text, txtPrimarySchool.Text.ToUpper(), txtPrimaryYG.Text, txtSecondarySchool.Text.ToUpper(), txtSecondaryYG.Text, txtTertiarySchool.Text.ToUpper(), txtTertiaryYG.Text, txtCourse.Text.ToUpper(), chkIsGraduate.Checked);
 
-          
-            lblSuccessMessage.Text = "Education background successfully updated.";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+            if (!string.IsNullOrEmpty(lblEmployeeID.Text))
+            {
+                oEmployeeData.INSERT_UPDATE_EMPLOYEE_EDUCATION(lblEmployeeID.Text, txtPrimarySchool.Text.ToUpper(), txtPrimaryYG.Text, txtSecondarySchool.Text.ToUpper(), txtSecondaryYG.Text, txtTertiarySchool.Text.ToUpper(), txtTertiaryYG.Text, txtCourse.Text.ToUpper(), chkIsGraduate.Checked);
 
+
+                lblSuccessMessage.Text = "Education background successfully updated.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+            }
+            else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+            }
         }
 
         protected void lnkUpdateSkills_Click(object sender, EventArgs e)
@@ -571,6 +604,133 @@ namespace DGMU_HR
             oEmployeeData.REMOVE_EMPLOYEE_SKILLSTRAINING(_ID);
             DISPLAY_SKILLS_TRAINING(lblEmployeeID.Text);
 
+        }
+
+        #region "WORK EVALUATION AND RATINGS AREA LOCAL FUNCTIONS"
+        /*LIST OF FUNCTIONS RELATED TO WORK EVALUATION*/
+
+        private void DISPLAY_EVALUATION_CRITERIA_LIST()
+        {
+            DataTable dtWorkEvaluationCriteriaList = oUtility.GET_WORK_EVALUATION_CRITERIA_LIST();
+
+            gvWorkEvaluationCriteria.DataSource = dtWorkEvaluationCriteriaList;
+            gvWorkEvaluationCriteria.DataBind();
+        }
+
+        private void DISPLAY_EVALUATION_RATINGS_LIST()
+        {
+            DataTable dt = oUtility.GET_WORK_EVALUATION_RATINGS_LIST();
+
+            gvRatingsLegend.DataSource = dt;
+            gvRatingsLegend.DataBind();
+        }
+
+        private string DISPLAY_EVALUATION_RESULT(string _employeeID, string _wecCode)
+        {
+            string x = "";
+                x = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_RESULT(_employeeID, _wecCode);
+            return x;
+        }
+
+        #endregion
+
+        protected void gvWorkEvaluationCriteria_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            DataTable dt = oUtility.GET_WORK_EVALUATION_RATINGS_LIST();
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string wecCode = e.Row.Cells[0].Text;
+
+                DropDownList ddRatings = (e.Row.FindControl("ddRatings") as DropDownList);
+                ddRatings.DataSource = dt;
+                ddRatings.DataTextField =  dt.Columns["WER_Title"].ToString();
+                ddRatings.DataValueField = dt.Columns["WER_CODE"].ToString();
+                ddRatings.DataBind();
+
+                ddRatings.SelectedValue = DISPLAY_EVALUATION_RESULT(lblEmployeeID.Text, wecCode);
+            }
+        }
+
+        protected void lnkUpdateWorkEvaluation_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblEmployeeID.Text))
+            {
+                foreach (GridViewRow row in gvWorkEvaluationCriteria.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        string wecCode = row.Cells[0].Text;
+                        DropDownList ddRatings = (row.FindControl("ddRatings") as DropDownList);
+
+                        oEmployeeData.INSERT_UPDATE_EMPLOYEE_WORK_EVALUATION(lblEmployeeID.Text, wecCode, ddRatings.SelectedValue.ToString(), txtEvaluationRemarks.Text);
+                    }
+                }
+
+                lblSuccessMessage.Text = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+            }
+            else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+            }
+        }
+
+
+        /*
+        Employee Offenses
+        */
+
+        private void DISPLAY_EMPLOYEE_OFFENSE(string _employeeID)
+        {
+            //Display Employee Skills and Training
+            DataTable dtEmployeeOffense = oEmployeeData.GET_EMPLOYEE_OFFENSES(_employeeID);
+            
+            if (dtEmployeeOffense.Rows.Count > 0)
+            {
+                gvEmployeeOffense.DataSource = dtEmployeeOffense;
+            }
+            else
+            {
+                gvEmployeeOffense.DataSource = null;
+            }
+
+            gvEmployeeOffense.DataBind();
+        }
+
+        protected void lnkOffenses_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtOffenseTitle.Text) && !string.IsNullOrEmpty(txtOffenseDetails.Text))
+            {
+                
+                oEmployeeData.INSERT_UPDATE_EMPLOYEE_OFFENSES(lblEmployeeID.Text, txtOffenseTitle.Text,txtOffenseDetails.Text, txtOffenseRecommendation.Text);
+                DISPLAY_EMPLOYEE_OFFENSE(lblEmployeeID.Text);
+
+                lblSuccessMessage.Text = "Offenses successfully added.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+                Clear_EmployeeOffenses();
+            }
+
+            else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+            }
+        }
+
+    
+
+        protected void lnkRemoveOffense_Click(object sender, EventArgs e)
+        {
+            var selEdit = (Control)sender;
+            GridViewRow r = (GridViewRow)selEdit.NamingContainer;
+
+            int _ID = Convert.ToInt32(r.Cells[0].Text);
+
+            oEmployeeData.REMOVE_EMPLOYEE_OFFENSE(_ID);
+            DISPLAY_EMPLOYEE_OFFENSE(lblEmployeeID.Text);
         }
     }
 }

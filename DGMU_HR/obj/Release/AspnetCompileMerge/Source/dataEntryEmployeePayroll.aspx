@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HRMS.Master"  AutoEventWireup="true" CodeBehind="dataEntryEmployeePayroll.aspx.cs" Inherits="DGMU_HR.dataEntryEmployeePayroll" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentArea" runat="server">
- 
 
-<br /><br /><hr />   
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentArea" runat="server">
+
+<br /><br />   
 <%--<div class="container container_content">--%>
  <div>
 <asp:UpdatePanel runat="server" ID="uplMain">
@@ -59,23 +59,32 @@
             .tbInput {
                 width: 100px;
             }
+
+            tr {
+                font-size: 12px;
+            }
+
+            .sub_label {
+                font-size: 12px;
+                color: red;
+            }
         </style>
 
-  <div class="panel panel-warning">
+  <div class="panel panel-success">
     <div class="panel-heading">
- 
-                <h5><span class="glyphicon glyphicon-cog"></span> <asp:Label runat="server" ID="lblPayrollPeriodText"></asp:Label></h5>
+    
+                <h5><span class="glyphicon glyphicon-cog"></span> Office and Other Payslip : <b> <asp:Label runat="server" ID="lblPayrollPeriodText"></asp:Label></b></h5>
    
     </div>
     <div class="panel-body">
     <div class="row">
         <!-- LEFT -->
          
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4">
             <asp:Panel runat="server" ID="panelLeft">
             <ul class="list-group">
                
-                 <li class="list-group-item">
+               <%--  <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-12">
                             <asp:DropDownList runat="server" id="ddPayrollGroup" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Select Payroll Group" AutoPostBack="true" OnSelectedIndexChanged="ddPayrollGroup_SelectedIndexChanged"> </asp:DropDownList>
@@ -84,7 +93,7 @@
                       
                           
                
-                </li>
+                </li>--%>
 
                  <li class="list-group-item">
                      <asp:Panel runat="server" ID="panelBranchPayroll" Visible="false">
@@ -97,9 +106,7 @@
                         </div>
                     </div>
                     </asp:Panel>
-                      
-                          
-               
+                    
                 </li>
 
                 <li class="list-group-item">
@@ -117,7 +124,10 @@
                 <li class="list-group-item">
       
     
-
+            <%--Panel to control height--%>
+        <asp:Panel runat="server" id="panelEmployeeList" Height="500px" ScrollBars="Vertical">
+           
+       
        <asp:GridView runat="server" ID="gvEmployeeList" 
             CssClass="table table-responsive table-hover table-condensed table-bordered" AutoGenerateColumns="False" OnRowDataBound="gvEmployeeList_RowDataBound">
     
@@ -135,6 +145,7 @@
         </Columns>
     
     </asp:GridView>
+             </asp:Panel>
                 </li>
             </ul>
            </asp:Panel>
@@ -143,7 +154,7 @@
 
         <!--RIGHT -->
         
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8">
             <asp:Panel runat="server" ID="panelRight" ScrollBars="None" Enabled="false">
                 <div class="row">
                     <div class="col-md-6">
@@ -155,7 +166,7 @@
                 </div>
             
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4">
                     <table class="table table-responsive table-hover">
                         <thead>
                             <caption>
@@ -164,7 +175,7 @@
                             </caption>
                         </thead>
                         <tr>
-                            <td># Days Worked: </td>
+                            <td class="td_label"># Days Worked: </td>
                             <td>
                                 
                                 <asp:TextBox runat="server" ID="txtDaysWork"  CssClass="form-control tbInput" TextMode="Number" MaxLength="5"></asp:TextBox>
@@ -250,7 +261,7 @@
                     </table>
                 </div>
 
-              <div class="col-md-4">
+              <div class="col-md-4 col-sm-4">
                     <table class="table table-responsive table-hover">
                         <thead>
                             <caption>
@@ -302,7 +313,7 @@
                             <td>
                                 <div class="input-group">
                                 <asp:TextBox runat="server" ID="txtSalaryLoan" CssClass="form-control tbInput" TextMode="Number" MaxLength="5"></asp:TextBox>
-                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblLoanBalance" data-toggle="tooltip" data-placement="top" title="Salary Loan Balance"></asp:Label></span>
+                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblLoanBalance" data-toggle="tooltip" data-placement="top" title="Salary Loan Balance" CssClass="sub_label"></asp:Label></span>
                                 </div>
                             </td>
                         </tr>
@@ -311,7 +322,7 @@
                             <td>
                                 <div class="input-group">
                                 <asp:TextBox runat="server" ID="txtSSSLoan" CssClass="form-control tbInput" TextMode="Number" MaxLength="5"></asp:TextBox>
-                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblSSSLoan" data-toggle="tooltip" data-placement="top" title="SSS Loan Balance"></asp:Label></span>
+                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblSSSLoan" data-toggle="tooltip" data-placement="top" title="SSS Loan Balance" CssClass="sub_label"></asp:Label></span>
                                 </div>
                             </td>
                         </tr>
@@ -320,7 +331,7 @@
                             <td>
                                 <div class="input-group">
                                 <asp:TextBox runat="server" ID="txtPagibigLoan" CssClass="form-control tbInput" TextMode="Number" MaxLength="5"></asp:TextBox>
-                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblPagibigLoan" data-toggle="tooltip" data-placement="top" title="Pagibig Loan Balance"></asp:Label></span>
+                                <span class="input-group-addon alert-warning"><asp:Label runat="server" ID="lblPagibigLoan" data-toggle="tooltip" data-placement="top" title="Pagibig Loan Balance" CssClass="sub_label"></asp:Label></span>
                                 </div>
                             </td>
                         </tr>
@@ -331,7 +342,7 @@
                     </table>
                 </div>  
 
-              <div class="col-md-4">
+              <div class="col-md-4 col-sm-4">
                     <table class="table table-responsive table-hover">
                         <thead>
                             <caption>

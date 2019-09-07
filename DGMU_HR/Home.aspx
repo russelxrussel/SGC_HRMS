@@ -113,7 +113,7 @@
                        </script>    
 
 
-           <div class="row">
+           <div class="row small">
         <div class="hidden">
               
                <div class="panel panel-primary">
@@ -264,12 +264,13 @@
                                  <br />
 
                              </div>--%>
-                            <asp:Panel runat="server" ID="panelUpcomingLeaves" Height="250px" ScrollBars="Vertical">
+                            <asp:Panel runat="server" ID="panelUpcomingLeaves" Height="200px" ScrollBars="Vertical">
                             <asp:GridView runat="server" ID="gvUpcomingLeaves" CssClass="table table-responsive table-condensed small" GridLines="None" AutoGenerateColumns="false" ShowHeader="true">
                                 <Columns>
-                                    <asp:BoundField DataField="EmployeeName" /> 
-                                    <asp:BoundField DataField="LeaveTypeCode" HeaderText="Leave" />
-                                    <asp:BoundField DataField="DateFrom" DataFormatString="{0:d}" HeaderText="Date Start" />
+                                    <asp:BoundField DataField="DateFrom" DataFormatString="{0:d}" HeaderText="From" />
+                                    <asp:BoundField DataField="EmployeeName" HeaderText="Employee" /> 
+                                    <%--<asp:BoundField DataField="LeaveTypeCode" HeaderText="Leave" />--%>
+                                    
                                     <asp:BoundField DataField="DaysCount" HeaderText="Days" />
                                 </Columns>
                             </asp:GridView>

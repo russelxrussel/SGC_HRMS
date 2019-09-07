@@ -9,11 +9,11 @@ namespace DGMU_HR
 {
     public class Employee_C : Base_C
 
-    
+
     {
-    
+
     }
-    
+
 
     public class Employee_Data_C : Base_C
     {
@@ -90,7 +90,7 @@ namespace DGMU_HR
             DataTable dt = new DataTable();
             dt = queryCommandDT_StoredProc("[HR].[spGET_EMPLOYEE_LIST_LW]");
             return dt;
-        
+
         }
 
         public DataTable GET_EMPLOYEE_EMPLOYMENT_STAT()
@@ -137,7 +137,7 @@ namespace DGMU_HR
                                                 string _genderCode, string _maritalCode, DateTime _dateOfBirth, string _placeOfBirth, string _weight, string _height,
                                                 string _landLineNumber, string _mobileNumber, string _religionCode, string _citizenshipCode,
                                                 string _presentAddress, string _provincialAddress,
-                                                string _tin, string _sss, string _hdmf, string _philHealth, DateTime _dateHired, string _companyCode,string _departmentCode,
+                                                string _tin, string _sss, string _hdmf, string _philHealth, DateTime _dateHired, string _companyCode, string _departmentCode,
                                                 string _positionCode, string _employmentStatusCode, DateTime _dateApplied, string _jpCode, string _applicantEvaluation, string _bloodType,
                                                 string _contactPerson, string _contactRelationship, string _contactNumber)
         {
@@ -148,7 +148,7 @@ namespace DGMU_HR
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@EMPLOYEEID",_employeeID);
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
                     cmd.Parameters.AddWithValue("@LAST_NAME", _lastname);
                     cmd.Parameters.AddWithValue("@FIRST_NAME", _firstname);
                     cmd.Parameters.AddWithValue("@MIDDLE_NAME", _middleName);
@@ -176,7 +176,7 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@POSITIONCODE", _positionCode);
                     cmd.Parameters.AddWithValue("@EMPLOYMENTSTATUSCODE", _employmentStatusCode);
 
-                  
+
 
                     cmd.Parameters.AddWithValue("@DATE_APPLIED", _dateApplied);
                     cmd.Parameters.AddWithValue("@JPCODE", _jpCode);
@@ -247,7 +247,7 @@ namespace DGMU_HR
                 }
             }
         }
-        
+
         public void INSERT_EMPLOYEE_PICTURE(string _employeeID, string _picture_name, int _size, byte[] _image_data)
         {
             using (SqlConnection cn = new SqlConnection(CS))
@@ -313,7 +313,7 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@SKILLSTRAINING", _skillsTraining);
                     cmd.Parameters.AddWithValue("@TRAININGCENTER", _trainingCenter);
                     cmd.Parameters.AddWithValue("@ENDTRAININGDATE", _endTrainingDate);
-                    
+
                     cn.Open();
 
                     cmd.ExecuteNonQuery();
@@ -321,6 +321,8 @@ namespace DGMU_HR
                 }
             }
         }
+
+
 
         //REMOVE SKILLS AND TRAINING
         public void REMOVE_EMPLOYEE_SKILLSTRAINING(int _id)
@@ -333,7 +335,7 @@ namespace DGMU_HR
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@ID", _id);
-               
+
                     cn.Open();
 
                     cmd.ExecuteNonQuery();
@@ -342,9 +344,159 @@ namespace DGMU_HR
             }
         }
 
-        #endregion
 
+        /*WORK EVALUATION INSERT-UPDATE
+        */
+        public void INSERT_UPDATE_EMPLOYEE_WORK_EVALUATION(string _employeeID, string _wecCode, string _werCode, string _generalRemarks)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERTUPDATE_EMPLOYEE_WORK_EVALUATION]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+                    cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
+                    cmd.Parameters.AddWithValue("@WER_CODE", _werCode);
+                    cmd.Parameters.AddWithValue("@GENERAL_REMARKS", _generalRemarks);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+        public string GET_EMPLOYEE_WORK_EVALUATION_REMARKS(string _employeeID)
+        {
+            string x = "";
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_WORK_EVALUATION_REMARKS]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+
+
+                    cn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+
+                        while (dr.Read())
+                        {
+                            x = dr["GeneralRemarks"].ToString();
+                        }
+                    }
+                }
+
+                return x;
+            }
+       
+
+        }
+        public string GET_EMPLOYEE_WORK_EVALUATION_RESULT(string _employeeID, string _wecCode)
+        {
+            string x = "";
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_WORK_EVALUATION_RESULT]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+                    cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
+
+
+                    cn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+
+                        while (dr.Read())
+                        {
+                            x = dr["WER_CODE"].ToString();
+                        }
+                    }
+                }
+
+                return x;
+            }
+
+            #endregion
+
+
+        }
+
+        /*
+        EMPLOYEE OFFENSES
+        */
+        public void INSERT_UPDATE_EMPLOYEE_OFFENSES(string _employeeID, string _offenseTitle, string _offenseDetails, string _offenseRecommendation)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERTUPDATE_EMPLOYEE_OFFENSES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+                    cmd.Parameters.AddWithValue("@OFFENSE_TITLE", _offenseTitle);
+                    cmd.Parameters.AddWithValue("@OFFENSE_DETAILS", _offenseDetails);
+                    cmd.Parameters.AddWithValue("@OFFENSE_RECOMMENDATION", _offenseRecommendation);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+        public DataTable GET_EMPLOYEE_OFFENSES(string _employeeID)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_OFFENSES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
+        public void REMOVE_EMPLOYEE_OFFENSE(int _offenseID)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spREMOVE_EMPLOYEE_OFFENSE]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@OFFENSE_ID", _offenseID);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
 
     }
-
 }
