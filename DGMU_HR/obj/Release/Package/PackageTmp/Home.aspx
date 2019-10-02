@@ -181,7 +181,7 @@
 
                                     </asp:GridView>
                             
-                            
+                            <asp:LinkButton runat="server" ID="lnkNoGovtID" CssClass="btn btn-sm btn-danger" OnClick="lnkNoGovtID_Click">Employee List with NO Gov't ID</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,6 @@
                     </div>
 
                    
-
                     
                 </div>
 
@@ -309,6 +308,9 @@
         </div>
     </div>
    
+
+         
+
         <div class="modal fade" id="modalShowProcessPayroll">
                                       <div class="modal-dialog">
                                           <div class="modal-content">

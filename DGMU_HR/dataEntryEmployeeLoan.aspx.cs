@@ -57,7 +57,9 @@ namespace DGMU_HR
 
             //   DisplayEmployeeAttendance(sEmpCode, Convert.ToInt16(ViewState["PPID"].ToString()));
             txtLoanAmount.Text = "0";
-
+            txtLoanAmountAndInterest.Text = "0";
+            txtLoanMonthlyAmortization.Text = "0";
+            
             DisplayLoanList();
             DisplayEmployeeLoan(ViewState["EMPCODE"].ToString());
             DisplayEmployeeLoanHistory(ViewState["EMPCODE"].ToString());
@@ -117,19 +119,25 @@ namespace DGMU_HR
 
         protected void lnkProcess_Click(object sender, EventArgs e)
         {
-            if (Convert.ToDouble(txtLoanAmount.Text) > 0 && !string.IsNullOrEmpty(txtDateLoan.Text))
+            if (Convert.ToDouble(txtLoanAmount.Text) > 0 && Convert.ToDouble(txtLoanAmountAndInterest.Text) > 0 && !string.IsNullOrEmpty(txtDateLoan.Text))
             {
                 //Check if Loan Type have active balance
                 if (!checkActiveLoanTypeExist(ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue))
                 {
                     //Save Loan
-                    oPayroll.INSERT_UPDATE_EMPLOYEE_LOAN(oSystem.GENERATE_SERIES_NUMBER_EMPLOYEE("LN"), ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue, Convert.ToDateTime(txtDateLoan.Text), Convert.ToDouble(txtLoanAmount.Text), txtRemarks.Text);
+                    oPayroll.INSERT_UPDATE_EMPLOYEE_LOAN(oSystem.GENERATE_SERIES_NUMBER_EMPLOYEE("LN"), ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue, Convert.ToDateTime(txtDateLoan.Text), Convert.ToDouble(txtLoanAmount.Text), txtLoanReferenceNumber.Text,
+                                                        Convert.ToDouble(txtLoanAmountAndInterest.Text), Convert.ToDouble(txtLoanMonthlyAmortization.Text),Convert.ToDateTime(txtLoanStartDate.Text), Convert.ToDateTime(txtLoanEndDate.Text), txtRemarks.Text);
 
                     DisplayEmployeeLoan(ViewState["EMPCODE"].ToString());
 
                     txtDateLoan.Text = "";
                     txtLoanAmount.Text = "0";
+                    txtLoanAmountAndInterest.Text = "0";
                     txtRemarks.Text = "";
+                    txtLoanReferenceNumber.Text = "";
+                    txtLoanMonthlyAmortization.Text = "";
+                    txtLoanStartDate.Text = "";
+                    txtLoanEndDate.Text = "";
                     panelNewLoan.Enabled = false;
 
                     lblSuccessMessage.Text = "Employee Loan successfully save.";
@@ -288,7 +296,7 @@ namespace DGMU_HR
 
         protected void lnkAddLoanProcess_Click(object sender, EventArgs e)
         {
-            oPayroll.INSERT_UPDATE_ADD_LOAN(ViewState["V_LOANSN"].ToString(), ViewState["V_LOANCODE"].ToString(),Convert.ToDateTime(txtAddLoanDate.Text),Convert.ToDouble(txtAddLoanAmount.Text),txtAddLoanRemarks.Text);
+            oPayroll.INSERT_UPDATE_ADD_LOAN(ViewState["V_LOANSN"].ToString(), ViewState["V_LOANCODE"].ToString(), Convert.ToDateTime(txtAddLoanDate.Text), Convert.ToDouble(txtAddLoanAmount.Text), Convert.ToDouble(txtAddLoanAmountAndInterest.Text), txtAddLoanRemarks.Text);
             Response.Redirect(Request.RawUrl);
         }
 

@@ -114,14 +114,32 @@
                                  <tr>
                                      <td>Computed Rate:</td><td><asp:Label runat="server" ID="lblComputedRated"></asp:Label></td>
                                  </tr>
+                                  <tr>
+                                     <td>Additional Work Days:</td><td><asp:TextBox runat="server" ID="txtAddWorkDays" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                                  <tr>
+                                     <td>OT Hours:</td><td><asp:TextBox runat="server" ID="txtOTHours" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
                                  <tr>
                                      <td>Additional:</td><td><asp:TextBox runat="server" ID="txtAdditionalAmount" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
                                  </tr>
                                  <tr>
                                      <td>Remarks:</td><td><asp:TextBox runat="server" ID="txtRemarks" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="Remarks"></asp:TextBox></td>
                                  </tr>
-                                 <tr><td>Total Voucher Amount:</td>
-                                     <td><b><asp:Label runat="server" ID="lblComputedVoucher"></asp:Label></b></td>
+                                 <tr>
+                                     <td>
+                                         <asp:Label ID="lblComputedOT" runat="server"></asp:Label>
+                                     </td>
+                                     <tr>
+                                         <td>
+                                             <asp:Label ID="lblComputeAddedWork" runat="server"></asp:Label>
+                                         </td>
+                                         <tr>
+                                     <td>
+                                         Total Voucher Amount:</td>
+                                             <td><b>
+                                                 <asp:Label ID="lblComputedVoucher" runat="server"></asp:Label>
+                                                 </b></td>
 
                                  </tr>
                              </table>

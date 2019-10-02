@@ -67,15 +67,6 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.Label lblEmployeeName;
         
         /// <summary>
-        /// imgEmployee control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgEmployee;
-        
-        /// <summary>
         /// lnkCreateLoan control.
         /// </summary>
         /// <remarks>
@@ -83,6 +74,15 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkCreateLoan;
+        
+        /// <summary>
+        /// imgEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgEmployee;
         
         /// <summary>
         /// panelNewLoan control.
@@ -112,6 +112,15 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.DropDownList ddLoansList;
         
         /// <summary>
+        /// txtLoanReferenceNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoanReferenceNumber;
+        
+        /// <summary>
         /// txtLoanAmount control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,42 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLoanAmount;
+        
+        /// <summary>
+        /// txtLoanAmountAndInterest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoanAmountAndInterest;
+        
+        /// <summary>
+        /// txtLoanMonthlyAmortization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoanMonthlyAmortization;
+        
+        /// <summary>
+        /// txtLoanStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoanStartDate;
+        
+        /// <summary>
+        /// txtLoanEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoanEndDate;
         
         /// <summary>
         /// txtRemarks control.
@@ -236,6 +281,15 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddLoanAmount;
+        
+        /// <summary>
+        /// txtAddLoanAmountAndInterest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAddLoanAmountAndInterest;
         
         /// <summary>
         /// txtAddLoanRemarks control.

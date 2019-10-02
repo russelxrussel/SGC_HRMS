@@ -638,10 +638,33 @@ namespace DGMU_HR
             }
 
             double _salaryLoanBalance = 0, _sssLoanBalance = 0, _pagibigLoanBalance = 0;
+            double _salaryAmortization = 0, _ssAmortization = 0, _pagibigAmortization = 0;
 
             _salaryLoanBalance = Convert.ToDouble(txtSalaryLoan.Text) + oPayroll.GET_EMPLOYEE_SALARY_LOAN_BALANCE(sEmpCode);
             _sssLoanBalance = Convert.ToDouble(txtSSSLoan.Text) + oPayroll.GET_EMPLOYEE_SSS_LOAN_BALANCE(sEmpCode);
             _pagibigLoanBalance = Convert.ToDouble(txtPagibigLoan.Text) + oPayroll.GET_EMPLOYEE_PAGIBIG_LOAN_BALANCE(sEmpCode);
+
+            _salaryAmortization = oPayroll.GET_EMPLOYEE_SALARY_AMORTIZATION(sEmpCode);
+            txtSalaryLoan.Text = _salaryAmortization.ToString();
+
+            //Condition it will display upon cut off is 1
+            //10.01.2019
+            if ((int)ViewState["PPCUTOFF"] == 1)
+            {
+                _ssAmortization = oPayroll.GET_EMPLOYEE_SSS_AMORTIZATION(sEmpCode);
+                _pagibigAmortization = oPayroll.GET_EMPLOYEE_PAGIBIG_AMORTIZATION(sEmpCode);
+                txtSSSLoan.Text = _ssAmortization.ToString();
+                txtPagibigLoan.Text = _pagibigAmortization.ToString();
+                txtSSSLoan.Enabled = true;
+                txtPagibigLoan.Enabled = true;
+            }
+            else {
+                txtSSSLoan.Text = "0";
+                txtPagibigLoan.Text = "0";
+                txtSSSLoan.Enabled = false;
+                txtPagibigLoan.Enabled = false;
+            }
+            
 
             lblLoanBalance.Text = "<b>(" + string.Format("{0:n}", _salaryLoanBalance) + ")</b>";
             lblSSSLoan.Text = "<b>(" + string.Format("{0:n}", _sssLoanBalance ) + ")</b>";
@@ -754,14 +777,6 @@ namespace DGMU_HR
                 Clear_Inputs();
 
 
-                //if (ddPayrollGroup.SelectedIndex == 1)
-                //{
-                //    ddBranchList_SelectedIndexChanged(sender, e);
-                //}
-                //else
-                //{
-                //    ddPayrollGroup_SelectedIndexChanged(sender, e);
-                //}
             }
 
             else

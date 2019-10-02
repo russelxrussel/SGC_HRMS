@@ -229,7 +229,7 @@ position: fixed;
                                 <li role="presentation"><a href="#SkillTraining" aria-controls="SkillTraining" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> Skills and Training</a></li>
                                 <li role="presentation"><a href="#Evaluation" aria-controls="Evaluation" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-briefcase text-success"></span> Work Evaluation</a></li>
                                 <li role="presentation"><a href="#Offenses" aria-controls="Offenses" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-comment text-danger"></span> Offenses Record</a></li>
-                           
+                                <li role="presentation"><a href="#Attachment" aria-controls="Attachment" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-file text-danger"></span> Attachment</a></li>
                             </ul>
 
                             <!-- Tab panes -->
@@ -637,12 +637,20 @@ position: fixed;
                                                 <!--Input Entry of Skills -->
                                                 <div class="col-md-4">
                                                      <ul class="list-group">
+                                                          <li class="list-group-item">
+                                                                <small class="form-text text-muted">Company Sponsored?</small>
+                                                              <asp:CheckBox runat="server" ID="chkCompanySponsor" Text="Yes" />
+                                                            </li>
                                                             <li class="list-group-item">
                                                                 <small class="form-text text-muted">Skills/Training:</small>
                                                                 <asp:TextBox runat="server" ID="txtSkillsTraining" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Skill / Training"></asp:TextBox></li>
                                                             <li class="list-group-item">
                                                                 <small class="form-text text-muted">Name of Training Center:</small>
                                                                  <asp:TextBox runat="server" ID="txtTrainingCenterName" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Name of Training Center"></asp:TextBox></li>
+                                                            </li>
+                                                          <li class="list-group-item">
+                                                                <small class="form-text text-muted">Start date of Training:</small>
+                                                                 <asp:TextBox runat="server" ID="txtStartDateTraining" CssClass="form-control calendarInput" data-toggle="tooltip" data-placement="top" title="Date Training End"></asp:TextBox></li>
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <small class="form-text text-muted">End date of Training:</small>
@@ -660,7 +668,14 @@ position: fixed;
                                                                  <asp:BoundField DataField="ID" />
                                                                 <asp:BoundField DataField="SkillTraining" HeaderText="Skills and Training" />
                                                                 <asp:BoundField DataField="TrainingCenter" HeaderText="Training Center" />
+                                                                <asp:BoundField DataField="StartTrainingDate" HeaderText="Training Date End" DataFormatString="{0:d}" />
                                                                 <asp:BoundField DataField="EndTrainingDate" HeaderText="Training Date End" DataFormatString="{0:d}" />
+                                                                <%--<asp:BoundField DataField="IsCompanySponsor" HeaderText="Company Sponsor" DataFormatString=""/>--%>
+                                                                <asp:TemplateField>
+                                                                    <ItemTemplate>
+                                                                        <%# (Boolean.Parse(Eval("IsCompanySponsor").ToString())) ? "Yes" : "No" %>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
                                                             <asp:TemplateField>
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger btn-sm" OnClick="lnkRemove_Click">X</asp:LinkButton>
@@ -692,7 +707,8 @@ position: fixed;
                                                      Work Evaluation / Performance
                                                      </div>
                                                 <div class="col-md-6 col-sm-6 text-right">
-                                                 <asp:LinkButton runat="server" ID="lnkUpdateWorkEvaluation" CssClass="btn btn-success btn-sm" OnClick="lnkUpdateWorkEvaluation_Click">Update</asp:LinkButton>
+                                                  
+                                                 
                                             </div>
                                             </div>
                                             
@@ -700,10 +716,157 @@ position: fixed;
 
                                         </div>
                                         <div class="panel-body">
-                                          <div class="row small small">
-                                                      <div class="col-md-9">
+                                          <div class="row small">
+                                               <div class="col-md-4 col-sm-4">
+                                                   <div class="panel panel-warning">
+                                                       <div class="panel panel-heading">
+                                                           <div class="row">
+                                                               <div class="col-md-6 col-sm-6">Evaluation Record List(s)</div>
+                                                               <div class="col-md-6 col-sm-6 text-right">
+                                                                   <asp:LinkButton runat="server" ID="lnkCreateWorkEvaluation" CssClass="btn btn-success btn-sm" OnClick="lnkCreateWorkEvaluation_Click">Create</asp:LinkButton>
+                                                               </div>
+
+                                                           </div>
+                                                       </div>
+                                                       <div class="panel-body">
+                                                           <asp:GridView runat="server" ID="gvWorkEvaluationRecord" CssClass="table table-hover table-responsive" AutoGenerateColumns="false">
+                                                       <Columns>
+                                                           <asp:BoundField DataField="WE_ID" HeaderText="ID" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden"/>
+                                                           <asp:BoundField DataField="DateStart" HeaderText="Date From" DataFormatString="{0:d}" />
+                                                           <asp:BoundField DataField="DateEnd" HeaderText="Date To" DataFormatString="{0:d}" />
+                                                           <asp:BoundField DataField="GeneralRemarks" HeaderText="Remarks"/>
+                                                           <asp:TemplateField>
+                                                               <ItemTemplate>
+                                                                    
+                                                                   <asp:LinkButton runat="server" ID="lnkViewEvaluation" CssClass="btn btn-sm btn-primary" OnClick="lnkViewEvaluation_Click">View/Edit</asp:LinkButton>
+                                                                 
+                                                                   
+                                                               </ItemTemplate>
+                                                           </asp:TemplateField>
+                                                       </Columns>
+                                                   </asp:GridView>
+                                                         
+                                                       </div>
+                                                   </div>
                                                              
-                                                           <asp:GridView runat="server" ID="gvWorkEvaluationCriteria" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true" OnRowDataBound="gvWorkEvaluationCriteria_RowDataBound">
+                                                           
+                                                          
+                                                </div>
+
+                                               <div class="col-md-8 col-sm-8">
+                                                   <asp:Panel runat="server" ID="panelUpdateEvaluation" Enabled="false">
+
+
+                                                       <div class="panel panel-info">
+                                                           <div class="panel-heading">
+
+                                                               <div class="row">
+                                                                   <div class="col-md-6 col-sm-6">Evaluation Details</div>
+                                                                   <div class="col-md-6 col-sm-6 text-right">
+                                                                       <asp:LinkButton runat="server" ID="lnkEvaluationUpdate" CssClass="btn btn-success btn-sm" OnClick="lnkEvaluationUpdate_Click">Update</asp:LinkButton>
+                                                                   </div>
+
+                                                               </div>
+                                                           </div>
+                                                           <div class="panel-body">
+                                                               <div class="row">
+                                                                   <div class="col-md-6 col-sm-6">
+                                                                       <table class="table table-condensed">
+                                                                           <tr>
+                                                                               <td>Date From:</td>
+                                                                               <td>
+                                                                                   <asp:TextBox runat="server" ID="txtEditEvalDateFrom" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                               <td>Date To:</td>
+                                                                               <td>
+                                                                                   <asp:TextBox runat="server" ID="txtEditEvalDateTo" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                               <td>Remarks:</td>
+                                                                               <td>
+                                                                                   <asp:TextBox runat="server" ID="txtEditEvalRemarks" TextMode="MultiLine" CssClass="form-control" Rows="3"></asp:TextBox></td>
+                                                                           </tr>
+                                                                       </table>
+                                                                   </div>
+
+                                                                   <div class="col-md-6 col-sm-6">
+                                                                       <asp:GridView runat="server" ID="gvRatingsLegend" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true">
+                                                                           <Columns>
+                                                                               <asp:BoundField DataField="WER_Title" HeaderText="Legend" ItemStyle-Font-Bold="true" />
+                                                                               <asp:BoundField DataField="Value_Min" HeaderText="Ratings" />
+                                                                           </Columns>
+                                                                       </asp:GridView>
+                                                                   </div>
+                                                               </div>
+
+
+
+                                                               <asp:GridView runat="server" ID="gvEmployeeEvaluationResult" CssClass="table table-hover table-responsive" AutoGenerateColumns="false" OnRowDataBound="gvEmployeeEvaluationResult_RowDataBound">
+                                                                   <Columns>
+                                                                       <asp:BoundField DataField="WE_ID" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
+                                                                       <asp:BoundField DataField="WEC_CODE" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
+                                                                       <asp:TemplateField>
+
+                                                                           <ItemTemplate>
+                                                                               <strong>
+                                                                                   <asp:Label runat="server" ID="lblWEC_Title" Text='<%#Eval("WEC_Title") %>'></asp:Label></strong>
+                                                                               <p><i>
+                                                                                   <asp:Label runat="server" ID="Label1" Text='<%#Eval("WEC_Details") %>'></asp:Label></i></p>
+                                                                           </ItemTemplate>
+                                                                       </asp:TemplateField>
+
+                                                                       <asp:TemplateField>
+                                                                           <ItemTemplate>
+                                                                               <asp:DropDownList runat="server" ID="ddRatings" CssClass="form-control small">
+                                                                               </asp:DropDownList>
+                                                                           </ItemTemplate>
+                                                                       </asp:TemplateField>
+                                                                   </Columns>
+                                                               </asp:GridView>
+                                                           </div>
+                                                       </div>
+
+                                                   </asp:Panel>
+
+                                               </div>
+                                              
+                                           
+
+                                             
+
+                                                     
+                                                    
+                                              <!--Selected Item Modal -->
+                    <div class="modal fade" id="promptEvaluationEntry" data-backdrop="static" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header alert-info">
+                                <button class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Work Evaluation Entry</h4>
+                            </div>
+                            <div class="modal-body">
+                                  <table class="table table-condensed table-hover">
+                                      <tr>
+                                          <td>Date Start:</td>
+                                          <td>
+                                              <asp:TextBox runat="server" ID="txtEvalDateStart" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                      </tr>
+                                      <tr>
+                                          <td>Date End:</td>
+                                          <td>
+                                              <asp:TextBox runat="server" ID="txtEvalDateEnd" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                      </tr>
+                                      <tr>
+                                          <td>General Remarks:</td>
+                                          <td>
+                                              <asp:TextBox runat="server" ID="txtEvaluationRemarks" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="General Remarks">
+                                              </asp:TextBox></td>
+                                      </tr>
+                                                    </table>
+                                                            
+                                                             
+                               <asp:GridView runat="server" ID="gvWorkEvaluationCriteria" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true" OnRowDataBound="gvWorkEvaluationCriteria_RowDataBound">
                                                      <Columns>
                                                          <asp:BoundField DataField="WEC_CODE" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                                          <asp:BoundField DataField="WEC_Title" HeaderText="Title" ItemStyle-Font-Bold="true" />
@@ -713,30 +876,27 @@ position: fixed;
                                                                  Ratings
                                                              </HeaderTemplate>
                                                              <ItemTemplate>
-                                                                 <asp:DropDownList runat="server" ID="ddRatings" CssClass="form-control">
+                                                                 <asp:DropDownList runat="server" ID="ddRatings" CssClass="form-control small">
 
                                                                  </asp:DropDownList>
                                                              </ItemTemplate>
                                                          </asp:TemplateField>
                                                      </Columns>
                                                   </asp:GridView>
-                                                          
-                                                      </div>
-                                                      <div class="col-md-3">
-                                                            General Remarks:
-                                                              <asp:TextBox runat="server" ID="txtEvaluationRemarks" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="General Remarks">
-                                                              </asp:TextBox>
-                                                        <br />
-                                                          Ratings Legend:
-                                                   <asp:GridView runat="server" ID="gvRatingsLegend" CssClass="table table-responsive" AutoGenerateColumns="false" ShowHeader="true">
-                                                       <Columns>
-                                                           <asp:BoundField DataField="WER_Title" HeaderText="Title" ItemStyle-Font-Bold="true" />
-                                                           <asp:BoundField DataField="Value_Min" HeaderText="Ratings" />
-                                                       </Columns>
-                                                   </asp:GridView>
-                                                  
-                                              </div>
-                                             
+                            </div>
+                            
+                            <div class="modal-footer">
+                            <asp:LinkButton runat="server" ID="lnkSaveWorkEvaluation" CssClass="btn btn-success btn-sm" OnClick="lnkSaveWorkEvaluation_Click">Save</asp:LinkButton>
+                            <asp:LinkButton runat="server" ID="lnkClose" CssClass="btn btn-danger btn-sm" data-dismiss="modal">Cancel</asp:LinkButton>
+                            </div>
+
+
+                 
+                        </div>
+                        </div>
+
+          
+                   </div>
                                           </div>
                                         </div>
                                     </div>
@@ -819,7 +979,23 @@ position: fixed;
 
                                 </div>
                              
-                                 
+                                 <div role="tabpanel" class="tab-pane fade" id="Attachment">
+                                    <br />
+                                     <asp:UpdatePanel runat="server" ID="upAttachment" UpdateMode="Conditional">
+                                         <ContentTemplate>
+                                             Attachment here.
+                                       <asp:FileUpload runat="server" ID="fuAttachment" />
+                                             <asp:LinkButton runat="server" ID="lnkUploadFile" CssClass="btn btn-sm btn-warning" OnClick="lnkUploadFile_Click">Upload</asp:LinkButton>
+
+                                         </ContentTemplate>
+                                         <Triggers>
+                                             <asp:PostBackTrigger ControlID="lnkUploadFile" />
+                                             
+                                         </Triggers>
+                                     </asp:UpdatePanel>
+
+                                 </div> 
+
                             </div>
                             <!-- End of Tab Content-->
 
@@ -883,6 +1059,9 @@ position: fixed;
 
         
         </ContentTemplate>
+
+       
+        
     </asp:UpdatePanel>
 
          <asp:UpdateProgress id="upgLoading" runat="server" AssociatedUpdatePanelID="uplMain">
@@ -897,5 +1076,8 @@ position: fixed;
                         
                     </ProgressTemplate>
                 </asp:UpdateProgress>
+
+    
+                              
 <%--</div>--%>
   </asp:Content>

@@ -116,6 +116,40 @@ namespace DGMU_HR
 
             return x;
         }
+        public double GET_EMPLOYEE_SALARY_AMORTIZATION(string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_SALARY_LOAN_AMORTIZATION]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
+        public double GET_EMPLOYEE_SSS_AMORTIZATION(string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_SSS_AMORTIZATION]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
         public double GET_EMPLOYEE_SSS_LOAN_BALANCE(string _empCode)
         {
             double x = 0;
@@ -150,7 +184,23 @@ namespace DGMU_HR
 
             return x;
         }
+        public double GET_EMPLOYEE_PAGIBIG_AMORTIZATION(string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
 
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_PAGIBIG_AMORTIZATION]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
 
 
         public DataTable GET_EMPLOYEE_SALARY()
@@ -345,6 +395,7 @@ namespace DGMU_HR
          return x;
         }
 
+       
         public double GET_REGULAR_HOLIDAY_OT_PAY(string _empCode, double _otHours)
         {
             double x = 0;
@@ -421,6 +472,24 @@ namespace DGMU_HR
             return x;
         }
 
+        public double GET_OT_VOUCHER_PAY(string _empCode, double _otHours)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[GET_VOUCHER_OVERTIME_PAY]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@OTHOURS", _otHours);
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
         public double GET_SSS_SHARE(string _empCode, double _grossIncome, double _regularHoliday, double _regularHolidayOT,
                                     double _specialHoliday, double _specialHolidayOT, int _ppId)
         {
@@ -1260,7 +1329,7 @@ namespace DGMU_HR
 
         //INSERT UPDATE EMPLOYEE VOUCHER TRANSACTION
         public void INSERT_UPDATE_EMPLOYEE_VOUCHER_TRANS(int _ppid, string _empCode, double _actualRate, double _basicRate, double _computedRate, double _daysPresent, double _additionalAmount,
-                                                        double _totalVoucherAmount, string _remarks)
+                                                        double _additionalWorkDays, double _otHours,double _totalVoucherAmount, string _remarks)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
@@ -1276,6 +1345,8 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@ACTUALRATE", _actualRate);
                     cmd.Parameters.AddWithValue("@BASICRATE", _basicRate);
                     cmd.Parameters.AddWithValue("@ADDITIONALAMOUNT", _additionalAmount);
+                    cmd.Parameters.AddWithValue("@ADDITIONALWORKDAYS", _additionalWorkDays);
+                    cmd.Parameters.AddWithValue("@OTHOURS", _otHours);
                     cmd.Parameters.AddWithValue("@TOTALAMOUNT", _totalVoucherAmount);
                     cmd.Parameters.AddWithValue("@REMARKS", _remarks);
 
@@ -1357,8 +1428,9 @@ namespace DGMU_HR
 
 
         //LOAN INSERT AND UPDATE
-        public void INSERT_UPDATE_EMPLOYEE_LOAN(string _loanSN, string _empCode, string _loanCode, DateTime _loanDate,
-                                                double _loanAmount, string _remarks)
+        public void INSERT_UPDATE_EMPLOYEE_LOAN(string _loanSN, string _empCode, string _loanCode, DateTime _loanDate, double _loanAmount,
+                                            string _loanReferenceNumber,double _loanAmountAndInterest,double _monthlyAmortization, DateTime _maDateStart, DateTime _maDateEnd,
+                                              string _remarks)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
@@ -1372,6 +1444,11 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@LOANCODE", _loanCode);
                     cmd.Parameters.AddWithValue("@LOANDATE", _loanDate);
                     cmd.Parameters.AddWithValue("@LOANAMOUNT", _loanAmount);
+                    cmd.Parameters.AddWithValue("@LOANREFERENCENUMBER", _loanReferenceNumber);
+                    cmd.Parameters.AddWithValue("@LOANAMOUNTANDINTEREST", _loanAmountAndInterest);
+                    cmd.Parameters.AddWithValue("@MONTHLYAMORTIZATION", _monthlyAmortization);
+                    cmd.Parameters.AddWithValue("@MADATESTART", _maDateStart);
+                    cmd.Parameters.AddWithValue("@MADATEEND", _maDateEnd);
                     cmd.Parameters.AddWithValue("@REMARKS", _remarks);
 
 
@@ -1386,7 +1463,7 @@ namespace DGMU_HR
         }
 
         //ADD LOAN
-        public void INSERT_UPDATE_ADD_LOAN(string _loanSN, string _loanCode, DateTime _loanDate, double _loanAmount, string _remarks)
+        public void INSERT_UPDATE_ADD_LOAN(string _loanSN, string _loanCode, DateTime _loanDate, double _loanAmount,double _loanAmountAndInterest, string _remarks)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
@@ -1399,8 +1476,8 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@LOANCODE", _loanCode);
                     cmd.Parameters.AddWithValue("@LOANDATE", _loanDate);
                     cmd.Parameters.AddWithValue("@LOANAMOUNT", _loanAmount);
+                    cmd.Parameters.AddWithValue("@LOANAMOUNTANDINTEREST", _loanAmountAndInterest);
                     cmd.Parameters.AddWithValue("@REMARKS", _remarks);
-
 
 
                     cn.Open();

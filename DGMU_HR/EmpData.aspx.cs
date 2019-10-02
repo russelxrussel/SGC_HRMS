@@ -381,7 +381,8 @@ namespace DGMU_HR
                 //WORK EVALUATION
                 DISPLAY_EVALUATION_CRITERIA_LIST();
                 DISPLAY_EVALUATION_RATINGS_LIST();
-                txtEvaluationRemarks.Text = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_REMARKS(_employeeID);
+                //txtEvaluationRemarks.Text = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_REMARKS(_employeeID);
+                DISPLAY_EMPLOYEE_EVALUATION_RECORD(_employeeID);
 
                 //EMPLOYEE OFFENSES
 
@@ -508,6 +509,8 @@ namespace DGMU_HR
             gvWorkEvaluationCriteria.DataBind();
             txtEvaluationRemarks.Text = "";
 
+            gvWorkEvaluationRecord.DataSource = null;
+            gvWorkEvaluationRecord.DataBind();
         }
 
         private void Clear_SkillsTraining()
@@ -515,6 +518,8 @@ namespace DGMU_HR
             txtSkillsTraining.Text = "";
             txtTrainingCenterName.Text = "";
             txtEndDateTraining.Text = "";
+            txtStartDateTraining.Text = "";
+            chkCompanySponsor.Checked = false;
         }
 
         private void Clear_EmployeeOffenses()
@@ -578,7 +583,7 @@ namespace DGMU_HR
             if (!string.IsNullOrEmpty(txtSkillsTraining.Text) && !string.IsNullOrEmpty(txtEndDateTraining.Text))
             {
 
-                oEmployeeData.INSERT_UPDATE_EMPLOYEE_SKILLSTRAINING(lblEmployeeID.Text, txtSkillsTraining.Text.ToUpper(), txtTrainingCenterName.Text.ToUpper(), Convert.ToDateTime(txtEndDateTraining.Text));
+                oEmployeeData.INSERT_UPDATE_EMPLOYEE_SKILLSTRAINING(lblEmployeeID.Text, txtSkillsTraining.Text.ToUpper(),txtTrainingCenterName.Text.ToUpper(), Convert.ToDateTime(txtStartDateTraining.Text), Convert.ToDateTime(txtEndDateTraining.Text), chkCompanySponsor.Checked);
                 DISPLAY_SKILLS_TRAINING(lblEmployeeID.Text);
 
                 lblSuccessMessage.Text = "New Skills and training successfully added.";
@@ -625,11 +630,41 @@ namespace DGMU_HR
             gvRatingsLegend.DataBind();
         }
 
-        private string DISPLAY_EVALUATION_RESULT(string _employeeID, string _wecCode)
+        private string DISPLAY_EVALUATION_RATINGS_RESULT(int _weID, string _wecCode)
         {
-            string x = "";
-                x = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_RESULT(_employeeID, _wecCode);
-            return x;
+            string ratingCode = "";
+
+            DataView dv = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_RESULT(_weID).DefaultView;
+            dv.RowFilter = "WEC_CODE = '" + _wecCode + "'";
+
+            if (dv.Count > 0)
+            {
+                foreach(DataRowView drv in dv)
+                {
+                    ratingCode = drv["WER_CODE"].ToString();
+                }
+            }
+
+
+            return ratingCode;
+        }
+
+        private void DISPLAY_EVALUATION_RESULT(int _weID)
+        {
+          DataTable dt =  oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_RESULT(_weID);
+          gvEmployeeEvaluationResult.DataSource = dt;
+          gvEmployeeEvaluationResult.DataBind();
+
+        
+        }
+
+        private void DISPLAY_EMPLOYEE_EVALUATION_RECORD(string _employeeID)
+        {
+            DataTable dt = oEmployeeData.GET_EMPLOYEE_WORK_EVALUATION_RECORD(_employeeID);
+
+            gvWorkEvaluationRecord.DataSource = dt;
+            gvWorkEvaluationRecord.DataBind();
+            
         }
 
         #endregion
@@ -639,42 +674,23 @@ namespace DGMU_HR
             DataTable dt = oUtility.GET_WORK_EVALUATION_RATINGS_LIST();
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string wecCode = e.Row.Cells[0].Text;
+                //string wecCode = e.Row.Cells[0].Text;
 
                 DropDownList ddRatings = (e.Row.FindControl("ddRatings") as DropDownList);
                 ddRatings.DataSource = dt;
-                ddRatings.DataTextField =  dt.Columns["WER_Title"].ToString();
+                ddRatings.DataTextField = dt.Columns["WER_Title"].ToString();
                 ddRatings.DataValueField = dt.Columns["WER_CODE"].ToString();
                 ddRatings.DataBind();
 
-                ddRatings.SelectedValue = DISPLAY_EVALUATION_RESULT(lblEmployeeID.Text, wecCode);
+              //  ddRatings.SelectedValue = DISPLAY_EVALUATION_RESULT(lblEmployeeID.Text, wecCode);
             }
         }
 
-        protected void lnkUpdateWorkEvaluation_Click(object sender, EventArgs e)
+        protected void lnkCreateWorkEvaluation_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(lblEmployeeID.Text))
-            {
-                foreach (GridViewRow row in gvWorkEvaluationCriteria.Rows)
-                {
-                    if (row.RowType == DataControlRowType.DataRow)
-                    {
-                        string wecCode = row.Cells[0].Text;
-                        DropDownList ddRatings = (row.FindControl("ddRatings") as DropDownList);
-
-                        oEmployeeData.INSERT_UPDATE_EMPLOYEE_WORK_EVALUATION(lblEmployeeID.Text, wecCode, ddRatings.SelectedValue.ToString(), txtEvaluationRemarks.Text);
-                    }
-                }
-
-                lblSuccessMessage.Text = "";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
-
-            }
-            else
-            {
-                lblErrorMessage.Text = "Empty field not allowed.";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
-            }
+          
+            //Display Entry for Work Evaluation
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#promptEvaluationEntry').modal('show');</script>", false);
         }
 
 
@@ -731,6 +747,113 @@ namespace DGMU_HR
 
             oEmployeeData.REMOVE_EMPLOYEE_OFFENSE(_ID);
             DISPLAY_EMPLOYEE_OFFENSE(lblEmployeeID.Text);
+        }
+
+        protected void lnkUploadFile_Click(object sender, EventArgs e)
+        {
+            if (fuAttachment.HasFile)
+            { 
+            fuAttachment.SaveAs(Server.MapPath("~/Uploads/EmployeeAttachment/" + fuAttachment.FileName.ToString()));
+            string fullPath = fuAttachment.FileName.ToString();
+            oEmployeeData.INSERT_EMPLOYEE_ATTACHMENT(lblEmployeeID.Text, txtAttachmentFileName.Text, fullPath);
+            lblSuccessMessage.Text = "Attachment Success.";
+            }
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+        }
+
+        protected void lnkSaveWorkEvaluation_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblEmployeeID.Text) && !string.IsNullOrEmpty(txtEvalDateStart.Text) && !string.IsNullOrEmpty(txtEvalDateEnd.Text))
+            {
+                foreach (GridViewRow row in gvWorkEvaluationCriteria.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        string wecCode = row.Cells[0].Text;
+                        DropDownList ddRatings = (row.FindControl("ddRatings") as DropDownList);
+
+                        oEmployeeData.INSERT_EMPLOYEE_WORK_EVALUATION(lblEmployeeID.Text, wecCode, ddRatings.SelectedValue.ToString(), txtEvaluationRemarks.Text, Convert.ToDateTime(txtEvalDateStart.Text), Convert.ToDateTime(txtEvalDateEnd.Text));
+                    }
+                }
+
+                lblSuccessMessage.Text = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+            }
+            else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+            }
+
+            //Close the Modal
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "#promptEvaluationEntry", "$('body').removeClass('modal-open');$('.modal-backdrop').remove();$('#promptEvaluationEntry').hide();", true);
+            DISPLAY_EMPLOYEE_EVALUATION_RECORD(lblEmployeeID.Text);
+        }
+
+        protected void lnkViewEvaluation_Click(object sender, EventArgs e)
+        {
+            var selEdit = (Control)sender;
+            GridViewRow r = (GridViewRow)selEdit.NamingContainer;
+
+            int _ID = Convert.ToInt32(r.Cells[0].Text);
+
+            txtEditEvalDateFrom.Text = r.Cells[1].Text;
+            txtEditEvalDateTo.Text = r.Cells[2].Text;
+            txtEditEvalRemarks.Text = r.Cells[4].Text;
+            
+            DISPLAY_EVALUATION_RESULT(_ID);
+
+            panelUpdateEvaluation.Enabled = true;
+        }
+
+        protected void gvEmployeeEvaluationResult_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            DataTable dt = oUtility.GET_WORK_EVALUATION_RATINGS_LIST();
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int weID = Convert.ToInt32(e.Row.Cells[0].Text);
+                string wecCode = e.Row.Cells[1].Text;
+
+                DropDownList ddRatings = (e.Row.FindControl("ddRatings") as DropDownList);
+                ddRatings.DataSource = dt;
+                ddRatings.DataTextField = dt.Columns["WER_Title"].ToString();
+                ddRatings.DataValueField = dt.Columns["WER_CODE"].ToString();
+                ddRatings.DataBind();
+
+                 ddRatings.SelectedValue = DISPLAY_EVALUATION_RATINGS_RESULT(weID, wecCode);
+            }
+        }
+
+        protected void lnkEvaluationUpdate_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblEmployeeID.Text) && !string.IsNullOrEmpty(txtEditEvalDateFrom.Text) && !string.IsNullOrEmpty(txtEditEvalDateTo.Text))
+            {
+                foreach (GridViewRow row in gvEmployeeEvaluationResult.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        int weID = Convert.ToInt32(row.Cells[0].Text);
+                        string wecCode = row.Cells[1].Text;
+                        DropDownList ddRatings = (row.FindControl("ddRatings") as DropDownList);
+
+                        //oEmployeeData.INSERT_UPDATE_EMPLOYEE_WORK_EVALUATION(lblEmployeeID.Text, wecCode, ddRatings.SelectedValue.ToString(), txtEvaluationRemarks.Text, Convert.ToDateTime(txtEvalDateStart.Text), Convert.ToDateTime(txtEvalDateEnd.Text));
+                        oEmployeeData.UPDATE_EMPLOYEE_WORK_EVALUATION(weID, wecCode, ddRatings.SelectedValue, txtEditEvalRemarks.Text, Convert.ToDateTime(txtEditEvalDateFrom.Text), Convert.ToDateTime(txtEditEvalDateTo.Text));
+                    }
+                }
+
+                lblSuccessMessage.Text = "Work Evaluation Successfully updated.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+
+                DISPLAY_EMPLOYEE_EVALUATION_RECORD(lblEmployeeID.Text);
+                panelUpdateEvaluation.Enabled = false;
+            }
+            else
+            {
+                lblErrorMessage.Text = "Empty field not allowed.";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+            }
         }
     }
 }

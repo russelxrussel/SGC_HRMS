@@ -61,6 +61,8 @@ namespace DGMU_HR
                 foreach (DataRow dr in dt.Rows)
                 {
                     txtAdditionalAmount.Text = dr["AdditionalAmount"].ToString();
+                    txtAddWorkDays.Text = dr["AdditionalWorkDays"].ToString();
+                    txtOTHours.Text = dr["OTHours"].ToString();
                     lblComputedVoucher.Text = string.Format("{0:n}",dr["TotalAmount"]);
                     txtRemarks.Text = dr["Remarks"].ToString();
                 }
@@ -131,19 +133,42 @@ namespace DGMU_HR
 
         protected void lnkCompute_Click(object sender, EventArgs e)
         {
-            double additionalAmount = 0, computedTotalVoucherAmount = 0;
+            double additionalAmount = 0, additionalWorkDays = 0, otHours = 0, computedTotalVoucherAmount = 0, computedVoucherOT = 0, computedAddedWorkDays = 0;
             if (!string.IsNullOrEmpty(txtAdditionalAmount.Text))
             {
                 additionalAmount = Convert.ToDouble(txtAdditionalAmount.Text);
             }
             else { additionalAmount = 0; }
 
+            if (!string.IsNullOrEmpty(txtAddWorkDays.Text))
+            {
+                additionalWorkDays = Convert.ToDouble(txtAddWorkDays.Text);
+            }
+            else { additionalWorkDays = 0; }
+
+            if (!string.IsNullOrEmpty(txtOTHours.Text))
+            {
+                otHours = Convert.ToDouble(txtOTHours.Text);
+            }
+            else { otHours = 0; }
+
             ViewState["ADDITIONALAMOUNT"] = additionalAmount;
+            ViewState["ADDITIONALWORKDAYS"] = additionalWorkDays;
+            ViewState["OTHOURS"] = otHours;
+
+            computedVoucherOT = oPayroll.GET_OT_VOUCHER_PAY(ViewState["EMPCODE"].ToString(), otHours);
+            computedAddedWorkDays = Convert.ToDouble(lblActualRate.Text) * additionalWorkDays;
+
             computedTotalVoucherAmount = oPayroll.GET_EMPLOYEE_VOUCHER_COMPUTATION(Convert.ToInt16(ViewState["PPID"].ToString()),
-                                                                                ViewState["EMPCODE"].ToString(), additionalAmount);
+                                                                                ViewState["EMPCODE"].ToString(), additionalAmount)
+                                                                                + computedVoucherOT
+                                                                                + computedAddedWorkDays;
+            
 
+            lblComputedOT.Text = string.Format("{0:n}", computedVoucherOT);
+            lblComputeAddedWork.Text = string.Format("{0:n}", computedAddedWorkDays);
             lblComputedVoucher.Text = string.Format("{0:n}", computedTotalVoucherAmount);
-
+           
             txtRemarks.Text = "Overtime Pay from " + ViewState["PPDESCRIPTION"].ToString();
         }
 
@@ -155,6 +180,7 @@ namespace DGMU_HR
                                                            ViewState["EMPCODE"].ToString(), Convert.ToDouble(lblActualRate.Text),
                                                            Convert.ToDouble(lblBasicRate.Text), Convert.ToDouble(lblComputedRated.Text),
                                                            Convert.ToDouble(lblDaysPresent.Text), Convert.ToDouble(ViewState["ADDITIONALAMOUNT"]),
+                                                           Convert.ToDouble(ViewState["ADDITIONALWORKDAYS"]), Convert.ToDouble(ViewState["OTHOURS"]),
                                                            Convert.ToDouble(lblComputedVoucher.Text), txtRemarks.Text);
 
 

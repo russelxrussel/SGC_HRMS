@@ -259,7 +259,7 @@
                         <tr>
                             <td># Absence Day(s): </td>
                             <td><div class="input-group">
-                                <asp:TextBox runat="server" ID="txtAbsence" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtAbsence" CssClass="form-control tbInput" TextMode="Number" Enabled="false" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
                                 <span class="input-group-addon alert-danger"><asp:Label runat="server" ID="lblAbsence"></asp:Label></span>
 
                                 </div>

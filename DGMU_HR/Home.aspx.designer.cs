@@ -103,6 +103,15 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.GridView gvEmployeeEmploymentStat;
         
         /// <summary>
+        /// lnkNoGovtID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkNoGovtID;
+        
+        /// <summary>
         /// lblPayrollPeriodText control.
         /// </summary>
         /// <remarks>

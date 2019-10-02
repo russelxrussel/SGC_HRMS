@@ -271,6 +271,26 @@ namespace DGMU_HR
             }
         }
 
+        public void INSERT_EMPLOYEE_ATTACHMENT(string _employeeID, string _fileName, string _filePath)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERT_EMPLOYEE_ATTACHMENT]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+                    cmd.Parameters.AddWithValue("@FILENAME", _fileName);
+                    cmd.Parameters.AddWithValue("@FILEPATH", _filePath);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
         public void INSERT_UPDATE_EMPLOYEE_EDUCATION(string _employeeID, string _primarySchoolName, string _primaryYG, string _secondarySchoolName, string _secondaryYG,
                                                      string _tertiarySchoolName, string _tertiaryYG, string _course, bool _isGraduate)
         {
@@ -300,7 +320,7 @@ namespace DGMU_HR
         }
 
         //INSERT NEW RECORD OF SKILLS AND TRAINNG
-        public void INSERT_UPDATE_EMPLOYEE_SKILLSTRAINING(string _employeeID, string _skillsTraining, string _trainingCenter, DateTime _endTrainingDate)
+        public void INSERT_UPDATE_EMPLOYEE_SKILLSTRAINING(string _employeeID, string _skillsTraining, string _trainingCenter,DateTime _startTrainingDate, DateTime _endTrainingDate, bool _isCompanySponsor)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
@@ -312,8 +332,9 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
                     cmd.Parameters.AddWithValue("@SKILLSTRAINING", _skillsTraining);
                     cmd.Parameters.AddWithValue("@TRAININGCENTER", _trainingCenter);
+                    cmd.Parameters.AddWithValue("@STARTTRAININGDATE", _startTrainingDate);
                     cmd.Parameters.AddWithValue("@ENDTRAININGDATE", _endTrainingDate);
-
+                    cmd.Parameters.AddWithValue("@ISCOMPANYSPONSOR", _isCompanySponsor);
                     cn.Open();
 
                     cmd.ExecuteNonQuery();
@@ -347,12 +368,12 @@ namespace DGMU_HR
 
         /*WORK EVALUATION INSERT-UPDATE
         */
-        public void INSERT_UPDATE_EMPLOYEE_WORK_EVALUATION(string _employeeID, string _wecCode, string _werCode, string _generalRemarks)
+        public void INSERT_EMPLOYEE_WORK_EVALUATION(string _employeeID, string _wecCode, string _werCode, string _generalRemarks, DateTime _dateStart, DateTime _dateEnd)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
 
-                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERTUPDATE_EMPLOYEE_WORK_EVALUATION]", cn))
+                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERT_EMPLOYEE_WORK_EVALUATION]", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -360,6 +381,8 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
                     cmd.Parameters.AddWithValue("@WER_CODE", _werCode);
                     cmd.Parameters.AddWithValue("@GENERAL_REMARKS", _generalRemarks);
+                    cmd.Parameters.AddWithValue("@DATESTART", _dateStart);
+                    cmd.Parameters.AddWithValue("@DATEEND", _dateEnd);
 
                     cn.Open();
 
@@ -368,6 +391,34 @@ namespace DGMU_HR
                 }
             }
         }
+
+        public void UPDATE_EMPLOYEE_WORK_EVALUATION(int _weID, string _wecCode, string _werCode, string _generalRemarks, DateTime _dateStart, DateTime _dateEnd)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spUPDATE_EMPLOYEE_WORK_EVALUATION]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@WE_ID", _weID);
+                    cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
+                    cmd.Parameters.AddWithValue("@WER_CODE", _werCode);
+                    cmd.Parameters.AddWithValue("@GENERAL_REMARKS", _generalRemarks);
+                    cmd.Parameters.AddWithValue("@DATESTART", _dateStart);
+                    cmd.Parameters.AddWithValue("@DATEEND", _dateEnd);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+
+
+        #endregion
         public string GET_EMPLOYEE_WORK_EVALUATION_REMARKS(string _employeeID)
         {
             string x = "";
@@ -396,12 +447,44 @@ namespace DGMU_HR
 
                 return x;
             }
-       
+
 
         }
-        public string GET_EMPLOYEE_WORK_EVALUATION_RESULT(string _employeeID, string _wecCode)
+        //    public string GET_EMPLOYEE_WORK_EVALUATION_RESULT(string _employeeID, string _wecCode)
+        //    {
+        //        string x = "";
+
+        //        using (SqlConnection cn = new SqlConnection(CS))
+        //        {
+
+        //            using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_WORK_EVALUATION_RESULT]", cn))
+        //            {
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+        //                cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
+
+
+        //                cn.Open();
+        //                SqlDataReader dr = cmd.ExecuteReader();
+
+        //                if (dr.HasRows)
+        //                {
+
+        //                    while (dr.Read())
+        //                    {
+        //                        x = dr["WER_CODE"].ToString();
+        //                    }
+        //                }
+        //            }
+
+        //            return x;
+        //           }
+
+
+        //}
+        public DataTable GET_EMPLOYEE_WORK_EVALUATION_RESULT(int _weID)
         {
-            string x = "";
+            DataTable dt = new DataTable();
 
             using (SqlConnection cn = new SqlConnection(CS))
             {
@@ -409,29 +492,34 @@ namespace DGMU_HR
                 using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_WORK_EVALUATION_RESULT]", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
-                    cmd.Parameters.AddWithValue("@WEC_CODE", _wecCode);
+                    cmd.Parameters.AddWithValue("@WE_ID", _weID);
 
-
-                    cn.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    if (dr.HasRows)
-                    {
-
-                        while (dr.Read())
-                        {
-                            x = dr["WER_CODE"].ToString();
-                        }
-                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
                 }
-
-                return x;
             }
 
-            #endregion
+            return dt;
+        }
 
+        public DataTable GET_EMPLOYEE_WORK_EVALUATION_RECORD(string _employeeID)
+        {
+            DataTable dt = new DataTable();
 
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_WORK_EVALUATION_RECORD]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
         }
 
         /*
@@ -498,5 +586,53 @@ namespace DGMU_HR
             }
         }
 
+        /*
+        TRANSFER OF EMPLOYEE COMPANY
+        09.20.2019
+        */
+
+        public DataTable GET_EMPLOYEE_COMPANY_TRANSFER(string _employeeID)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spGET_EMPLOYEE_COMPANY_HISTORY]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+        public void INSERT_UPDATE_EMPLOYEE_COMPANY_TRANSFER(string _employeeID, string _companyCode, string _oldCompanyCode, DateTime _transferDate, DateTime _dateStart, DateTime _dateEnd, string _remarks)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[HR].[spINSERTUPDATE_EMPLOYEE_TRANSFER]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _employeeID);
+                    cmd.Parameters.AddWithValue("@COMPANYCODE", _companyCode);
+                    cmd.Parameters.AddWithValue("@OLDCOMPANYCODE", _oldCompanyCode);
+                    cmd.Parameters.AddWithValue("@TRANSFERDATE", _transferDate);
+                    cmd.Parameters.AddWithValue("@DATESTART", _dateStart);
+                    cmd.Parameters.AddWithValue("@DATEEND", _dateEnd);
+                    cmd.Parameters.AddWithValue("@REMARKS", _remarks);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
     }
 }

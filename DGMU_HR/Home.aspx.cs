@@ -25,13 +25,20 @@ namespace DGMU_HR
                 lblDefaultYear.Text = " Year: <b>" + oSystem.GET_DEFAULT_FISCAL_YEAR().ToString() + "</b> <p> Today is:" + DateTime.Now.ToShortDateString() +"</p>";
 
                 //lblCountActiveEmployee.Text = "Active Employee's : <b>" + oPayroll.GET_COUNT_EMPLOYEE_ACTIVE() + "</b>";
-              //  lnkActiveEmployees.Text = oPayroll.GET_COUNT_EMPLOYEE_ACTIVE().ToString();
+                //  lnkActiveEmployees.Text = oPayroll.GET_COUNT_EMPLOYEE_ACTIVE().ToString();
 
-               // lblActiveLoansCount.Text = "Active Salary Loans : <b>" + oPayroll.GET_COUNT_EMPLOYEE_SALARY_LOAN_ACTIVE() + "</b>";
+                // lblActiveLoansCount.Text = "Active Salary Loans : <b>" + oPayroll.GET_COUNT_EMPLOYEE_SALARY_LOAN_ACTIVE() + "</b>";
 
+                //if (!string.IsNullOrEmpty(lblUser.Text))
+                //{
+                //    
+                  //}
+                //else
+                //{
+                //    Response.Redirect("~/login.aspx");
+                //}
                 lblUser.Text = Session["USER"].ToString();
 
-               
                 DisplayMonthBirthday(oSystem.GET_SERVER_DATE_TIME().Month);
 
                 //DISPLAY EMPLOYEE PAYROLL PROCESSED
@@ -190,6 +197,12 @@ namespace DGMU_HR
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#modalShowEmployeeLoanStat').modal('show');</script>", false);
             }
+        }
+
+       
+        protected void lnkNoGovtID_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/repEmployeeNoGovtID.aspx");
         }
     }
 }

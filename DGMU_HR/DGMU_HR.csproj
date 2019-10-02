@@ -186,6 +186,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap2-toggle.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="dataEntryEmployeeCompanyTransfer.aspx" />
     <Content Include="dataEntryEmployeeLeaveSetup.aspx" />
     <Content Include="dataEntryEmployeeLeave.aspx" />
     <Content Include="dataEntryEmployeeLoan.aspx" />
@@ -202,6 +203,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="repEmployeeNoGovtID.aspx" />
     <Content Include="repGovtForBIR.aspx" />
     <Content Include="repIncentives.aspx" />
     <Content Include="repCompanyPayrollSummary.aspx" />
@@ -398,6 +400,13 @@
     <Compile Include="App_Code\Payroll_C.cs" />
     <Compile Include="App_Code\SystemX.cs" />
     <Compile Include="App_Code\Utility.cs" />
+    <Compile Include="dataEntryEmployeeCompanyTransfer.aspx.cs">
+      <DependentUpon>dataEntryEmployeeCompanyTransfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dataEntryEmployeeCompanyTransfer.aspx.designer.cs">
+      <DependentUpon>dataEntryEmployeeCompanyTransfer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dataEntryEmployeeLeaveSetup.aspx.cs">
       <DependentUpon>dataEntryEmployeeLeaveSetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -506,6 +515,13 @@
     <Compile Include="dataEntryEmployeePayroll.aspx.designer.cs">
       <DependentUpon>dataEntryEmployeePayroll.aspx</DependentUpon>
     </Compile>
+    <Compile Include="repEmployeeNoGovtID.aspx.cs">
+      <DependentUpon>repEmployeeNoGovtID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repEmployeeNoGovtID.aspx.designer.cs">
+      <DependentUpon>repEmployeeNoGovtID.aspx</DependentUpon>
+    </Compile>
     <Compile Include="repGovtForBIR.aspx.cs">
       <DependentUpon>repGovtForBIR.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -518,6 +534,12 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\No_Govt_IDs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>No_Govt_IDs.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Summary_Payroll_Billing_Company_Final.cs">
       <DependentUpon>Summary_Payroll_Billing_Company_Final.rpt</DependentUpon>
@@ -749,11 +771,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
+    <Folder Include="Uploads\EmployeeAttachment\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\Deductions_Salary_Loan.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Deductions_Salary_Loan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\No_Govt_IDs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>No_Govt_IDs.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Summary_Payroll_Billing_Company_Final.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -634,6 +634,15 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.LinkButton lnkUpdateSkills;
         
         /// <summary>
+        /// chkCompanySponsor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkCompanySponsor;
+        
+        /// <summary>
         /// txtSkillsTraining control.
         /// </summary>
         /// <remarks>
@@ -650,6 +659,15 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTrainingCenterName;
+        
+        /// <summary>
+        /// txtStartDateTraining control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStartDateTraining;
         
         /// <summary>
         /// txtEndDateTraining control.
@@ -679,22 +697,103 @@ namespace DGMU_HR {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// lnkUpdateWorkEvaluation control.
+        /// lnkCreateWorkEvaluation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkUpdateWorkEvaluation;
+        protected global::System.Web.UI.WebControls.LinkButton lnkCreateWorkEvaluation;
         
         /// <summary>
-        /// gvWorkEvaluationCriteria control.
+        /// gvWorkEvaluationRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvWorkEvaluationCriteria;
+        protected global::System.Web.UI.WebControls.GridView gvWorkEvaluationRecord;
+        
+        /// <summary>
+        /// panelUpdateEvaluation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelUpdateEvaluation;
+        
+        /// <summary>
+        /// lnkEvaluationUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkEvaluationUpdate;
+        
+        /// <summary>
+        /// txtEditEvalDateFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditEvalDateFrom;
+        
+        /// <summary>
+        /// txtEditEvalDateTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditEvalDateTo;
+        
+        /// <summary>
+        /// txtEditEvalRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditEvalRemarks;
+        
+        /// <summary>
+        /// gvRatingsLegend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvRatingsLegend;
+        
+        /// <summary>
+        /// gvEmployeeEvaluationResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeEvaluationResult;
+        
+        /// <summary>
+        /// txtEvalDateStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEvalDateStart;
+        
+        /// <summary>
+        /// txtEvalDateEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEvalDateEnd;
         
         /// <summary>
         /// txtEvaluationRemarks control.
@@ -706,13 +805,31 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.TextBox txtEvaluationRemarks;
         
         /// <summary>
-        /// gvRatingsLegend control.
+        /// gvWorkEvaluationCriteria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRatingsLegend;
+        protected global::System.Web.UI.WebControls.GridView gvWorkEvaluationCriteria;
+        
+        /// <summary>
+        /// lnkSaveWorkEvaluation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkSaveWorkEvaluation;
+        
+        /// <summary>
+        /// lnkClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkClose;
         
         /// <summary>
         /// UpdatePanel3 control.
@@ -767,6 +884,42 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEmployeeOffense;
+        
+        /// <summary>
+        /// upAttachment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upAttachment;
+        
+        /// <summary>
+        /// txtAttachmentFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAttachmentFileName;
+        
+        /// <summary>
+        /// fuAttachment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuAttachment;
+        
+        /// <summary>
+        /// lnkUploadFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkUploadFile;
         
         /// <summary>
         /// lblSuccessMessage control.

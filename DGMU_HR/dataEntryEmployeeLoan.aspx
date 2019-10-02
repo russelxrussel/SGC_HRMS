@@ -70,7 +70,7 @@
   <div class="panel panel-warning">
     <div class="panel-heading">
  
-                <h5><span class="glyphicon glyphicon-cog"></span> Employee Loan Management </h5>
+                <h6><span class="glyphicon glyphicon-cog"></span> Employee Loan Management </h6>
         
     </div>
     <div class="panel-body">
@@ -116,19 +116,19 @@
                 <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> <asp:Label runat="server" ID="lblEmployeeName"></asp:Label></div>
                 <div class="panel-body">
                         <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-5 hidden">
                      <div class="panel panel-success">
-                         <div class="panel-heading"></div>
+                         <div class="panel-heading">Create New Loan  <asp:LinkButton runat="server" ID="lnkCreateLoan" CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="New Loan" OnClick="lnkCreateLoan_Click"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>    
+                           </div>
                          <div class="panel-body">
                              
-                                 <div class="text-center">
-                                     <asp:Image runat="server" ID="imgEmployee" CssClass="img-thumbnail img-responsive" Width="200px" Height="200px" />
+                                 <div class="text-left">
+                                     <asp:Image runat="server" ID="imgEmployee" CssClass="img-circle" Width="100px" Height="100px" Visible="false" />
                                  </div>
                              
-                              <asp:LinkButton runat="server" ID="lnkCreateLoan" CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="New Loan" OnClick="lnkCreateLoan_Click"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>    
-                           
+                             
                             <asp:Panel runat="server" ID="panelNewLoan" Enabled="false">
-                            <table class="table table-responsive">
+                            <table class="table table-responsive sm">
                                  <tr>
                                      <td>Loan Date:</td> <td><asp:TextBox runat="server" ID="txtDateLoan" CssClass="form-control calendarInput"></asp:TextBox></td>
                                  </tr>
@@ -136,10 +136,26 @@
                                      <td>Loan Type:</td> <td><asp:DropDownList runat="server" ID="ddLoansList" CssClass="form-control"></asp:DropDownList></td>
                                  </tr>
                                  <tr>
-                                     <td>Loan Amount:</td><td><asp:TextBox runat="server" ID="txtLoanAmount" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                    <td>Reference #:</td><td><asp:TextBox runat="server" ID="txtLoanReferenceNumber" CssClass="form-control"></asp:TextBox></td>
+                                </tr>
+                                 <tr>
+                                     <td>Principal Amount:</td><td><asp:TextBox runat="server" ID="txtLoanAmount" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
                                  </tr>
                                  <tr>
-                                     <td>Remarks:</td><td><asp:TextBox runat="server" ID="txtRemarks" TextMode="MultiLine" Rows="2" CssClass="form-control" placeholder="Remarks"></asp:TextBox></td>
+                                     <td>Loan Amount + Interest:</td><td><asp:TextBox runat="server" ID="txtLoanAmountAndInterest" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                               
+                                <tr>
+                                     <td>Monthly Amortization:</td><td><asp:TextBox runat="server" ID="txtLoanMonthlyAmortization" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                                <tr>
+                                     <td>Date Start:</td> <td><asp:TextBox runat="server" ID="txtLoanStartDate" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Date End:</td> <td><asp:TextBox runat="server" ID="txtLoanEndDate" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Remarks:</td><td><asp:TextBox runat="server" ID="txtRemarks" TextMode="MultiLine" CssClass="form-control" placeholder="Remarks"></asp:TextBox></td>
                                  </tr>
                                 
                              </table>
@@ -151,15 +167,15 @@
                          </div>
                      </div>
                 </div>
-                     <div class="col-md-8">
+                     <div class="col-md-12">
                 <div class="panel panel-danger">
                 <div class="panel-heading"> <span class="glyphicon glyphicon-briefcase"></span> Active Loans and Balances Summary</div>
                 <div class="panel-body">
                    <asp:GridView runat="server" ID="gvActiveLoans"
-                    CssClass="table table-responsive table-hover table-condensed" AutoGenerateColumns="False" OnRowDataBound="gvActiveLoans_RowDataBound">
+                    CssClass="table table-responsive table-hover table-condensed sm" AutoGenerateColumns="False" OnRowDataBound="gvActiveLoans_RowDataBound">
 
                     <Columns>
-                         <asp:TemplateField>
+                         <asp:TemplateField HeaderStyle-CssClass ="hidden" ItemStyle-CssClass="hidden">
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="lnkPayroll" Visible="false" CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Link to Payroll Deduction" OnClick="lnkPayroll_Click"><span class="glyphicon glyphicon-link"></span></asp:LinkButton>
                                 <asp:LinkButton runat="server" ID="lnkPayrollRemove" Visible="false" CssClass="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Unlink Deduction from Payroll" OnClick="lnkPayrollRemove_Click"><span class="glyphicon glyphicon-resize-full"></span></asp:LinkButton>
@@ -168,9 +184,12 @@
                        
                          
                         <asp:BoundField DataField="LoanSN" HeaderText="Code" />
-                        <asp:BoundField DataField="LoanCode" />
+                        <asp:BoundField DataField="LoanReferenceNumber" HeaderText="Reference" />
+                        <asp:BoundField DataField="LoanCode" HeaderStyle-CssClass ="hidden" ItemStyle-CssClass="hidden" />
                         <asp:BoundField DataField="LoanName" HeaderText="Name" />
-                        <asp:BoundField DataField="LoanAmount" HeaderText="Amount" DataFormatString="{0:n}" />
+                        <asp:BoundField DataField="LoanAmount" HeaderText="Princ. Amount" DataFormatString="{0:n}" />
+                        <asp:BoundField DataField="LoanAmountAndInterest" HeaderText="Amount + Intrs." DataFormatString="{0:n}" />
+                        <asp:BoundField DataField="MonthlyAmortization" HeaderText="Amortization" DataFormatString="{0:n}" />
                         <asp:BoundField DataField="TotalPayment" ItemStyle-CssClass="text-success" HeaderText="Payment" DataFormatString="{0:n}" />
                         <asp:BoundField DataField="Balance" ItemStyle-CssClass="text-danger" HeaderText="Balance" DataFormatString="{0:n}" />
                      
@@ -204,6 +223,7 @@
                     <asp:GridView runat="server" ID="gvEmployeeLoanHistory" CssClass="table table-responsive table-hover table-condensed" AutoGenerateColumns="False">
                         <Columns>
                             <asp:BoundField DataField="LoanSN" HeaderText="Code" />
+                            <asp:BoundField DataField="LoanReferenceNumber" HeaderText="Reference" />
                             <asp:BoundField DataField="LoanName" HeaderText="Name" />
                             <asp:BoundField DataField="LoanAmount" HeaderText="Amount" DataFormatString="{0:n}" />
                             <asp:BoundField DataField="DateClose" HeaderText="Date Settled" DataFormatString="{0:d}" />
@@ -341,6 +361,10 @@
                                                       <tr>
                                                           <td>Amount</td>
                                                           <td><asp:TextBox runat="server" ID="txtAddLoanAmount" CssClass="form-control" TextMode="Number"></asp:TextBox></td>
+                                                      </tr>
+                                                       <tr>
+                                                          <td>Amount + Interest</td>
+                                                          <td><asp:TextBox runat="server" ID="txtAddLoanAmountAndInterest" CssClass="form-control" TextMode="Number"></asp:TextBox></td>
                                                       </tr>
                                                       <tr>
                                                           <td>Remarks</td>
