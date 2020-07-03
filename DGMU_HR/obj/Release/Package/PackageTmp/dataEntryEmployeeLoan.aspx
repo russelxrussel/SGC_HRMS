@@ -113,7 +113,17 @@
                
                 <div class="col-md-12">
                <div class="panel panel-default">
-                <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> <asp:Label runat="server" ID="lblEmployeeName"></asp:Label></div>
+                  
+                <div class="panel-heading">
+                     <div class="row">
+                   <div class="col-md-6"><span class="glyphicon glyphicon-user"></span> <asp:Label runat="server" ID="lblEmployeeName"></asp:Label></div>
+                       <div class="col-md-6 text-right">
+                           <asp:LinkButton runat="server" ID="lnkCreateNewLoan" CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Create Loan" OnClick="lnkCreateNewLoan_Click">Create Loan</asp:LinkButton>
+                       </div>
+                   </div>
+                    
+
+                </div>
                 <div class="panel-body">
                         <div class="row">
                       <div class="col-md-5 hidden">
@@ -123,50 +133,16 @@
                          <div class="panel-body">
                              
                                  <div class="text-left">
-                                     <asp:Image runat="server" ID="imgEmployee" CssClass="img-circle" Width="100px" Height="100px" Visible="false" />
+                                     <asp:Image runat="server" ID="imgEmployee" CssClass="img-circle" Width="100px" Height="100px"  />
                                  </div>
                              
                              
                             <asp:Panel runat="server" ID="panelNewLoan" Enabled="false">
-                            <table class="table table-responsive sm">
-                                 <tr>
-                                     <td>Loan Date:</td> <td><asp:TextBox runat="server" ID="txtDateLoan" CssClass="form-control calendarInput"></asp:TextBox></td>
-                                 </tr>
-                                 <tr>
-                                     <td>Loan Type:</td> <td><asp:DropDownList runat="server" ID="ddLoansList" CssClass="form-control"></asp:DropDownList></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Reference #:</td><td><asp:TextBox runat="server" ID="txtLoanReferenceNumber" CssClass="form-control"></asp:TextBox></td>
-                                </tr>
-                                 <tr>
-                                     <td>Principal Amount:</td><td><asp:TextBox runat="server" ID="txtLoanAmount" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
-                                 </tr>
-                                 <tr>
-                                     <td>Loan Amount + Interest:</td><td><asp:TextBox runat="server" ID="txtLoanAmountAndInterest" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
-                                 </tr>
-                               
-                                <tr>
-                                     <td>Monthly Amortization:</td><td><asp:TextBox runat="server" ID="txtLoanMonthlyAmortization" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
-                                 </tr>
-                                <tr>
-                                     <td>Date Start:</td> <td><asp:TextBox runat="server" ID="txtLoanStartDate" CssClass="form-control calendarInput"></asp:TextBox></td>
-                                 </tr>
-                                 <tr>
-                                     <td>Date End:</td> <td><asp:TextBox runat="server" ID="txtLoanEndDate" CssClass="form-control calendarInput"></asp:TextBox></td>
-                                 </tr>
-                                 <tr>
-                                     <td>Remarks:</td><td><asp:TextBox runat="server" ID="txtRemarks" TextMode="MultiLine" CssClass="form-control" placeholder="Remarks"></asp:TextBox></td>
-                                 </tr>
-                                
-                             </table>
-                            
-                            <div class="text-right">
-                           <asp:LinkButton runat="server" ID="lnkProcess" CssClass="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Process Loan" OnClick="lnkProcess_Click"><span class="glyphicon glyphicon-check"></span></asp:LinkButton>
-                                </div>
+                           
                                 </asp:Panel>
                          </div>
                      </div>
-                </div>
+                    </div>
                      <div class="col-md-12">
                 <div class="panel panel-danger">
                 <div class="panel-heading"> <span class="glyphicon glyphicon-briefcase"></span> Active Loans and Balances Summary</div>
@@ -198,19 +174,19 @@
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="lnkAddLoan" Visible="true" CssClass="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Additional Loan" OnClick="lnkAddLoan_Click"><span class="glyphicon glyphicon-plus-sign"></span></asp:LinkButton>
                                 <asp:LinkButton runat="server" ID="lnkViewAddLoans" CssClass="btn btn-info btn-sm" OnClick="lnkViewAddLoans_Click"><span class="glyphicon glyphicon-list-alt" data-toggle="tooltip" data-placement="top" title="View Loans"></span></asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="lnkEditLoan" CssClass="btn btn-warning btn-sm" OnClick="lnkEditLoan_Click"><span class="fa fa-pencil-alt" data-toggle="tooltip" data-placement="top" title="Modify Loan"></span></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                          <asp:TemplateField HeaderText="Manual Pay">
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="lnkPayment" CssClass="btn btn-primary btn-sm" OnClick="lnkPayment_Click" data-toggle="tooltip" data-placement="top" title="Payment Entry"><span class="glyphicon glyphicon-circle-arrow-up"></span></asp:LinkButton>
-                                  <asp:LinkButton runat="server" ID="lnkViewPayment" CssClass="btn btn-warning btn-sm" OnClick="lnkViewPayment_Click"><span class="glyphicon glyphicon-bookmark" data-toggle="tooltip" data-placement="top" title="View Payment Transactions"></span></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField>
+                        <asp:TemplateField HeaderText="Payments">
                             <ItemTemplate>
-                              
+                                 <asp:LinkButton runat="server" ID="lnkViewPayment" CssClass="btn btn-warning btn-sm" OnClick="lnkViewPayment_Click"><span class="glyphicon glyphicon-bookmark" data-toggle="tooltip" data-placement="top" title="View Payment Transactions"></span></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -248,7 +224,7 @@
         </div>
     </div>
     <!-- Display Modal Input Here -->
-     <div class="modal fade" id="modalPaymentEntry">
+        <div class="modal fade" id="modalPaymentEntry">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header bg-success">
@@ -387,6 +363,57 @@
                                       </div>
                                   </div>
 
+            <!-- Payment List -->
+         <div class="modal fade" id="modalCreateLoan">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header bg-warning">
+                                                  <button class="close" data-dismiss="modal">
+                                                      &times;</button>
+                                                  <h4 class="modal-title"><span class="glyphicon glyphicon-bookmark"></span> <asp:Label runat="server" ID="lblLoanActionName"></asp:Label></h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                   <table class="table table-responsive sm">
+                                 <tr>
+                                     <td>Loan Date:</td> <td><asp:TextBox runat="server" ID="txtDateLoan" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Loan Type:</td> <td><asp:DropDownList runat="server" ID="ddLoansList" CssClass="form-control"></asp:DropDownList></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Reference #:</td><td><asp:TextBox runat="server" ID="txtLoanReferenceNumber" CssClass="form-control"></asp:TextBox></td>
+                                </tr>
+                                 <tr>
+                                     <td>Principal Amount:</td><td><asp:TextBox runat="server" ID="txtLoanAmount" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Loan Amount + Interest:</td><td><asp:TextBox runat="server" ID="txtLoanAmountAndInterest" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                               
+                                <tr>
+                                     <td>Monthly Amortization:</td><td><asp:TextBox runat="server" ID="txtLoanMonthlyAmortization" TextMode="Number" CssClass="form-control"></asp:TextBox></td>
+                                 </tr>
+                                <tr>
+                                     <td>Date Start:</td> <td><asp:TextBox runat="server" ID="txtLoanStartDate" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Date End:</td> <td><asp:TextBox runat="server" ID="txtLoanEndDate" CssClass="form-control calendarInput"></asp:TextBox></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Remarks:</td><td><asp:TextBox runat="server" ID="txtRemarks" TextMode="MultiLine" CssClass="form-control" placeholder="Remarks"></asp:TextBox></td>
+                                 </tr>
+                                
+                             </table>
+                            
+                            <div class="text-right">
+                           <asp:LinkButton runat="server" ID="lnkProcess" CssClass="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Process Loan" OnClick="lnkProcess_Click"><span class="glyphicon glyphicon-check"></span></asp:LinkButton>
+                                </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
     </div>
    </div>
  

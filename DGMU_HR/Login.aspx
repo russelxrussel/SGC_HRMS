@@ -37,7 +37,7 @@
             height: 100%;
             background-size: auto 100%;
             background-repeat: no-repeat;
-            background-image: linear-gradient(to bottom right, skyblue , green); /* Standard syntax (must be last) */
+            background-image: linear-gradient(to bottom right, blue , Yellow); /* Standard syntax (must be last) */
         }
 
         li.borderless {
@@ -46,13 +46,15 @@
     </style>
 
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Content/bootstrap-datetimepicker.css" rel="stylesheet" />
-
+    <link href="Content/toastr.min.css" rel="stylesheet" />
+    <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
+   
 
      <script src="Scripts/jquery-3.3.1.js"></script>
     <script src="Scripts/moment.js"></script>
     <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="Scripts/toastr.min.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -62,41 +64,53 @@
         <ContentTemplate>
 
             <div class="centeredBox">
-      
-                 <div class="panel panel-info">
-            <div class="panel-heading">
-                 <div class="text-center">
+       <div class="panel panel-info">
+  <div class="panel-heading "> 
+      <div class="text-left">
                  <img src="images/DGMU.PNG" width="200px" height="100px"/>
-                    </div>
-                </div>
-            <div class="panel-body">
-               <%-- <strong>User Login</strong>--%>
+                    </div></div>
+  <div class="panel-body">
+   <%-- <strong>User Login</strong>--%>
+    
+
                 <ul class="list-group">
+
                     <li class="list-group-item borderless">
                         <div class="input-group">
-                         <span class="input-group-addon alert-info"><span class="glyphicon glyphicon-user"></span></span>
-                        <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control" placeholder="Username"></asp:TextBox> 
+                          <span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
+                          <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control" placeholder="Username"></asp:TextBox>
                         </div>
+                       
+                       
                         </li>
                     <li class="list-group-item borderless">
                         <div class="input-group">
-                         <span class="input-group-addon alert-info"><span class="glyphicon glyphicon-inbox"></span></span>
-                        <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
+                          <span class="input-group-addon"><i class="input-group-text bg-light fa fa-key"></i></span>
+                          <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
                         </div>
+                        
+                          
+                          
                      </li>   
                     <li class="list-group-item borderless text-right">
                                 <asp:LinkButton runat="server" ID="lnkLogin" CssClass="btn btn-sm btn-primary" OnClick="lnkLogin_Click"><span class="glyphicon glyphicon-log-in"></span> Login</asp:LinkButton>
                     </li>
+
+                  
                 </ul>
-            </div>
-            <div class="panel-footer">
-                <p class="small text-muted" style="font-size: 12px;"><i>DGMU - Human Resources Management System</i></p>
-            </div>
-        </div>
+  </div>
+  <div class="panel -footer">
+      
+      <p class="small text-muted" style="font-size: 10px;"><i>DGMU - Human Resources Management System v.3</i></p>
+  </div>
+</div>
+
+           
                
         </div>
 
-           <div class="modal fade" id="msgErrorModal">
+          
+           <div class="modal fade" id="msgErrorModal4">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header bg-danger">
@@ -105,15 +119,35 @@
                                                   <h4 class="modal-title">DGMU - Human Resources Management System</h4>
                                               </div>
                                               <div class="modal-body">
-                                                  <h4 class="text-danger">
-                                                      <span class="glyphicon glyphicon-remove"></span>&nbsp;
-                                            <asp:Label runat="server" ID="lblErrorMessage"></asp:Label></h4>
+                                                  
                                               </div>
                                              
                                           </div>
                                       </div>
                                   </div>
-               
+            
+
+        <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="msgErrorModal"  tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">DGMU - Human Resources Management System</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <h4>
+                  <span class="fa fa-exclamation-circle text-danger"></span>&nbsp;
+                                            <asp:Label runat="server" ID="lblErrorMessage"></asp:Label></h4>
+      </div>
+     
+    </div>
+  </div>
+</div>
         </ContentTemplate>
     </asp:UpdatePanel>
 

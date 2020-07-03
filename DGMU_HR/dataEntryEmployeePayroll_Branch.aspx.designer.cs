@@ -157,6 +157,24 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.TextBox txtPayOff;
         
         /// <summary>
+        /// txtOverTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOverTime;
+        
+        /// <summary>
+        /// lblOTTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOTTotal;
+        
+        /// <summary>
         /// txtRegularHoliday control.
         /// </summary>
         /// <remarks>
@@ -175,22 +193,22 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.Label lblRegularHoliday;
         
         /// <summary>
-        /// txtOverTime control.
+        /// txtRegularHolidayNP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOverTime;
+        protected global::System.Web.UI.WebControls.TextBox txtRegularHolidayNP;
         
         /// <summary>
-        /// lblOTTotal control.
+        /// lblRegularHolidayNP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOTTotal;
+        protected global::System.Web.UI.WebControls.Label lblRegularHolidayNP;
         
         /// <summary>
         /// txtRegularHolidayOT control.
@@ -227,6 +245,24 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSpecialHoliday;
+        
+        /// <summary>
+        /// txtSpecialHolidayNP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSpecialHolidayNP;
+        
+        /// <summary>
+        /// lblSpecialHolidayNP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSpecialHolidayNP;
         
         /// <summary>
         /// txtSpecialHolidayOT control.
@@ -409,31 +445,31 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.TextBox txtOtherDeduction;
         
         /// <summary>
-        /// lblSSS control.
+        /// txtSSSDue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSSS;
+        protected global::System.Web.UI.WebControls.TextBox txtSSSDue;
         
         /// <summary>
-        /// lblPhilHealth control.
+        /// txtPhilHealthDue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhilHealth;
+        protected global::System.Web.UI.WebControls.TextBox txtPhilHealthDue;
         
         /// <summary>
-        /// lblPagibig control.
+        /// txtPagibigDue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPagibig;
+        protected global::System.Web.UI.WebControls.TextBox txtPagibigDue;
         
         /// <summary>
         /// txtPagIbigAdditional control.
@@ -488,6 +524,15 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalDeduction;
+        
+        /// <summary>
+        /// lblTotalLoans control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalLoans;
         
         /// <summary>
         /// lblTotalNetPay control.

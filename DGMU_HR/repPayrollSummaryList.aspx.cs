@@ -65,18 +65,32 @@ namespace DGMU_HR
         {
 
 
-            if (optWithATM.Checked)
+            //if (optWithATM.Checked)
+            //{
+            //    oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_With_ATM.rpt"));
+            //}
+            //else if (optNonATM.Checked)
+            //{
+            //    oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_Non_ATM.rpt"));
+            //}
+            //else
+            //{ 
+            if (ddPayrollGroup.SelectedIndex == 0)
             {
-                oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_With_ATM.rpt"));
-            }
-            else if (optNonATM.Checked)
-            {
-                oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_Non_ATM.rpt"));
-            }
-            else
-            { 
+                //Combination of Inhouse and Branch
                 oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_Final.rpt"));
             }
+            else if (ddPayrollGroup.SelectedIndex == 1)
+            {
+                //Inhouse Payroll will display
+                oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_Final_Inhouse.rpt"));
+            }
+            else
+            {
+                //Branch 
+                oReportDocument.Load(Server.MapPath("~/Reports/Summary_Payroll_Billing_Company_Final_Store.rpt"));
+            }
+            //}
 
 
             try

@@ -84,7 +84,7 @@ namespace DGMU_HR
         {
             string x = "";
 
-            DataView dv = oEmployee.GET_EMPLOYEE_LIST_LW().DefaultView;
+            DataView dv = oEmployee.GET_ACTIVE_EMPLOYEE_LIST_LW().DefaultView;
 
             dv.RowFilter = "EmployeeID ='" + _employeeID + "'";
 
@@ -208,7 +208,7 @@ namespace DGMU_HR
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "#promptMessage", "$('body').removeClass('modal-open');$('.modal-backdrop').remove();$('#promptMessage').hide();", true);
 
-            oEmployee.INSERT_UPDATE_EMPLOYEE_COMPANY_TRANSFER(ViewState["EMPLOYEEID"].ToString(), ddTransferCompanyTo.SelectedValue, ViewState["CURRENTCOMPANYCODE"].ToString(), Convert.ToDateTime(txtDateTransfer.Text), Convert.ToDateTime(txtDateStart.Text), Convert.ToDateTime(txtDateEnd.Text), txtRemarks.Text);
+            oEmployee.INSERT_UPDATE_EMPLOYEE_COMPANY_TRANSFER(ViewState["EMPLOYEEID"].ToString(), ddTransferCompanyTo.SelectedValue, ViewState["CURRENTCOMPANYCODE"].ToString(), Convert.ToDateTime(txtDateTransfer.Text), txtRemarks.Text);
 
             lblCurrentCompany.Text = GET_CURRENT_EMPLOYEE_COMPANY(ViewState["EMPLOYEEID"].ToString());
 

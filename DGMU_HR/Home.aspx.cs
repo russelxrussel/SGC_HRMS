@@ -32,14 +32,18 @@ namespace DGMU_HR
                 //if (!string.IsNullOrEmpty(lblUser.Text))
                 //{
                 //    
-                  //}
+                //}
                 //else
                 //{
                 //    Response.Redirect("~/login.aspx");
                 //}
+               
                 lblUser.Text = Session["USER"].ToString();
+               
 
                 DisplayMonthBirthday(oSystem.GET_SERVER_DATE_TIME().Month);
+
+                DisplayMonthEndOfService(oSystem.GET_SERVER_DATE_TIME().Month);
 
                 //DISPLAY EMPLOYEE PAYROLL PROCESSED
                 DisplayEmployeePayrollProcessed(oPayroll.GET_DEFAULT_PAYROLL_PERIOD());
@@ -60,7 +64,7 @@ namespace DGMU_HR
 
         private void DisplayMonthBirthday(int _month)
         {
-            DataTable dt = oEmployee.GET_EMPLOYEE_LIST_LW();
+            DataTable dt = oEmployee.GET_ACTIVE_EMPLOYEE_LIST_LW();
             DataView dv = dt.DefaultView;
             dv.RowFilter = "Status = '" + "Active" + "' and BdayMonth = '" + _month + "'";
             dv.Sort = "BdayDay, Date_Of_Birth, EmployeeName";
@@ -72,6 +76,23 @@ namespace DGMU_HR
                 gvBirthdayList.DataSource = dv;
                 gvBirthdayList.DataBind();
             } 
+        }
+
+        //END OF SERVICES LIST 03.29.2020
+        private void DisplayMonthEndOfService(int _month)
+        {
+            DataTable dt = oEmployee.GET_END_OF_SERVICES_LIST();
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "EffectiveMonth = '" + _month + "'";
+            dv.Sort = "IsSet, EOs_Effective_Date, EmployeeName";
+
+           // lblBirthdayMonth.Text = dv.Count.ToString() + " Birthday celebrant(s) for the month of " + oSystem.GET_SERVER_DATE_TIME().ToString("MMMM") + " " + oSystem.GET_SERVER_DATE_TIME().Year.ToString();
+
+            if (dv.Count > 0)
+            {
+                gvEOSList.DataSource = dv;
+                gvEOSList.DataBind();
+            }
         }
 
         private void DisplayEmployeeEmploymentStat()
@@ -160,7 +181,7 @@ namespace DGMU_HR
             lblEmployeeStatusName.Text = "List of " + sStatus + " Employee's";
 
 
-            DataView dv = oEmployee.GET_EMPLOYEE_LIST_LW().DefaultView;
+            DataView dv = oEmployee.GET_ALL_EMPLOYEE_LIST_LW().DefaultView;
             dv.RowFilter = "Status ='" + sStatus + "'";
 
 
@@ -203,6 +224,11 @@ namespace DGMU_HR
         protected void lnkNoGovtID_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/repEmployeeNoGovtID.aspx");
+        }
+
+        protected void lnkManual13thMonth_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/data13thMonthManualEntry.aspx");
         }
     }
 }

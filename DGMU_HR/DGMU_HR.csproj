@@ -185,13 +185,34 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap2-toggle.min.css" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
+    <Content Include="dataEntryGovtDues.aspx" />
     <Content Include="dataEntryEmployeeCompanyTransfer.aspx" />
+    <Content Include="data13thMonthManualEntry.aspx" />
     <Content Include="dataEntryEmployeeLeaveSetup.aspx" />
     <Content Include="dataEntryEmployeeLeave.aspx" />
     <Content Include="dataEntryEmployeeLoan.aspx" />
     <Content Include="dataEntryEmployeePayroll_Branch.aspx" />
     <Content Include="dataEntryPayrollVoucher.aspx" />
+    <Content Include="EmployeePictureAttachment.aspx" />
+    <Content Include="EmployeeAttachment.aspx" />
+    <Content Include="dataEntryEmployeeManagement.aspx" />
     <Content Include="EmpPaySetup.aspx" />
     <Content Include="EmpData.aspx" />
     <Content Include="Emp_Pictures\default-avatar.png" />
@@ -200,34 +221,67 @@
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Account\Web.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="rep13thmonthSummaryBilling.aspx" />
     <Content Include="repEmployeeNoGovtID.aspx" />
+    <Content Include="repGovtForBIR_Manual.aspx" />
     <Content Include="repGovtForBIR.aspx" />
     <Content Include="repIncentives.aspx" />
     <Content Include="repCompanyPayrollSummary.aspx" />
     <Content Include="repSalaryLoanDeductions.aspx" />
     <Content Include="repPayrollSummaryList.aspx" />
     <Content Include="repRemittances.aspx" />
+    <Content Include="rep13thmonth.aspx" />
     <Content Include="repVoucher.aspx" />
     <Content Include="repPayslip.aspx" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-toggle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap2-toggle.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="Scripts\index.d.ts" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="HRMS.Master" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\SPGC_PUB.pubxml" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Pictures\add-inventory.png" />
     <Content Include="Pictures\Artboard-2-copy-5DL-Icons-300x300.png" />
     <Content Include="Pictures\ghnw20131025-115414-673.jpg" />
     <Content Include="Pictures\graduated.png" />
     <Content Include="Pictures\icon-familie.png" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -239,8 +293,81 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -283,12 +410,37 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Site.Master" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -400,12 +552,26 @@
     <Compile Include="App_Code\Payroll_C.cs" />
     <Compile Include="App_Code\SystemX.cs" />
     <Compile Include="App_Code\Utility.cs" />
+    <Compile Include="dataEntryGovtDues.aspx.cs">
+      <DependentUpon>dataEntryGovtDues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dataEntryGovtDues.aspx.designer.cs">
+      <DependentUpon>dataEntryGovtDues.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dataEntryEmployeeCompanyTransfer.aspx.cs">
       <DependentUpon>dataEntryEmployeeCompanyTransfer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="dataEntryEmployeeCompanyTransfer.aspx.designer.cs">
       <DependentUpon>dataEntryEmployeeCompanyTransfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data13thMonthManualEntry.aspx.cs">
+      <DependentUpon>data13thMonthManualEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data13thMonthManualEntry.aspx.designer.cs">
+      <DependentUpon>data13thMonthManualEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="dataEntryEmployeeLeaveSetup.aspx.cs">
       <DependentUpon>dataEntryEmployeeLeaveSetup.aspx</DependentUpon>
@@ -441,6 +607,27 @@
     </Compile>
     <Compile Include="dataEntryPayrollVoucher.aspx.designer.cs">
       <DependentUpon>dataEntryPayrollVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePictureAttachment.aspx.cs">
+      <DependentUpon>EmployeePictureAttachment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePictureAttachment.aspx.designer.cs">
+      <DependentUpon>EmployeePictureAttachment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeAttachment.aspx.cs">
+      <DependentUpon>EmployeeAttachment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeAttachment.aspx.designer.cs">
+      <DependentUpon>EmployeeAttachment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dataEntryEmployeeManagement.aspx.cs">
+      <DependentUpon>dataEntryEmployeeManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dataEntryEmployeeManagement.aspx.designer.cs">
+      <DependentUpon>dataEntryEmployeeManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmpPaySetup.aspx.cs">
       <DependentUpon>EmpPaySetup.aspx</DependentUpon>
@@ -515,12 +702,26 @@
     <Compile Include="dataEntryEmployeePayroll.aspx.designer.cs">
       <DependentUpon>dataEntryEmployeePayroll.aspx</DependentUpon>
     </Compile>
+    <Compile Include="rep13thmonthSummaryBilling.aspx.cs">
+      <DependentUpon>rep13thmonthSummaryBilling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rep13thmonthSummaryBilling.aspx.designer.cs">
+      <DependentUpon>rep13thmonthSummaryBilling.aspx</DependentUpon>
+    </Compile>
     <Compile Include="repEmployeeNoGovtID.aspx.cs">
       <DependentUpon>repEmployeeNoGovtID.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="repEmployeeNoGovtID.aspx.designer.cs">
       <DependentUpon>repEmployeeNoGovtID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="repGovtForBIR_Manual.aspx.cs">
+      <DependentUpon>repGovtForBIR_Manual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repGovtForBIR_Manual.aspx.designer.cs">
+      <DependentUpon>repGovtForBIR_Manual.aspx</DependentUpon>
     </Compile>
     <Compile Include="repGovtForBIR.aspx.cs">
       <DependentUpon>repGovtForBIR.aspx</DependentUpon>
@@ -540,6 +741,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>No_Govt_IDs.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Pay13thMonth.cs">
+      <DependentUpon>Pay13thMonth.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Summary_GovtDues_BIR_Manual.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Summary_GovtDues_BIR_Manual.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Summary_List_Manual_13thMonth.cs">
+      <DependentUpon>Summary_List_Manual_13thMonth.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Summary_Payroll_Billing_Company_Final_Store.cs">
+      <DependentUpon>Summary_Payroll_Billing_Company_Final_Store.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Summary_Payroll_Billing_Company_Final_Inhouse.cs">
+      <DependentUpon>Summary_Payroll_Billing_Company_Final_Inhouse.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\Summary_Payroll_Billing_Company_Final.cs">
       <DependentUpon>Summary_Payroll_Billing_Company_Final.rpt</DependentUpon>
@@ -697,6 +928,13 @@
     <Compile Include="repRemittances.aspx.designer.cs">
       <DependentUpon>repRemittances.aspx</DependentUpon>
     </Compile>
+    <Compile Include="rep13thmonth.aspx.cs">
+      <DependentUpon>rep13thmonth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rep13thmonth.aspx.designer.cs">
+      <DependentUpon>rep13thmonth.aspx</DependentUpon>
+    </Compile>
     <Compile Include="repVoucher.aspx.cs">
       <DependentUpon>repVoucher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -772,6 +1010,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
     <Folder Include="Uploads\EmployeeAttachment\" />
+    <Folder Include="Uploads\EmployeePictures\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\Deductions_Salary_Loan.rpt">
@@ -781,6 +1020,26 @@
     <EmbeddedResource Include="Reports\No_Govt_IDs.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>No_Govt_IDs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Pay13thMonth.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Pay13thMonth.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Summary_GovtDues_BIR_Manual.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Summary_GovtDues_BIR_Manual.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Summary_List_Manual_13thMonth.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Summary_List_Manual_13thMonth.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Summary_Payroll_Billing_Company_Final_Store.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Summary_Payroll_Billing_Company_Final_Store.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Summary_Payroll_Billing_Company_Final_Inhouse.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Summary_Payroll_Billing_Company_Final_Inhouse.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Summary_Payroll_Billing_Company_Final.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

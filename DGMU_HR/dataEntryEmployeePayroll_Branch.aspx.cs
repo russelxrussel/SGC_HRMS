@@ -171,11 +171,11 @@ namespace DGMU_HR
             double totalGrossIncome = 0;
             double basicRate = 0;
             double RegularTotal = 0;
-            double regHolidayTotal = 0, spcHolidayTotal = 0;
+            double regHolidayTotal = 0, regHolidayTotalNP = 0, spcHolidayTotal = 0, spcHolidayTotalNP = 0;
             double HolidayTotal = 0, OTTotal = 0, ORHTotal = 0, OShTotal = 0;
 
             double daysWork = 0, wLeave = 0, payoff = 0;
-            double regHolidayQty = 0, spcHolidayQty = 0;
+            double regHolidayQty = 0, regHolidayQtyNP = 0, spcHolidayQty = 0, spcHolidayQtyNP = 0;
             double OTHours = 0, RegularOTHour = 0, SpecialOTHour = 0;
 
             double daysPresent = 0;
@@ -214,11 +214,24 @@ namespace DGMU_HR
             }
             else { regHolidayQty = 0; }
 
+            if (!string.IsNullOrEmpty(txtRegularHolidayNP.Text) && Convert.ToDouble(txtRegularHolidayNP.Text) > 0)
+            {
+                regHolidayQtyNP = Convert.ToDouble(txtRegularHolidayNP.Text);
+
+            }
+            else { regHolidayQtyNP = 0; }
+
             if (!string.IsNullOrEmpty(txtSpecialHoliday.Text) && Convert.ToDouble(txtSpecialHoliday.Text) > 0)
             {
                 spcHolidayQty = Convert.ToDouble(txtSpecialHoliday.Text);
             }
             else { spcHolidayQty = 0; }
+
+            if (!string.IsNullOrEmpty(txtSpecialHolidayNP.Text) && Convert.ToDouble(txtSpecialHolidayNP.Text) > 0)
+            {
+                spcHolidayQtyNP = Convert.ToDouble(txtSpecialHolidayNP.Text);
+            }
+            else { spcHolidayQtyNP = 0; }
 
             if (!string.IsNullOrEmpty(txtSpecialHolidayOT.Text) && Convert.ToDouble(txtSpecialHolidayOT.Text) > 0)
             {
@@ -269,10 +282,23 @@ namespace DGMU_HR
             ViewState["REGULARHOLIDAYQTY"] = regHolidayQty;
             ViewState["REGULARHOLIDAY"] = regHolidayTotal;
 
+            regHolidayTotalNP = oPayroll.GET_REGULAR_HOLIDAY_NP(regHolidayQtyNP, _empCode);
+            lblRegularHolidayNP.Text = regHolidayTotalNP.ToString();
+            //This view state will use for database saving
+            ViewState["REGULARHOLIDAYQTY_NP"] = regHolidayQtyNP;
+            ViewState["REGULARHOLIDAY_NP"] = regHolidayTotalNP;
+
             spcHolidayTotal = oPayroll.GET_SPECIAL_HOLIDAY(spcHolidayQty,_empCode);
             lblSpecialHoliday.Text = spcHolidayTotal.ToString();
+
             ViewState["SPECIALHOLIDAYQTY"] = spcHolidayQty;
             ViewState["SPECIALHOLIDAY"] = spcHolidayTotal;
+
+            spcHolidayTotalNP = oPayroll.GET_SPECIAL_HOLIDAY_NP(spcHolidayQty, _empCode);
+            lblSpecialHolidayNP.Text = spcHolidayTotalNP.ToString();
+            //This view state will use for database saving
+            ViewState["SPECIALHOLIDAYQTY_NP"] = spcHolidayQtyNP;
+            ViewState["SPECIALHOLIDAY_NP"] = spcHolidayTotalNP;
 
             //OT HOLIDAY
             ORHTotal = oPayroll.GET_REGULAR_HOLIDAY_OT_PAY(_empCode, RegularOTHour);
@@ -289,7 +315,7 @@ namespace DGMU_HR
             ViewState["ADJUSTMENT"] = adjustment;
             ViewState["ADJUSTMENTWTAX"] = adjustmentWTax;
 
-            HolidayTotal = regHolidayTotal + spcHolidayTotal;
+            HolidayTotal = regHolidayTotal + regHolidayTotalNP + spcHolidayTotal + spcHolidayTotalNP;
 
             daysPresent = daysWork;
 
@@ -381,22 +407,27 @@ namespace DGMU_HR
             * Employee government deductions.
             * 01.07.2019
             */
-            if ((int)ViewState["PPCUTOFF"] == 2)
-            { 
-           
-            SSS = oPayroll.GET_SSS_SHARE(_empCode, Compute_Gross_Income(_empCode), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()), Convert.ToDouble(ViewState["RHOVERTIME"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()), Convert.ToDouble(ViewState["SHOVERTIME"].ToString()), Convert.ToInt32(ViewState["PPID"]));
-            lblSSS.Text = string.Format("{0:n}",SSS);
+            //if ((int)ViewState["PPCUTOFF"] == 2)
+            //{ 
 
-            PhilHealth = oPayroll.GET_PHILHEALTH_SHARE(_empCode, Compute_Gross_Income(_empCode), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()), Convert.ToDouble(ViewState["RHOVERTIME"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()), Convert.ToDouble(ViewState["SHOVERTIME"].ToString()), Convert.ToInt32(ViewState["PPID"]));
-            lblPhilHealth.Text = string.Format("{0:n}", PhilHealth);
+            //SSS = oPayroll.GET_SSS_SHARE(_empCode, Compute_Gross_Income(_empCode), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()), Convert.ToDouble(ViewState["RHOVERTIME"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()), Convert.ToDouble(ViewState["SHOVERTIME"].ToString()), Convert.ToInt32(ViewState["PPID"]));
+            //lblSSS.Text = string.Format("{0:n}",SSS);
 
-            PagIbig = oPayroll.GET_PAGIBIG_SHARE(_empCode);
-            lblPagibig.Text = string.Format("{0:n}", PagIbig);
+            //PhilHealth = oPayroll.GET_PHILHEALTH_SHARE(_empCode, Compute_Gross_Income(_empCode), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()), Convert.ToDouble(ViewState["RHOVERTIME"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()), Convert.ToDouble(ViewState["SHOVERTIME"].ToString()), Convert.ToInt32(ViewState["PPID"]));
+            //lblPhilHealth.Text = string.Format("{0:n}", PhilHealth);
+
+            //PagIbig = oPayroll.GET_PAGIBIG_SHARE(_empCode);
+            //lblPagibig.Text = string.Format("{0:n}", PagIbig);
+
+            //
+            //}
+            //else
+            //{ totalGovernmentDeduction = 0; }
+            SSS = Convert.ToDouble(txtSSSDue.Text);
+            PhilHealth = Convert.ToDouble(txtPhilHealthDue.Text);
+            PagIbig = Convert.ToDouble(txtPagibigDue.Text);
 
             totalGovernmentDeduction = SSS + PhilHealth + PagIbig;
-            }
-            else
-            { totalGovernmentDeduction = 0; }
 
             return totalGovernmentDeduction;
         }
@@ -440,7 +471,7 @@ namespace DGMU_HR
             double total_Deductions = 0;
             double hdmfAdditional = 0;
 
-            double boardinglodging = 0, cashAdvance = 0, emergencyLoan = 0, salaryLoan = 0, sssLoan = 0, pagibigLoan = 0, otherDeduction = 0;
+            double boardinglodging = 0, cashAdvance = 0, otherDeduction = 0;
 
             if (!string.IsNullOrEmpty(txtBoardingLodging.Text) && Convert.ToDouble(txtBoardingLodging.Text) > 0)
             {
@@ -460,6 +491,46 @@ namespace DGMU_HR
                 cashAdvance = 0;
             }
 
+           
+
+            if (!string.IsNullOrEmpty(txtOtherDeduction.Text) && Convert.ToDouble(txtOtherDeduction.Text) > 0)
+            {
+                otherDeduction = Convert.ToDouble(txtOtherDeduction.Text);
+            }
+            else
+            {
+                otherDeduction = 0;
+            }
+
+            if (!string.IsNullOrEmpty(txtPagIbigAdditional.Text) && Convert.ToDouble(txtPagIbigAdditional.Text) > 0)
+            {
+                hdmfAdditional = Convert.ToDouble(txtPagIbigAdditional.Text);
+            }
+            else
+            {
+                hdmfAdditional = 0;
+            }
+
+            //PAGIBIG ADDITIONAL
+
+
+            ViewState["BOARDINGLODGING"] = boardinglodging;
+            ViewState["CASHADVANCE"] = cashAdvance;
+            
+            ViewState["OTHERDEDUCTION"] = otherDeduction;
+            ViewState["HDMFPAYADD"] = hdmfAdditional;
+
+            total_Deductions =  Compute_Government_Due_WoutTax(_empCode) + Compute_WTax(_empCode)
+                                + boardinglodging + cashAdvance
+                                + otherDeduction + hdmfAdditional;
+
+            return total_Deductions;
+        }
+
+        private double Compute_Total_Loans(string _empCode)
+        {
+            double total_Loans = 0;
+            double emergencyLoan = 0, salaryLoan = 0, sssLoan = 0, pagibigLoan = 0;
             if (!string.IsNullOrEmpty(txtEmergencyLoan.Text) && Convert.ToDouble(txtEmergencyLoan.Text) > 0)
             {
                 emergencyLoan = Convert.ToDouble(txtEmergencyLoan.Text);
@@ -496,48 +567,25 @@ namespace DGMU_HR
                 pagibigLoan = 0;
             }
 
-            if (!string.IsNullOrEmpty(txtOtherDeduction.Text) && Convert.ToDouble(txtOtherDeduction.Text) > 0)
-            {
-                otherDeduction = Convert.ToDouble(txtOtherDeduction.Text);
-            }
-            else
-            {
-                otherDeduction = 0;
-            }
-
-            if (!string.IsNullOrEmpty(txtPagIbigAdditional.Text) && Convert.ToDouble(txtPagIbigAdditional.Text) > 0)
-            {
-                hdmfAdditional = Convert.ToDouble(txtPagIbigAdditional.Text);
-            }
-            else
-            {
-                hdmfAdditional = 0;
-            }
-
-            //PAGIBIG ADDITIONAL
-
-
-            ViewState["BOARDINGLODGING"] = boardinglodging;
-            ViewState["CASHADVANCE"] = cashAdvance;
             ViewState["EMERGENCYLOAN"] = emergencyLoan;
             ViewState["SALARYLOAN"] = salaryLoan;
             ViewState["SSSLOAN"] = sssLoan;
             ViewState["PAGIBIGLOAN"] = pagibigLoan;
-            ViewState["OTHERDEDUCTION"] = otherDeduction;
-            ViewState["HDMFPAYADD"] = hdmfAdditional;
 
-            total_Deductions =  Compute_Government_Due_WoutTax(_empCode) + Compute_WTax(_empCode)
-                                + boardinglodging + cashAdvance + emergencyLoan + salaryLoan + sssLoan + pagibigLoan 
-                                + otherDeduction + hdmfAdditional;
 
-            return total_Deductions;
+            total_Loans = salaryLoan + sssLoan + pagibigLoan + emergencyLoan;
+
+            ViewState["TOTAL_LOANS"] = total_Loans;
+
+            return total_Loans;
         }
 
         private double Compute_Net_Pay(string _empCode)
         {
             double totalNetPay = 0;
 
-            totalNetPay = Compute_Gross_Income(_empCode) - Compute_Total_Deductions(_empCode) + Convert.ToDouble(ViewState["ADJUSTMENT"].ToString());
+            totalNetPay = Compute_Gross_Income(_empCode) - Compute_Total_Deductions(_empCode) - Compute_Total_Loans(_empCode)
+                + Convert.ToDouble(ViewState["ADJUSTMENT"].ToString());
 
             return totalNetPay;
         }
@@ -609,11 +657,13 @@ namespace DGMU_HR
                     txtLeavePay.Text = dr["Leave_Qty"].ToString();
                     txtPayOff.Text = dr["Payoff_Qty"].ToString();
                     txtOverTime.Text = dr["OverTime_Qty"].ToString();
-                    txtRegularHoliday.Text = dr["RegularHoliday_Qty"].ToString();
-                    txtRegularHolidayOT.Text = dr["RegHolidayOT_Qty"].ToString();
-                    txtSpecialHoliday.Text = dr["SpecialHoliday_Qty"].ToString();
-                    txtSpecialHolidayOT.Text = dr["SpcHolidayOT_Qty"].ToString();
-                    txtAdjustment.Text = dr["Adjustment"].ToString();
+                        txtRegularHoliday.Text = dr["RegularHoliday_Qty"].ToString();
+                        txtRegularHolidayNP.Text = dr["RegularHolidayNP_Qty"].ToString();
+                        txtRegularHolidayOT.Text = dr["RegHolidayOT_Qty"].ToString();
+                        txtSpecialHoliday.Text = dr["SpecialHoliday_Qty"].ToString();
+                        txtSpecialHolidayNP.Text = dr["SpecialHolidayNP_Qty"].ToString();
+                        txtSpecialHolidayOT.Text = dr["SpcHolidayOT_Qty"].ToString();
+                        txtAdjustment.Text = dr["Adjustment"].ToString();
                     txtAdjustmentWTax.Text = dr["AdjustmentWTax"].ToString();
 
                     txtAbsence.Text = dr["DayAbsences_Qty"].ToString();
@@ -630,6 +680,10 @@ namespace DGMU_HR
                     txtOtherDeduction.Text = dr["OtherDeduction"].ToString();
 
                     txtPagIbigAdditional.Text = dr["HDMFPayAdd"].ToString();
+                        //Computation of Government Due that saved.
+                    txtSSSDue.Text = dr["SSSPay"].ToString();
+                    txtPhilHealthDue.Text = dr["PhilHealthPay"].ToString();
+                    txtPagibigDue.Text = dr["HDMFPay"].ToString();
                     }
                 }
                 
@@ -667,6 +721,7 @@ namespace DGMU_HR
                 lblTotalNetPay.Text = string.Format("{0:n}", Compute_Net_Pay(_empCode));
 
                 lblNonTaxableAdjustment.Text = string.Format("{0:n}", ViewState["ADJUSTMENT"].ToString());
+                lblTotalLoans.Text = string.Format("{0:n}", ViewState["TOTAL_LOANS"].ToString());
             }
             else
             {
@@ -689,9 +744,14 @@ namespace DGMU_HR
                 double basicRate = Get_Employee_BasicRate(ViewState["EMP_CODE"].ToString());
                 //double basicPay = basicRate * Convert.ToDouble(ViewState["DAYSPRESENT"].ToString());
 
-                double sssPay = Convert.ToDouble(lblSSS.Text);
-                double philHealthPay = Convert.ToDouble(lblPhilHealth.Text);
-                double hdmfPay = Convert.ToDouble(lblPagibig.Text);
+                //double sssPay = Convert.ToDouble(lblSSS.Text);
+                double sssPay = Convert.ToDouble(txtSSSDue.Text);
+
+                //double philHealthPay = Convert.ToDouble(lblPhilHealth.Text);
+                double philHealthPay = Convert.ToDouble(txtPhilHealthDue.Text);
+                //double hdmfPay = Convert.ToDouble(lblPagibig.Text);
+                double hdmfPay = Convert.ToDouble(txtPagibigDue.Text);
+
                 double wTaxPay = Convert.ToDouble(lblWTax.Text);
 
                 double grossIncome = Convert.ToDouble(lblTotalGross.Text);
@@ -703,8 +763,8 @@ namespace DGMU_HR
 
 
                 oPayroll.INSERT_UPDATE_EMPLOYEE_PAYROLL_TRANS(Convert.ToInt16(ViewState["PPID"]), ViewState["EMP_CODE"].ToString(), basicRate, daysWork, Convert.ToDouble(ViewState["DAYSPRESENT"].ToString()),
-                                                                Convert.ToDouble(ViewState["REGULARHOLIDAYQTY"].ToString()), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()),
-                                                                Convert.ToDouble(ViewState["SPECIALHOLIDAYQTY"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()),
+                                                              Convert.ToDouble(ViewState["REGULARHOLIDAYQTY"].ToString()), Convert.ToDouble(ViewState["REGULARHOLIDAY"].ToString()), Convert.ToDouble(ViewState["REGULARHOLIDAYQTY_NP"].ToString()), Convert.ToDouble(ViewState["REGULARHOLIDAY_NP"].ToString()),
+                                                                Convert.ToDouble(ViewState["SPECIALHOLIDAYQTY"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAYQTY_NP"].ToString()), Convert.ToDouble(ViewState["SPECIALHOLIDAY_NP"].ToString()),
                                                                 Convert.ToDouble(ViewState["LEAVEQTY"].ToString()), Convert.ToDouble(ViewState["LEAVE"].ToString()), Convert.ToDouble(ViewState["PAYOFFQTY"].ToString()), Convert.ToDouble(ViewState["PAYOFF"].ToString()),
                                                                 Convert.ToDouble(ViewState["OVERTIMEQTY"].ToString()), Convert.ToDouble(ViewState["OVERTIME"].ToString()), Convert.ToDouble(ViewState["RHOVERTIMEQTY"].ToString()), Convert.ToDouble(ViewState["RHOVERTIME"].ToString()),
                                                                 Convert.ToDouble(ViewState["SHOVERTIMEQTY"].ToString()), Convert.ToDouble(ViewState["SHOVERTIME"].ToString()),
@@ -713,7 +773,7 @@ namespace DGMU_HR
                                                                 Convert.ToDouble(ViewState["UNDERTIMEQTY"].ToString()), Convert.ToDouble(ViewState["UNDERTIME"].ToString()),
                                                                 sssPay, philHealthPay, hdmfPay, Convert.ToDouble(ViewState["HDMFPAYADD"].ToString()), wTaxPay,
                                                                 Convert.ToDouble(ViewState["BOARDINGLODGING"].ToString()), Convert.ToDouble(ViewState["CASHADVANCE"].ToString()), Convert.ToDouble(ViewState["EMERGENCYLOAN"].ToString()),
-                                                                Convert.ToDouble(ViewState["SALARYLOAN"].ToString()), Convert.ToDouble(ViewState["SSSLOAN"].ToString()), Convert.ToDouble(ViewState["PAGIBIGLOAN"].ToString()),Convert.ToDouble(ViewState["SALARYLOANBALANCE"].ToString()),
+                                                                Convert.ToDouble(ViewState["SALARYLOAN"].ToString()), Convert.ToDouble(ViewState["SSSLOAN"].ToString()), Convert.ToDouble(ViewState["PAGIBIGLOAN"].ToString()), Convert.ToDouble(ViewState["SALARYLOANBALANCE"].ToString()),
                                                                 Convert.ToDouble(ViewState["OTHERDEDUCTION"].ToString()), grossIncome, taxableIncome, totalDeduction, netPay,
                                                                 Convert.ToDouble(ViewState["ADJUSTMENT"].ToString()), Convert.ToDouble(ViewState["ADJUSTMENTWTAX"].ToString()));
 
@@ -782,8 +842,10 @@ namespace DGMU_HR
             txtPayOff.Text = "0";
             txtOverTime.Text = "0";
             txtRegularHoliday.Text = "0";
+            txtRegularHolidayNP.Text = "0";
             txtRegularHolidayOT.Text = "0";
             txtSpecialHoliday.Text = "0";
+            txtSpecialHolidayNP.Text = "0";
             txtSpecialHolidayOT.Text = "0";
             txtAdjustment.Text = "0";
             txtAdjustmentWTax.Text = "0";
@@ -804,18 +866,24 @@ namespace DGMU_HR
 
             lblOTTotal.Text = "0";
             lblRegularHoliday.Text = "0";
+            lblRegularHolidayNP.Text = "0";
             lblRegularHolidayOT.Text = "0";
             lblSpecialHoliday.Text = "0";
+            lblSpecialHolidayNP.Text = "0";
             lblSpecialHolidayOT.Text = "0";
             lblAbsence.Text = "0";
             lblTardiness.Text = "0";
             lblUndertime.Text = "0";
 
 
-            //GOVT DUES
+            /*GOVT DUES
             lblSSS.Text = "0";
             lblPhilHealth.Text = "0";
             lblPagibig.Text = "0";
+            */
+            txtSSSDue.Text = "0";
+            txtPhilHealthDue.Text = "0";
+            txtPagibigDue.Text = "0";
             lblWTax.Text = "0";
 
             //Breakdown
@@ -824,6 +892,7 @@ namespace DGMU_HR
             lblTotalDeduction.Text = "0";
             lblTotalNetPay.Text = "0";
             lblNonTaxableAdjustment.Text = "0";
+            lblTotalLoans.Text = "0";
 
             lblEmployeeCodeAndName.Text = "";
             lblBasicRate.Text = "";

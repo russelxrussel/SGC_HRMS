@@ -67,6 +67,24 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.GridView gvEmployeeList;
         
         /// <summary>
+        /// panelInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelInput;
+        
+        /// <summary>
+        /// lnkBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBack;
+        
+        /// <summary>
         /// lblEmployeeName control.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,33 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgEmployee;
+        
+        /// <summary>
+        /// gvEmployeeLeaveAvailability control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeLeaveAvailability;
+        
+        /// <summary>
+        /// gvLeaveHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLeaveHistory;
+        
+        /// <summary>
+        /// lnkProcess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkProcess;
         
         /// <summary>
         /// txtDateApplied control.
@@ -103,15 +148,6 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.DropDownList ddLeavesList;
         
         /// <summary>
-        /// txtDays control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDays;
-        
-        /// <summary>
         /// txtDateFrom control.
         /// </summary>
         /// <remarks>
@@ -130,6 +166,24 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.TextBox txtDateTo;
         
         /// <summary>
+        /// chkWithHalfday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkWithHalfday;
+        
+        /// <summary>
+        /// chkIncludeToPayroll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIncludeToPayroll;
+        
+        /// <summary>
         /// txtRemarks control.
         /// </summary>
         /// <remarks>
@@ -137,51 +191,6 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRemarks;
-        
-        /// <summary>
-        /// lnkProcess control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkProcess;
-        
-        /// <summary>
-        /// lnkLeaveHistory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLeaveHistory;
-        
-        /// <summary>
-        /// gvEmployeeLeaveAvailability control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEmployeeLeaveAvailability;
-        
-        /// <summary>
-        /// panelLeaveHistory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelLeaveHistory;
-        
-        /// <summary>
-        /// gvLeaveHistory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvLeaveHistory;
         
         /// <summary>
         /// lblSuccessMessage control.

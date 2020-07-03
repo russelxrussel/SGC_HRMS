@@ -103,6 +103,7 @@
                         <asp:BoundField DataField="EmployeeID" HeaderText="Code" />
                         <asp:BoundField DataField="EmployeeName" HeaderText="Name" />
                         <asp:BoundField DataField="Date_Hired" HeaderText ="Date Hired" DataFormatString="{0:d}" />
+                        <asp:BoundField DataField="EmpTypeDesc" HeaderText ="Emp Type" />
                        
                          <asp:TemplateField ItemStyle-CssClass="text-center" HeaderText="Tenure" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
@@ -117,7 +118,11 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-
+                        <asp:TemplateField ItemStyle-CssClass="text-center" HeaderText="Controls" HeaderStyle-CssClass="text-center">
+                            <ItemTemplate>
+                                <asp:LinkButton runat="server" ID="lnkSaveIndividualLeave" CssClass="btn btn-success">Save</asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
 
                 </asp:GridView>

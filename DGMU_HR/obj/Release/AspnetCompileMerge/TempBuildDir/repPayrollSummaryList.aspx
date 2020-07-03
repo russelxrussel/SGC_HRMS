@@ -24,16 +24,27 @@
                      </div>
 
                  </li>
-                 <li class="list-group-item">
+                  <li class="list-group-item">
+                      <div class="input-group input-group-sm">
+                         <span class="input-group-addon alert-danger">Payroll Period</span>
+                        <asp:DropDownList runat="server" ID="ddPayrollGroup" CssClass="form-control">
+                            <asp:ListItem>--ALL--</asp:ListItem>
+                            <asp:ListItem>Inhouse Payroll Group</asp:ListItem>
+                            <asp:ListItem>Branch Payroll Group</asp:ListItem>
+                        </asp:DropDownList>
+                     </div>
+                 </li>
+                <%-- <li class="list-group-item">
                        <div class="input-group input-group-sm">
                            <asp:RadioButton runat="server" ID="optWithATM" Text="With ATM" GroupName="optSalaryType" />
                         
                      </div>
 
                  </li>
+                
                  <li class="list-group-item">
                       <asp:RadioButton runat="server" ID="optNonATM" Text="Debit Memo / Manual Salary?" GroupName="optSalaryType" /> 
-                 </li>
+                 </li>--%>
 
                  <li class="list-group-item text-right">
                      <asp:LinkButton runat="server" ID="lnkView" CssClass="btn btn-sm btn-primary" OnClick="lnkView_Click"><span class="glyphicon glyphicon-print"></span> View</asp:LinkButton>

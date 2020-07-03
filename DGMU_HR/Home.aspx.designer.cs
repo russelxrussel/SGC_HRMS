@@ -112,6 +112,15 @@ namespace DGMU_HR {
         protected global::System.Web.UI.WebControls.LinkButton lnkNoGovtID;
         
         /// <summary>
+        /// gvEOSList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEOSList;
+        
+        /// <summary>
         /// lblPayrollPeriodText control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace DGMU_HR {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkProcessPayrollStat;
+        
+        /// <summary>
+        /// lnkManual13thMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkManual13thMonth;
         
         /// <summary>
         /// lblActiveLoansCount control.

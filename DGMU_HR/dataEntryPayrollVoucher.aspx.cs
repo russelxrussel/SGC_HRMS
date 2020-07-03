@@ -169,7 +169,7 @@ namespace DGMU_HR
             lblComputeAddedWork.Text = string.Format("{0:n}", computedAddedWorkDays);
             lblComputedVoucher.Text = string.Format("{0:n}", computedTotalVoucherAmount);
            
-            txtRemarks.Text = "Overtime Pay from " + ViewState["PPDESCRIPTION"].ToString();
+            txtRemarks.Text = "PERFORMANCE BONUS FROM PAYROLL PERIOD:  " + ViewState["PPDESCRIPTION"].ToString();
         }
 
         protected void lnkProcess_Click(object sender, EventArgs e)

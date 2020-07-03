@@ -180,14 +180,7 @@
                             <td>Pay-Off: </td>
                             <td><asp:TextBox runat="server" ID="txtPayOff" CssClass="form-control tbInput" TextMode="Number" MaxLength="5"></asp:TextBox></td>
                         </tr>
-                        <tr>
-                            <td>Regular Holiday: </td>
-                            <td><div class="input-group">
-                                <asp:TextBox runat="server" ID="txtRegularHoliday" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
-                                <span class="input-group-addon alert-success"><asp:Label runat="server" ID="lblRegularHoliday"></asp:Label></span>
-                            </div>
-                                </td>
-                        </tr>
+                        
                          <tr>
                             <td>Regular OT: </td>
                             <td><div class="input-group">
@@ -196,6 +189,23 @@
                                </div> 
                                 </td>
 
+                        </tr>
+
+                  <tr>
+                            <td>Regular Holiday: </td>
+                            <td><div class="input-group">
+                                <asp:TextBox runat="server" ID="txtRegularHoliday" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
+                                <span class="input-group-addon alert-success"><asp:Label runat="server" ID="lblRegularHoliday"></asp:Label></span>
+                            </div>
+                                </td>
+                        </tr>
+                   <tr>
+                            <td>Regular Holiday (NP): </td>
+                            <td><div class="input-group">
+                                <asp:TextBox runat="server" ID="txtRegularHolidayNP" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
+                                <span class="input-group-addon alert-success"><asp:Label runat="server" ID="lblRegularHolidayNP"></asp:Label></span>
+                            </div>
+                                </td>
                         </tr>
 
                        
@@ -215,6 +225,15 @@
                                 <asp:TextBox runat="server" ID="txtSpecialHoliday" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
                                 <span class="input-group-addon alert-success"><asp:Label runat="server" ID="lblSpecialHoliday"></asp:Label></span>
                                 </div>
+                                </td>
+                        </tr>
+
+                    <tr>
+                            <td>Spc NW Holiday (NP): </td>
+                            <td><div class="input-group">
+                                <asp:TextBox runat="server" ID="txtSpecialHolidayNP" CssClass="form-control tbInput" TextMode="Number" MaxLength="5" data-toggle="tooltip" data-placement="top" title="Per Day Input"></asp:TextBox>
+                                <span class="input-group-addon alert-success"><asp:Label runat="server" ID="lblSpecialHolidayNP"></asp:Label></span>
+                            </div>
                                 </td>
                         </tr>
                          <tr>
@@ -339,16 +358,20 @@
                         </thead>
                         <tr>
                             <td>SSS: </td>
-                            <td class="text-right"><asp:Label runat="server" ID="lblSSS"></asp:Label></td>
+                            <td class="text-right">
+                                <asp:TextBox runat="server" ID="txtSSSDue" CssClass="form-control"></asp:TextBox>
+                                <%--<asp:Label runat="server" ID="lblSSS"></asp:Label></td>--%></td>
                         </tr>
                          <tr>
                             <td>Phil Health: </td>
-                            <td class="text-right"><asp:Label runat="server" ID="lblPhilHealth" ></asp:Label></td>
+                            <td class="text-right"><asp:TextBox runat="server" ID="txtPhilHealthDue" CssClass="form-control"></asp:TextBox>
+                                <%--<asp:Label runat="server" ID="lblPhilHealth" ></asp:Label></td>--%></td>
                         </tr>
                         
                         <tr>
                             <td>Pag-Ibig (HDMF): </td>
-                            <td class="text-right"><asp:Label runat="server" ID="lblPagibig"></asp:Label>
+                            <td class="text-right"><asp:TextBox runat="server" ID="txtPagibigDue" CssClass="form-control"></asp:TextBox>
+                                <%--<asp:Label runat="server" ID="lblPagibig"></asp:Label>--%>
                              
                             </td>
                         </tr>
@@ -389,6 +412,12 @@
                                 <td>Deductions/Gov&#39;t Dues: </td>
                                 <td class="text-right"><b>
                                     <asp:Label ID="lblTotalDeduction" runat="server" CssClass="text-danger"></asp:Label>
+                                    </b></td>
+                            </tr>
+                            <tr>
+                                <td>Loans : </td>
+                                <td class="text-right"><b>
+                                    <asp:Label ID="lblTotalLoans" runat="server" CssClass="text-danger"></asp:Label>
                                     </b></td>
                             </tr>
                             <tr>

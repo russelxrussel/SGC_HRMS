@@ -24,6 +24,13 @@ namespace DGMU_HR
             dt = queryCommandDT_StoredProc("[Payroll].[spGET_GOVT_LIST]");
             return dt;
         }
+
+        public DataTable GET_GOVT_COMPANY_BILL()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_GOVT_DUES_COMPANY_RECORDS]");
+            return dt;
+        }
         public DataTable GET_PAYROLL_GROUP_LIST()
         {
             DataTable dt = new DataTable();
@@ -43,39 +50,9 @@ namespace DGMU_HR
 
 
         //LEAVES LIST
-        public DataTable GET_LEAVES_LIST()
-        {
-            DataTable dt = new DataTable();
-            dt = queryCommandDT_StoredProc("[Payroll].[spGET_LEAVES_LIST]");
-            return dt;
-        }
+       
 
-        public DataTable GET_EMPLOYEE_LEAVES_AVAILABLE()
-        {
-            DataTable dt = new DataTable();
-            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_LEAVES_AVAILABLE]");
-            return dt;
-        }
-
-        public DataTable GET_EMPLOYEE_LEAVES_HISTORY(string _empCode)
-        {
-            DataTable dt = new DataTable();
-
-            using (SqlConnection cn = new SqlConnection(CS))
-            {
-
-                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_LEAVES_HISTORY]", cn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
-                  
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                }
-            }
-
-            return dt;
-        }
+      
        
         public DataTable GET_EMPLOYEE_LOANS()
         {
@@ -395,7 +372,28 @@ namespace DGMU_HR
          return x;
         }
 
-       
+        //Get Holiday Pay for those employee not present 02022020
+        public double GET_REGULAR_HOLIDAY_NP(double _daysPresent, string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[GET_REGULAR_HOLIDAY_NP]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@DAYPRESENT", _daysPresent);
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+
+                    cn.Open();
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
+
+
         public double GET_REGULAR_HOLIDAY_OT_PAY(string _empCode, double _otHours)
         {
             double x = 0;
@@ -422,6 +420,26 @@ namespace DGMU_HR
             {
 
                 using (SqlCommand cmd = new SqlCommand("[Payroll].[GET_SPECIAL_HOLIDAY]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@SPCHOLIDAYPRESENT", _daysPresent);
+                    cn.Open();
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
+
+        //Get Holiday Pay for those employee not present 02022020
+        public double GET_SPECIAL_HOLIDAY_NP(double _daysPresent, string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[GET_SPECIAL_HOLIDAY_NP]", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
@@ -1247,8 +1265,10 @@ namespace DGMU_HR
 
         //INSERT UPDATE PAYROLL EMPLOYEE TRANSACTION
         public void INSERT_UPDATE_EMPLOYEE_PAYROLL_TRANS(int _ppId, string _empCode, double _basicRate, 
-                                                         double _daysWork, double _daysPresent, double _regularHolidayQty, double _regularHoliday,
-                                                         double _specialHolidayQty, double _specialHoliday, double _leaveQty, double _leave,
+                                                         double _daysWork, double _daysPresent, 
+                                                         double _regularHolidayQty, double _regularHoliday, double _regularHolidayQty_NP, double _regularHoliday_NP,
+                                                         double _specialHolidayQty, double _specialHoliday, double _specialHolidayQty_NP, double _specialHoliday_NP,
+                                                         double _leaveQty, double _leave,
                                                          double _payOffQty, double _payOff, double _overTimeQty, double _overTime,
                                                          double _regHolidayOTQty, double _regHolidayOT, double _spcHolidayOTQty, double _spcHolidayOT,
                                                          double _daysAbsencesQty, double _daysAbsences,double _tardinessQty, double _tardiness,
@@ -1274,8 +1294,14 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@DAYSPRESENT", _daysPresent);
                     cmd.Parameters.AddWithValue("@REGULARHOLIDAYQTY", _regularHolidayQty);
                     cmd.Parameters.AddWithValue("@REGULARHOLIDAY", _regularHoliday);
+                    cmd.Parameters.AddWithValue("@REGULARHOLIDAYQTY_NP", _regularHolidayQty_NP);
+                    cmd.Parameters.AddWithValue("@REGULARHOLIDAY_NP", _regularHoliday_NP);
+
                     cmd.Parameters.AddWithValue("@SPECIALHOLIDAYQTY", _specialHolidayQty);
                     cmd.Parameters.AddWithValue("@SPECIALHOLIDAY", _specialHoliday);
+                    cmd.Parameters.AddWithValue("@SPECIALHOLIDAYQTY_NP", _specialHolidayQty_NP);
+                    cmd.Parameters.AddWithValue("@SPECIALHOLIDAY_NP", _specialHoliday_NP);
+
                     cmd.Parameters.AddWithValue("@LEAVEQTY", _leaveQty);
                     cmd.Parameters.AddWithValue("@LEAVE", _leave);
                     cmd.Parameters.AddWithValue("@PAYOFFQTY", _payOffQty);
@@ -1313,10 +1339,7 @@ namespace DGMU_HR
                     cmd.Parameters.AddWithValue("@ADJUSTMENT", _adjustment);
                     cmd.Parameters.AddWithValue("@ADJUSTMENTWTAX", _adjustmentWTax);
 
-
-
-
-
+                    
                     cn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -1461,6 +1484,39 @@ namespace DGMU_HR
 
 
         }
+        public void EDIT_UPDATE_EMPLOYEE_LOAN(string _loanSN, string _empCode, string _loanCode, DateTime _loanDate, double _loanAmount,
+                                         string _loanReferenceNumber, double _loanAmountAndInterest, double _monthlyAmortization, DateTime _maDateStart, DateTime _maDateEnd,
+                                           string _remarks)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spEDIT_UPDATE_EMPLOYEE_LOAN]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@LOANSN", _loanSN);
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@LOANCODE", _loanCode);
+                    cmd.Parameters.AddWithValue("@LOANDATE", _loanDate);
+                    cmd.Parameters.AddWithValue("@LOANAMOUNT", _loanAmount);
+                    cmd.Parameters.AddWithValue("@LOANREFERENCENUMBER", _loanReferenceNumber);
+                    cmd.Parameters.AddWithValue("@LOANAMOUNTANDINTEREST", _loanAmountAndInterest);
+                    cmd.Parameters.AddWithValue("@MONTHLYAMORTIZATION", _monthlyAmortization);
+                    cmd.Parameters.AddWithValue("@MADATESTART", _maDateStart);
+                    cmd.Parameters.AddWithValue("@MADATEEND", _maDateEnd);
+                    cmd.Parameters.AddWithValue("@REMARKS", _remarks);
+
+
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
+
+        }
 
         //ADD LOAN
         public void INSERT_UPDATE_ADD_LOAN(string _loanSN, string _loanCode, DateTime _loanDate, double _loanAmount,double _loanAmountAndInterest, string _remarks)
@@ -1513,27 +1569,193 @@ namespace DGMU_HR
         }
 
 
-        //LEAVE SETUP
+   
 
-        public DataTable GET_EMPLOYEE_LIST_LEAVE_SETUP()
+        //MANUAL 13TH MONTH ENTRY 10.30.2019
+
+        public DataTable GET_EMPLOYEE_LIST_MANUAL_ENTRY_13TH_MONTH()
         {
             DataTable dt = new DataTable();
-            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_LIST_LEAVE_SETUP]");
+            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_LIST_MANUAL_13TH_MONTH]");
             return dt;
         }
 
-        public void INSERT_UPDATE_EMPLOYEE_LEAVES_SETUP(string _empCode, int _yearApplied, double _credit)
+        //GET LIST OF EMPLOYEE FOR MANUAL ENTRY OF GOVT DUES COMPUTATION 03.20.2020
+        public DataTable GET_EMPLOYEE_LIST_MANUAL_ENTRY_GOVTDUES(int _month)
         {
+            DataTable dt = new DataTable();
+
             using (SqlConnection cn = new SqlConnection(CS))
             {
 
-                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_LEAVES_SETUP]", cn))
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_LIST_MANUAL_GOVTDUES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
+        //GET SINGLE RESULT OF EMPLOYEE DAYSPRESENT 03.20.2020
+        public double GET_EMPLOYEE_GOVTDUES_DAYSPRESENT(string _empCode, int _year, int _month)
+        {
+            double totalDaysPresent = 0;
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_GOVTDUES_DAYSPRESENT]", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
-                    cmd.Parameters.AddWithValue("@YEAR_APPLIED", _yearApplied);
-                    cmd.Parameters.AddWithValue("@CREDIT", _credit);
+                    cmd.Parameters.AddWithValue("@YEAR", _year);
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+
+                    cn.Open();
+                    totalDaysPresent = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            if (totalDaysPresent == 0)
+            {
+                totalDaysPresent = 13;
+            }
+            
+            return totalDaysPresent;
+            
+    }
+        public double GET_EMPLOYEE_MANUAL_GOVTDUES_SSS(string _empCode, int _year, int _month)
+        {
+            double govtPay = 0;
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_MANUAL_GOVTDUES_SSS]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@YEAR", _year);
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+
+                    cn.Open();
+                    govtPay = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+            
+            return govtPay;
+            
+    }
+        public double GET_EMPLOYEE_MANUAL_GOVTDUES_PH(string _empCode, int _year, int _month)
+        {
+            double govtPay = 0;
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_MANUAL_GOVTDUES_PH]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@YEAR", _year);
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+
+                    cn.Open();
+                    govtPay = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return govtPay;
+
+        }
+         public double GET_EMPLOYEE_MANUAL_GOVTDUES_HDMF(string _empCode, int _year, int _month)
+        {
+            double govtPay = 0;
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_MANUAL_GOVTDUES_HDMF]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@YEAR", _year);
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+
+                    cn.Open();
+                    govtPay = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+            
+            return govtPay;
+            
+    }
+
+        //GET SINGLE RESULT 13TH MONTH WORK IN A YEAR
+        public double GET_EMPLOYEE_13TH_TOTALWORKINYEAR(string _empCode, int _fy)
+        {
+            double totalWorkInYear = 0;
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_13TH_TOTALWORKSINYEAR]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@FY", _fy);
+
+                    cn.Open();
+                   totalWorkInYear = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return totalWorkInYear;
+        }
+
+        public void INSERT_UPDATE_MANUAL_GOVTDUES(string _empCode, double _basicRate, double _daysPresent, int _year, int _month)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_MANUAL_GOVTDUES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@BASICRATE", _basicRate);
+                    cmd.Parameters.AddWithValue("@DAYSPRESENT", _daysPresent);
+
+                    cmd.Parameters.AddWithValue("@YEAR", _year);
+                    cmd.Parameters.AddWithValue("@MONTH", _month);
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void INSERT_UPDATE_MANUAL_ENTRY_13TH_MONTH(string _empCode, int _FY, double _totalWorksInYear,double _totalMonthBasicPay, double _totalAbsences)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_13TH_MONTH_MANUAL]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@FY", _FY);
+                    cmd.Parameters.AddWithValue("@TOTALWORKSINYEAR", _totalWorksInYear);
+                    cmd.Parameters.AddWithValue("@TOTALMONTHBASICPAY", _totalMonthBasicPay);
+                    cmd.Parameters.AddWithValue("@TOTALABSENCES", _totalAbsences);
 
                     cn.Open();
                     cmd.ExecuteNonQuery();
@@ -1541,28 +1763,18 @@ namespace DGMU_HR
             }
         }
 
-
-
-        
-        //LEAVE TRANSACTIONS 12.28.2018
-        public void INSERT_UPDATE_EMPLOYEE_LEAVES(string _empCode, string _leaveTypeCode, DateTime _dateApplied, DateTime _dateFrom, 
-                                DateTime _dateTo,double _daysCount, string _remarks, int _yearApplied)
+        public void REMOVE_EMPLOYEE_13TH_MONTH(string _empCode, int _FY)
         {
             using (SqlConnection cn = new SqlConnection(CS))
             {
 
-                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_LEAVES]", cn))
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spREMOVE_EMPLOYEE_13TH_MONTH]", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
-                    cmd.Parameters.AddWithValue("@LEAVETYPECODE", _leaveTypeCode);
-                    cmd.Parameters.AddWithValue("@DATEAPPLIED", _dateApplied);
-                    cmd.Parameters.AddWithValue("@DATEFROM", _dateFrom);
-                    cmd.Parameters.AddWithValue("@DATETO", _dateTo);
-                    cmd.Parameters.AddWithValue("@DAYSCOUNT", _daysCount);
-                    cmd.Parameters.AddWithValue("@REMARKS", _remarks);
-                    cmd.Parameters.AddWithValue("@YEARAPPLIED", _yearApplied);
+                    cmd.Parameters.AddWithValue("@EMPLOYEEID", _empCode);
+                    cmd.Parameters.AddWithValue("@FY", _FY);
+                   
 
                     cn.Open();
                     cmd.ExecuteNonQuery();
@@ -1570,6 +1782,7 @@ namespace DGMU_HR
             }
         }
 
+      
 
         //LOAN LINK AND UNLINK PAYROLL DEDUCTION
         public void UPDATE_LINK_EMPLOYEE_SALARY_LOAN_DEDUCTION(string _loanSN)
@@ -1629,6 +1842,152 @@ namespace DGMU_HR
                 }
             }
         }
+
+
+        /* This section is all for employee Leave Transaction
+           created this region to organize transactions
+           04.22.2020
+        */
+
+        #region "EMPLOYEE LEAVES TRANSACTION"
+
+        public DataTable GET_LEAVES_LIST()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[Payroll].[spGET_LEAVES_LIST]");
+            return dt;
+        }
+
+        public DataTable GET_EMPLOYEE_LEAVES_AVAILABLE()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_LEAVES_AVAILABLE]");
+            return dt;
+        }
+
+        //LEAVE ASSIGNMENT SETUP, YEARLY
+
+        public DataTable GET_EMPLOYEE_LIST_LEAVE_SETUP()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[Payroll].[spGET_EMPLOYEE_LIST_LEAVE_SETUP]");
+            return dt;
+        }
+
+        public void INSERT_UPDATE_EMPLOYEE_LEAVES_SETUP(string _empCode, int _yearApplied, double _credit)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_LEAVES_SETUP]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@YEAR_APPLIED", _yearApplied);
+                    cmd.Parameters.AddWithValue("@CREDIT", _credit);
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public DataTable GET_EMPLOYEE_LEAVES_HISTORY(string _empCode)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_LEAVES_HISTORY]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
+
+        //This will get the payable leave on payroll process
+        public double GET_EMPLOYEE_PAYABLE_LEAVES(string _empCode)
+        {
+            double x = 0;
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spGET_EMPLOYEE_LEAVE_PAYABLE]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    x = Convert.ToDouble(cmd.ExecuteScalar());
+                }
+            }
+
+            return x;
+        }
+
+
+        //LEAVE TRANSACTIONS 12.28.2018
+        //vErsion 2.0 04.20.2020
+        public void INSERT_UPDATE_EMPLOYEE_LEAVES(string _empCode, string _leaveTypeCode, DateTime _dateApplied, DateTime _dateFrom,
+                                DateTime _dateTo, double _daysCount,double _payableLeave, string _remarks, int _yearApplied,
+                                bool _isHalfDay, bool _isIncludeToPayroll)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spINSERT_UPDATE_EMPLOYEE_LEAVES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@LEAVETYPECODE", _leaveTypeCode);
+                    cmd.Parameters.AddWithValue("@DATEAPPLIED", _dateApplied);
+                    cmd.Parameters.AddWithValue("@DATEFROM", _dateFrom);
+                    cmd.Parameters.AddWithValue("@DATETO", _dateTo);
+                    cmd.Parameters.AddWithValue("@DAYSCOUNT", _daysCount);
+                    cmd.Parameters.AddWithValue("@PAYABLELEAVE", _payableLeave);
+                    cmd.Parameters.AddWithValue("@REMARKS", _remarks);
+                    cmd.Parameters.AddWithValue("@YEARAPPLIED", _yearApplied);
+                    cmd.Parameters.AddWithValue("@ISHALFDAY", _isHalfDay);
+                    cmd.Parameters.AddWithValue("@ISINCLUDETOPAYROLL", _isIncludeToPayroll);
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        //Remove-Cancel Leave Request
+        //04.20.2020
+        public void REMOVE_UPDATE_EMPLOYEE_LEAVES(int _id, string _empCode, int _yearApplied)
+        {
+            using (SqlConnection cn = new SqlConnection(CS))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("[Payroll].[spREMOVE_UPDATE_EMPLOYEE_LEAVES]", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ID", _id);
+                    cmd.Parameters.AddWithValue("@EMPCODE", _empCode);
+                    cmd.Parameters.AddWithValue("@YEARAPPLIED", _yearApplied);
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        #endregion
 
     }
 

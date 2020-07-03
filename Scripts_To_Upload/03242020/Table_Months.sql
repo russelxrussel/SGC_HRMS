@@ -1,0 +1,23 @@
+USE [DGMU]
+GO
+
+/****** Object:  Table [xSystem].[Months_RF]    Script Date: 3/24/2020 12:03:56 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [xSystem].[Months_RF](
+	[monthID] [int] NOT NULL,
+	[monthName] [nvarchar](10) NOT NULL,
+	[arr] [nvarchar](2) NOT NULL,
+ CONSTRAINT [PK_Months_RF] PRIMARY KEY CLUSTERED 
+(
+	[monthID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

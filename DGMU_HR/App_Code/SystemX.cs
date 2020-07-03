@@ -253,6 +253,16 @@ namespace DGMU_HR
             return x;
         }
 
+        //Get list of Months
+        public DataTable GET_MONTHS_LIST()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[xSystem].[spGET_MONTHS_LIST]");
+            return dt;
+        }
+
+      
+
 
         public void INSERT_PAYROLL_YEAR(int _year)
         {

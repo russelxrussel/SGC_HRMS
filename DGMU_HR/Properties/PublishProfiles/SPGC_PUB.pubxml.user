@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Pubsite_WorkatHome\HR_PUBS\09302019</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Pubsite_WorkatHome\HR_PUBS\07032020</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="About.aspx">
@@ -64,10 +64,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2019 15:10:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/01/2019 10:44:26</publishTime>
+      <publishTime>07/03/2020 09:09:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/01/2019 10:44:26</publishTime>
+      <publishTime>07/03/2020 09:09:29</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>07/18/2019 15:08:01</publishTime>
@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2017 04:39:24</publishTime>
     </File>
     <File Include="bin/DGMU_HR.dll">
-      <publishTime>10/01/2019 10:43:28</publishTime>
+      <publishTime>07/03/2020 09:09:17</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/19/2019 10:48:43</publishTime>
@@ -220,28 +220,94 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/13/2018 15:48:28</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>02/12/2018 10:02:16</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css.map">
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>02/12/2018 10:02:14</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css.map">
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Content/bootstrap-toggle.min.css">
       <publishTime>03/18/2016 05:50:38</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>02/13/2018 15:12:56</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>02/13/2018 15:11:06</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>02/12/2018 10:02:16</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Content/bootstrap2-toggle.min.css">
       <publishTime>03/18/2016 05:50:38</publishTime>
     </File>
+    <File Include="Content/brands.css">
+      <publishTime>04/17/2020 23:01:20</publishTime>
+    </File>
+    <File Include="Content/brands.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/fontawesome-all.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/fontawesome-all.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/fontawesome.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/fontawesome.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/regular.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/regular.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
     <File Include="Content/Site.css">
       <publishTime>02/10/2018 14:28:32</publishTime>
+    </File>
+    <File Include="Content/solid.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/solid.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/svg-with-js.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/svg-with-js.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/toastr.css">
+      <publishTime>04/17/2020 21:33:22</publishTime>
+    </File>
+    <File Include="Content/toastr.less">
+      <publishTime>04/17/2020 21:33:22</publishTime>
+    </File>
+    <File Include="Content/toastr.min.css">
+      <publishTime>04/17/2020 21:33:22</publishTime>
+    </File>
+    <File Include="Content/toastr.scss">
+      <publishTime>04/17/2020 21:33:22</publishTime>
+    </File>
+    <File Include="Content/v4-shims.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Content/v4-shims.min.css">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="data13thMonthManualEntry.aspx">
+      <publishTime>12/18/2019 18:29:02</publishTime>
     </File>
     <File Include="dataEntryBranchIncentives.aspx">
       <publishTime>02/21/2019 11:26:21</publishTime>
@@ -250,19 +316,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/24/2019 22:51:40</publishTime>
     </File>
     <File Include="dataEntryEmployeeLeave.aspx">
-      <publishTime>09/02/2019 01:12:04</publishTime>
+      <publishTime>04/27/2020 02:40:15</publishTime>
     </File>
     <File Include="dataEntryEmployeeLeaveSetup.aspx">
-      <publishTime>02/26/2019 11:43:33</publishTime>
+      <publishTime>04/01/2020 13:55:34</publishTime>
     </File>
     <File Include="dataEntryEmployeeLoan.aspx">
-      <publishTime>09/30/2019 13:02:11</publishTime>
+      <publishTime>06/30/2020 17:03:26</publishTime>
+    </File>
+    <File Include="dataEntryEmployeeManagement.aspx">
+      <publishTime>10/17/2019 09:50:08</publishTime>
     </File>
     <File Include="dataEntryEmployeePayroll.aspx">
-      <publishTime>09/07/2019 21:18:50</publishTime>
+      <publishTime>06/29/2020 13:26:58</publishTime>
     </File>
     <File Include="dataEntryEmployeePayroll_Branch.aspx">
-      <publishTime>09/07/2019 21:18:49</publishTime>
+      <publishTime>06/29/2020 16:20:05</publishTime>
+    </File>
+    <File Include="dataEntryGovtDues.aspx">
+      <publishTime>03/24/2020 00:00:49</publishTime>
     </File>
     <File Include="dataEntryPayrollVoucher.aspx">
       <publishTime>09/25/2019 15:27:20</publishTime>
@@ -271,7 +343,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 14:28:08</publishTime>
     </File>
     <File Include="EmpData.aspx">
-      <publishTime>09/30/2019 13:36:21</publishTime>
+      <publishTime>05/02/2020 11:21:08</publishTime>
+    </File>
+    <File Include="EmployeeAttachment.aspx">
+      <publishTime>07/03/2020 09:08:34</publishTime>
+    </File>
+    <File Include="EmployeePictureAttachment.aspx">
+      <publishTime>06/23/2020 14:23:16</publishTime>
     </File>
     <File Include="EmpPaySetup.aspx">
       <publishTime>01/30/2019 09:39:33</publishTime>
@@ -283,28 +361,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 14:28:08</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>02/12/2018 10:02:14</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>02/12/2018 10:02:14</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>02/12/2018 10:02:14</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>02/12/2018 10:02:14</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Home.aspx">
-      <publishTime>09/28/2019 12:00:11</publishTime>
+      <publishTime>03/30/2020 22:42:29</publishTime>
     </File>
     <File Include="HRMS.Master">
-      <publishTime>08/08/2019 16:38:47</publishTime>
+      <publishTime>04/26/2020 09:57:48</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>08/27/2019 00:04:11</publishTime>
+      <publishTime>04/23/2020 00:27:16</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/28/2018 09:33:16</publishTime>
+      <publishTime>04/17/2020 23:53:29</publishTime>
     </File>
     <File Include="Pictures/add-inventory.png">
       <publishTime>02/12/2018 16:11:18</publishTime>
@@ -322,7 +403,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/12/2018 16:20:52</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/01/2019 10:44:19</publishTime>
+      <publishTime>07/03/2020 09:09:23</publishTime>
+    </File>
+    <File Include="rep13thmonth.aspx">
+      <publishTime>11/18/2019 00:37:54</publishTime>
+    </File>
+    <File Include="rep13thmonthSummaryBilling.aspx">
+      <publishTime>12/09/2019 01:36:09</publishTime>
     </File>
     <File Include="repCompanyPayrollSummary.aspx">
       <publishTime>01/10/2019 15:29:06</publishTime>
@@ -332,6 +419,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="repGovtForBIR.aspx">
       <publishTime>02/23/2019 12:50:17</publishTime>
+    </File>
+    <File Include="repGovtForBIR_Manual.aspx">
+      <publishTime>03/24/2020 00:11:03</publishTime>
     </File>
     <File Include="repIncentives.aspx">
       <publishTime>02/19/2019 14:44:18</publishTime>
@@ -343,7 +433,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/23/2019 13:13:49</publishTime>
     </File>
     <File Include="repPayrollSummaryList.aspx">
-      <publishTime>02/21/2019 15:42:18</publishTime>
+      <publishTime>07/01/2020 06:07:22</publishTime>
     </File>
     <File Include="repPayslip.aspx">
       <publishTime>02/14/2019 16:21:15</publishTime>
@@ -364,13 +454,85 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/18/2016 05:50:38</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>02/13/2018 14:34:38</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>02/13/2018 14:34:38</publishTime>
+      <publishTime>04/17/2020 23:53:27</publishTime>
     </File>
     <File Include="Scripts/bootstrap2-toggle.min.js">
       <publishTime>03/18/2016 05:50:38</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.js">
+      <publishTime>04/17/2020 22:38:49</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.js.map">
+      <publishTime>04/17/2020 22:38:49</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.min.js">
+      <publishTime>04/17/2020 22:38:48</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper-utils.min.js.map">
+      <publishTime>04/17/2020 22:38:48</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.js">
+      <publishTime>04/17/2020 22:38:48</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.js.map">
+      <publishTime>04/17/2020 22:38:48</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.min.js">
+      <publishTime>04/17/2020 22:38:47</publishTime>
+    </File>
+    <File Include="Scripts/esm/popper.min.js.map">
+      <publishTime>04/17/2020 22:38:47</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/all.js">
+      <publishTime>04/17/2020 23:01:19</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/all.min.js">
+      <publishTime>04/17/2020 23:01:16</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/brands.js">
+      <publishTime>04/17/2020 23:01:16</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/brands.min.js">
+      <publishTime>04/17/2020 23:01:13</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/conflict-detection.js">
+      <publishTime>04/17/2020 23:01:13</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/conflict-detection.min.js">
+      <publishTime>04/17/2020 23:01:11</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/fontawesome.js">
+      <publishTime>04/17/2020 23:01:11</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/fontawesome.min.js">
+      <publishTime>04/17/2020 23:01:09</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/regular.js">
+      <publishTime>04/17/2020 23:01:09</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/regular.min.js">
+      <publishTime>04/17/2020 23:01:05</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/solid.js">
+      <publishTime>04/17/2020 23:01:05</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/solid.min.js">
+      <publishTime>04/17/2020 23:01:03</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/v4-shims.js">
+      <publishTime>04/17/2020 23:01:03</publishTime>
+    </File>
+    <File Include="Scripts/fontawesome/v4-shims.min.js">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="Scripts/index.d.ts">
+      <publishTime>04/17/2020 22:38:47</publishTime>
+    </File>
+    <File Include="Scripts/index.js.flow">
+      <publishTime>04/17/2020 22:38:47</publishTime>
     </File>
     <File Include="Scripts/jquery-3.2.1.js">
       <publishTime>02/13/2018 14:33:34</publishTime>
@@ -414,11 +576,260 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/moment.js">
       <publishTime>02/14/2018 09:15:52</publishTime>
     </File>
+    <File Include="Scripts/popper-utils.js">
+      <publishTime>04/17/2020 22:38:47</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.js.map">
+      <publishTime>04/17/2020 22:38:47</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.min.js">
+      <publishTime>04/17/2020 22:38:46</publishTime>
+    </File>
+    <File Include="Scripts/popper-utils.min.js.map">
+      <publishTime>04/17/2020 22:38:46</publishTime>
+    </File>
+    <File Include="Scripts/popper.js">
+      <publishTime>04/17/2020 22:38:46</publishTime>
+    </File>
+    <File Include="Scripts/popper.js.map">
+      <publishTime>04/17/2020 22:38:46</publishTime>
+    </File>
+    <File Include="Scripts/popper.min.js">
+      <publishTime>04/17/2020 22:38:45</publishTime>
+    </File>
+    <File Include="Scripts/popper.min.js.map">
+      <publishTime>04/17/2020 22:38:44</publishTime>
+    </File>
+    <File Include="Scripts/README.md">
+      <publishTime>04/17/2020 22:38:44</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>02/10/2018 14:28:20</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
       <publishTime>02/10/2018 14:28:20</publishTime>
+    </File>
+    <File Include="Scripts/src/index.js">
+      <publishTime>04/17/2020 22:38:44</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/defaults.js">
+      <publishTime>04/17/2020 22:38:43</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/destroy.js">
+      <publishTime>04/17/2020 22:38:42</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/disableEventListeners.js">
+      <publishTime>04/17/2020 22:38:42</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/enableEventListeners.js">
+      <publishTime>04/17/2020 22:38:41</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/placements.js">
+      <publishTime>04/17/2020 22:38:41</publishTime>
+    </File>
+    <File Include="Scripts/src/methods/update.js">
+      <publishTime>04/17/2020 22:38:40</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/applyStyle.js">
+      <publishTime>04/17/2020 22:38:40</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/arrow.js">
+      <publishTime>04/17/2020 22:38:39</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/computeStyle.js">
+      <publishTime>04/17/2020 22:38:39</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/flip.js">
+      <publishTime>04/17/2020 22:38:38</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/hide.js">
+      <publishTime>04/17/2020 22:38:38</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/index.js">
+      <publishTime>04/17/2020 22:38:37</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/inner.js">
+      <publishTime>04/17/2020 22:38:37</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/keepTogether.js">
+      <publishTime>04/17/2020 22:38:36</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/offset.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/preventOverflow.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/modifiers/shift.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/clockwise.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/computeAutoPlacement.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/debounce.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/find.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/findCommonOffsetParent.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/findIndex.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getBordersSize.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getBoundaries.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getBoundingClientRect.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getClientRect.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getFixedPositionOffsetParent.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOffsetParent.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOffsetRect.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOffsetRectRelativeToArbitraryNode.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOppositePlacement.js">
+      <publishTime>04/17/2020 22:38:35</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOppositeVariation.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getOuterSizes.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getParentNode.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getPopperOffsets.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getReferenceNode.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getReferenceOffsets.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getRoot.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getRoundedOffsets.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getScroll.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getScrollParent.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getStyleComputedProperty.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getSupportedPropertyName.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getViewportOffsetRectRelativeToArtbitraryNode.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getWindow.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/getWindowSizes.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/includeScroll.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/index.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isBrowser.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isFixed.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isFunction.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isIE.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isModifierEnabled.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isModifierRequired.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isNumeric.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/isOffsetContainer.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/removeEventListeners.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/runModifiers.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/setAttributes.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/setStyles.js">
+      <publishTime>04/17/2020 22:38:34</publishTime>
+    </File>
+    <File Include="Scripts/src/utils/setupEventListeners.js">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/toastr.js">
+      <publishTime>04/17/2020 21:33:22</publishTime>
+    </File>
+    <File Include="Scripts/toastr.min.js">
+      <publishTime>04/17/2020 21:33:19</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.js">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.js.map">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.min.js">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper-utils.min.js.map">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.js">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.js.flow">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.js.map">
+      <publishTime>04/17/2020 22:38:33</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.min.js">
+      <publishTime>04/17/2020 22:38:32</publishTime>
+    </File>
+    <File Include="Scripts/umd/popper.min.js.map">
+      <publishTime>04/17/2020 22:38:31</publishTime>
     </File>
     <File Include="Scripts/WebForms/DetailsView.js">
       <publishTime>02/10/2018 14:28:28</publishTime>
@@ -484,7 +895,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 14:28:28</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>12/28/2018 15:42:36</publishTime>
+      <publishTime>04/17/2020 23:53:28</publishTime>
     </File>
     <File Include="setupBranchEmployee.aspx">
       <publishTime>01/11/2019 14:57:14</publishTime>
@@ -511,7 +922,52 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 14:28:30</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/01/2019 10:43:34</publishTime>
+      <publishTime>06/29/2020 16:20:37</publishTime>
+    </File>
+    <File Include="webfonts/fa-brands-400.eot">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-brands-400.svg">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-brands-400.ttf">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-brands-400.woff">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-brands-400.woff2">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-regular-400.eot">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-regular-400.svg">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-regular-400.ttf">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-regular-400.woff">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-regular-400.woff2">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-solid-900.eot">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-solid-900.svg">
+      <publishTime>04/17/2020 23:01:00</publishTime>
+    </File>
+    <File Include="webfonts/fa-solid-900.ttf">
+      <publishTime>04/17/2020 23:00:59</publishTime>
+    </File>
+    <File Include="webfonts/fa-solid-900.woff">
+      <publishTime>04/17/2020 23:00:59</publishTime>
+    </File>
+    <File Include="webfonts/fa-solid-900.woff2">
+      <publishTime>04/17/2020 23:00:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

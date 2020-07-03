@@ -25,15 +25,7 @@ namespace DGMU_HR
         
         
 
-        private void DisplayEmployeeList()
-        {
-            DataTable dt = oPayroll.GET_EMPLOYEE_LIST_LW();
-
-            gvEmployeeList.DataSource = dt;
-            gvEmployeeList.DataBind();
-
-            imgEmployee.ImageUrl = "~/Emp_Pictures/default-avatar.png";
-        }
+      
    
         protected void lnkSelect_Click(object sender, EventArgs e)
         {
@@ -77,40 +69,7 @@ namespace DGMU_HR
             ddLoansList.DataBind();
         }
 
-        private void DisplayEmployeeLoan(string _empCode)
-        {
-            DataTable dt = oPayroll.GET_EMPLOYEE_LOANS();
-            DataView dv = dt.DefaultView;
-            dv.RowFilter = "EmpCode='" + _empCode + "' and IsOpen=1";
-
-            if (dv.Count > 0)
-            {
-                gvActiveLoans.DataSource = dv;
-                gvActiveLoans.DataBind();
-            }
-            else {
-                gvActiveLoans.DataSource = null;
-                gvActiveLoans.DataBind();
-            }
-        }
-
-        private void DisplayEmployeeLoanHistory(string _empCode)
-        {
-            DataTable dt = oPayroll.GET_EMPLOYEE_LOANS();
-            DataView dv = dt.DefaultView;
-            dv.RowFilter = "EmpCode='" + _empCode + "' and IsClose=1 and IsSettled=1";
-
-            if (dv.Count > 0)
-            {
-                gvEmployeeLoanHistory.DataSource = dv;
-                gvEmployeeLoanHistory.DataBind();
-            }
-            else
-            {
-                gvEmployeeLoanHistory.DataSource = null;
-                gvEmployeeLoanHistory.DataBind();
-            }
-        }
+     
 
         protected void lnkCreateLoan_Click(object sender, EventArgs e)
         {
@@ -121,14 +80,32 @@ namespace DGMU_HR
         {
             if (Convert.ToDouble(txtLoanAmount.Text) > 0 && Convert.ToDouble(txtLoanAmountAndInterest.Text) > 0 && !string.IsNullOrEmpty(txtDateLoan.Text))
             {
-                //Check if Loan Type have active balance
-                if (!checkActiveLoanTypeExist(ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue))
+                if (Convert.ToInt16(ViewState["LOAN_ACTION"]) == 0)
                 {
-                    //Save Loan
-                    oPayroll.INSERT_UPDATE_EMPLOYEE_LOAN(oSystem.GENERATE_SERIES_NUMBER_EMPLOYEE("LN"), ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue, Convert.ToDateTime(txtDateLoan.Text), Convert.ToDouble(txtLoanAmount.Text), txtLoanReferenceNumber.Text,
-                                                        Convert.ToDouble(txtLoanAmountAndInterest.Text), Convert.ToDouble(txtLoanMonthlyAmortization.Text),Convert.ToDateTime(txtLoanStartDate.Text), Convert.ToDateTime(txtLoanEndDate.Text), txtRemarks.Text);
+                    //Check if Loan Type have active balance
+                    if (!checkActiveLoanTypeExist(ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue))
+                    {
+                        //Save Loan
 
-                    DisplayEmployeeLoan(ViewState["EMPCODE"].ToString());
+                        oPayroll.INSERT_UPDATE_EMPLOYEE_LOAN(oSystem.GENERATE_SERIES_NUMBER_EMPLOYEE("LN"), ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue, Convert.ToDateTime(txtDateLoan.Text), Convert.ToDouble(txtLoanAmount.Text), txtLoanReferenceNumber.Text,
+                                                            Convert.ToDouble(txtLoanAmountAndInterest.Text), Convert.ToDouble(txtLoanMonthlyAmortization.Text), Convert.ToDateTime(txtLoanStartDate.Text), Convert.ToDateTime(txtLoanEndDate.Text), txtRemarks.Text);
+                    }
+                    else
+                    {
+                        lblErrorMessage.Text = "Employee has existing active " + ddLoansList.SelectedItem.ToString() + ". Use Add loan procedure instead.";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+                    }
+                }
+
+                else if (Convert.ToInt16(ViewState["LOAN_ACTION"]) == 1)
+                {
+                    //UPDATE LOAN DETAILS
+                    oPayroll.EDIT_UPDATE_EMPLOYEE_LOAN(ViewState["LOANSN"].ToString(), ViewState["EMPCODE"].ToString(), ddLoansList.SelectedValue, Convert.ToDateTime(txtDateLoan.Text), Convert.ToDouble(txtLoanAmount.Text), txtLoanReferenceNumber.Text,
+                                                        Convert.ToDouble(txtLoanAmountAndInterest.Text), Convert.ToDouble(txtLoanMonthlyAmortization.Text), Convert.ToDateTime(txtLoanStartDate.Text), Convert.ToDateTime(txtLoanEndDate.Text), txtRemarks.Text);
+
+                }
+
+                DisplayEmployeeLoan(ViewState["EMPCODE"].ToString());
 
                     txtDateLoan.Text = "";
                     txtLoanAmount.Text = "0";
@@ -140,14 +117,12 @@ namespace DGMU_HR
                     txtLoanEndDate.Text = "";
                     panelNewLoan.Enabled = false;
 
-                    lblSuccessMessage.Text = "Employee Loan successfully save.";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
-                }
-                else
-                {
-                    lblErrorMessage.Text = "Employee has existing active " + ddLoansList.SelectedItem.ToString() + ". Use Add loan procedure instead.";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
-                }
+                    //lblSuccessMessage.Text = "Employee Loan successfully save.";
+                   // ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgSuccessModal').modal('show');</script>", false);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "#modalCreateLoan", "$('body').removeClass('modal-open');$('.modal-backdrop').remove();$('#modalCreateLoan').hide();", true);
+
+               // }
+                
             }
             else {
                 lblErrorMessage.Text = "Input required.";
@@ -300,6 +275,116 @@ namespace DGMU_HR
             Response.Redirect(Request.RawUrl);
         }
 
+  
+        protected void lnkViewAddLoans_Click(object sender, EventArgs e)
+        {
+            DataTable dt = oPayroll.GET_EMPLOYEE_LOAN_DETAILS();
+
+            var selEdit = (Control)sender;
+            GridViewRow r = (GridViewRow)selEdit.NamingContainer;
+            string sLoanSN = r.Cells[1].Text;
+
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "LoanSN='" + sLoanSN + "'";
+            dv.Sort = "LoanDate desc";
+
+            gvLoanDetailList.DataSource = dv;
+            gvLoanDetailList.DataBind();
+
+            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#modalLoanDetailList').modal('show');</script>", false);
+
+        }
+
+        protected void lnkCreateNewLoan_Click(object sender, EventArgs e)
+        {
+            ViewState["LOAN_ACTION"] = 0;
+            lblLoanActionName.Text = "CREATE NEW LOAN";
+            CLEAR_INPUTS();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#modalCreateLoan').modal('show');</script>", false);
+        }
+
+        protected void lnkEditLoan_Click(object sender, EventArgs e)
+        {
+            var selEdit = (Control)sender;
+            GridViewRow r = (GridViewRow)selEdit.NamingContainer;
+
+            string sLoanSN = r.Cells[1].Text;
+
+            DataTable dt = oPayroll.GET_EMPLOYEE_LOANS();
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "LoanSN='" + sLoanSN + "' and IsOpen=1";
+            ViewState["LOANSN"] = sLoanSN;
+            if (dv.Count > 0)
+            {
+                CLEAR_INPUTS();
+                lblLoanActionName.Text = "EDIT LOAN";
+
+                foreach (DataRowView drv in dv)
+                {
+                    txtDateLoan.Text = Convert.ToDateTime(drv["LoanDate"]).ToString();
+                    txtLoanReferenceNumber.Text = drv["LoanReferenceNumber"].ToString();
+                    txtLoanAmount.Text = drv["LoanAmount"].ToString();
+                    txtLoanAmountAndInterest.Text = drv["LoanAmountAndInterest"].ToString();
+                    txtLoanMonthlyAmortization.Text = drv["MonthlyAmortization"].ToString();
+                    txtLoanStartDate.Text = Convert.ToDateTime(drv["MA_DateStart"]).ToString();
+                    txtLoanEndDate.Text = Convert.ToDateTime(drv["MA_DateEnd"]).ToString();
+                    txtRemarks.Text = drv["Remarks"].ToString();
+
+                    ViewState["LOAN_ACTION"] = 1;
+                }
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#modalCreateLoan').modal('show');</script>", false);
+            }
+            }
+
+        #region "User Define Function"
+
+        private void DisplayEmployeeList()
+        {
+            DataTable dt = oPayroll.GET_EMPLOYEE_LIST_LW();
+
+            gvEmployeeList.DataSource = dt;
+            gvEmployeeList.DataBind();
+
+            imgEmployee.ImageUrl = "~/Emp_Pictures/default-avatar.png";
+        }
+        private void DisplayEmployeeLoan(string _empCode)
+        {
+            DataTable dt = oPayroll.GET_EMPLOYEE_LOANS();
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "EmpCode='" + _empCode + "' and IsOpen=1";
+
+            if (dv.Count > 0)
+            {
+                gvActiveLoans.DataSource = dv;
+                gvActiveLoans.DataBind();
+            }
+            else
+            {
+                gvActiveLoans.DataSource = null;
+                gvActiveLoans.DataBind();
+            }
+        }
+
+        private void DisplayEmployeeLoanHistory(string _empCode)
+        {
+            DataTable dt = oPayroll.GET_EMPLOYEE_LOANS();
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "EmpCode='" + _empCode + "' and IsClose=1 and IsSettled=1";
+
+            if (dv.Count > 0)
+            {
+                gvEmployeeLoanHistory.DataSource = dv;
+                gvEmployeeLoanHistory.DataBind();
+            }
+            else
+            {
+                gvEmployeeLoanHistory.DataSource = null;
+                gvEmployeeLoanHistory.DataBind();
+            }
+        }
+
         private bool checkActiveLoanTypeExist(string _empCode, string _loanCode)
         {
             bool x;
@@ -320,24 +405,19 @@ namespace DGMU_HR
             return x;
         }
 
-        protected void lnkViewAddLoans_Click(object sender, EventArgs e)
+
+        private void CLEAR_INPUTS()
         {
-            DataTable dt = oPayroll.GET_EMPLOYEE_LOAN_DETAILS();
-
-            var selEdit = (Control)sender;
-            GridViewRow r = (GridViewRow)selEdit.NamingContainer;
-            string sLoanSN = r.Cells[1].Text;
-
-            DataView dv = dt.DefaultView;
-            dv.RowFilter = "LoanSN='" + sLoanSN + "'";
-            dv.Sort = "LoanDate desc";
-
-            gvLoanDetailList.DataSource = dv;
-            gvLoanDetailList.DataBind();
-
-            
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#modalLoanDetailList').modal('show');</script>", false);
-
+            txtDateLoan.Text = "";
+            txtLoanAmount.Text = "0";
+            txtLoanAmountAndInterest.Text = "0";
+            txtRemarks.Text = "";
+            txtLoanReferenceNumber.Text = "";
+            txtLoanMonthlyAmortization.Text = "";
+            txtLoanStartDate.Text = "";
+            txtLoanEndDate.Text = "";
         }
+        
+        #endregion
     }
 }

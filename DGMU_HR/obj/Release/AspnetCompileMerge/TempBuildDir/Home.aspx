@@ -168,7 +168,7 @@
                         </div>
                         <div class="panel-footer">
                             
-                                <asp:GridView runat="server" ID="gvEmployeeEmploymentStat" CssClass="table table-responsive table-hover table-condensed" AutoGenerateColumns="false" ShowHeader="false" GridLines="None">
+                                <asp:GridView runat="server" ID="gvEmployeeEmploymentStat" CssClass="table table-responsive table-hover table-condensed hidden" AutoGenerateColumns="false" ShowHeader="false" GridLines="None">
                                         <Columns>
                                            <%-- <asp:BoundField DataField="StatusCode" />--%>
                                             <asp:BoundField DataField="Status" />
@@ -184,6 +184,19 @@
                             <asp:LinkButton runat="server" ID="lnkNoGovtID" CssClass="btn btn-sm btn-danger" OnClick="lnkNoGovtID_Click">Employee List with NO Gov't ID</asp:LinkButton>
                         </div>
                     </div>
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Upcoming EOS List for this Month</div>
+                        <div class="panel-body">
+                            <asp:GridView runat="server" ID="gvEOSList" CssClass="table table-responsive table-bordered" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField DataField="EmployeeName"  />
+                                    <asp:BoundField DataField="EOs_Effective_Date" DataFormatString="{0:d}" HeaderText="Effectivity" />
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                   
                 </div>
                
 
@@ -209,7 +222,7 @@
                                 </li>
                             </ul>
                              
-                               
+                               <asp:LinkButton runat="server" ID="lnkManual13thMonth" CssClass="btn btn-sm btn-success" OnClick="lnkManual13thMonth_Click">Manual 13th Month Entry</asp:LinkButton>
                              
                         </div>
                     </div>

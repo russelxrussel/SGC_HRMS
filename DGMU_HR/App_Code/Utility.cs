@@ -45,6 +45,14 @@ namespace DGMU_HR
             return dt;
         }
 
+        //EMPLOYMENT TYPE
+        public DataTable GET_EMPLOYMENT_TYPE()
+        {
+            DataTable dt = new DataTable();
+            dt = queryCommandDT_StoredProc("[HR].[spGET_EMPLOYMENT_TYPE]");
+            return dt;
+        }
+
         //DEPARTMENT
         public DataTable GET_DEPARTMENT_DATA()
         {

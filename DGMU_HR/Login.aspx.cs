@@ -14,26 +14,37 @@ namespace DGMU_HR
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtUsername.Text = "1";
-            txtPassword.Text = "1";
+            //txtUsername.Text = "1";
+            //txtPassword.Text = "1";
 
+      
         }
 
         protected void lnkLogin_Click(object sender, EventArgs e)
         {
-            DataTable dt = oSystem.GET_USER_INFO(txtUsername.Text, txtPassword.Text);
-            if (dt.Rows.Count > 0)
+            if (!string.IsNullOrEmpty(txtUsername.Text.Trim()) && !string.IsNullOrEmpty(txtPassword.Text.Trim()))
             {
-                DataView dv = dt.DefaultView;
-                foreach (DataRowView drv in dv)
+                DataTable dt = oSystem.GET_USER_INFO(txtUsername.Text, txtPassword.Text);
+
+                if (dt.Rows.Count > 0)
                 {
-                    Session["USER"] = drv["Username"].ToString();
-                    Response.Redirect("~/home.aspx");
+                    DataView dv = dt.DefaultView;
+                    foreach (DataRowView drv in dv)
+                    {
+                        Session["USER"] = drv["Username"].ToString();
+                        Response.Redirect("~/home.aspx");
+                    }
                 }
+                else
+                {
+                    lblErrorMessage.Text = "Invalid username and password.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
+                }
+
+
             }
-            else
-            {
-                lblErrorMessage.Text = "Invalid username and password.";
+            else {
+                lblErrorMessage.Text = "Username and Password required!";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "msg", "<script>$('#msgErrorModal').modal('show');</script>", false);
             }
         }
